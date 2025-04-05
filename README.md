@@ -56,10 +56,6 @@ This portfolio is designed to look great on all devices:
 - Laptops
 - Desktop computers
 
-## 📝 License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
 ## 👤 Author
 
 Nischal S. Bista

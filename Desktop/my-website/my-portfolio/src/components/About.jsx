@@ -15,20 +15,31 @@ const About = () => {
         {/* Main Content Section */}
         <div className='w-full grid sm:grid-cols-2 gap-16'>
           {/* Add margin-top here to push the "Hi. I'm Nischal..." text down */}
-          <div className='sm:text-right mt-8'> {/* mt-8 to create space */}
-            <p className='text-3xl sm:text-5xl font-bold text-lightestSlate drop-shadow-[0_0_2px_rgba(226,232,240,0.2)] leading-relaxed'>
-              Hi. I'm Nischal, nice to meet you. Please take a look around.
+          <div className='sm:text-right mt-10'>
+            <p
+              className='text-secondary font-bold animate-fadeIn drop-shadow-[0_0_8px_rgba(100,255,218,0.3)]'
+              style={{ fontSize: '1.5rem', lineHeight: '1.3' }}
+            >
+              Hey, I’m Nischal! I’m a sophomore at the University of Wisconsin–Madison, majoring in Computer Science and geeking out over all things tech.
+            </p>
+            <p
+              className='text-secondary font-bold animate-fadeIn drop-shadow-[0_0_8px_rgba(100,255,218,0.3)] mt-8'
+              style={{ fontSize: '1.5rem', lineHeight: '1.3' }}
+            >
+              From building full-stack apps to experimenting with AI/ML, I love turning random ideas into real, working things (sometimes even useful ones).
+              I’m all about clean code, clever design, and solving problems that make you go “wait, that actually works?”
             </p>
           </div>
 
-          {/* Description Box */}
-          <div className='bg-lightNavy/20 p-10 rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.2)] backdrop-blur-sm'>
-            <p className='text-slate text-xl leading-relaxed mb-8'>
-              Fully committed to the philosophy of life-long learning, I'm a full stack developer with a deep passion for JavaScript, React, and all things web development.
+          {/* RIGHT - Description Box */}
+          <div className='bg-lightNavy/20 p-12 rounded-xl shadow-[0_8px_40px_rgba(0,0,0,0.25)] backdrop-blur-md'>
+            <p
+              className='text-slate animate-fadeIn'
+              style={{ fontSize: '1.5rem', lineHeight: '1.6', fontWeight: 500 }}
+            >
+              Outside of coding, you might catch me messing with side projects, browsing tech Reddit, or pretending to understand the latest AI papers.
             </p>
-            <p className='text-slate text-xl leading-relaxed'>
-              The unique combination of creativity, logic, technology, and never running out of new things to discover, drives my excitement and passion for web development. When I'm not at my computer I like to spend my time reading, keeping fit, and playing guitar.
-            </p>
+
             {/* Resume Button */}
             <div className='mt-12 flex justify-center'>
               <a

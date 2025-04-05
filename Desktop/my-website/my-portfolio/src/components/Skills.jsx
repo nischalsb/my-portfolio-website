@@ -31,7 +31,7 @@ const Skills = () => {
       {/* Container */}
       <div className='max-w-[1100px] mx-auto p-4 flex flex-col justify-center items-center w-full h-full'>
         <div className='animate-slideIn text-center mb-16'>
-          <p className='py-8 text-slate text-2xl max-w-[800px] text-center mt-4 leading-relaxed'>
+          <p className='py-8 text-slate font -bold text-2xl max-w-[800px] text-center mt-4 leading-relaxed'>
             My Tech Stack
           </p>
         </div>

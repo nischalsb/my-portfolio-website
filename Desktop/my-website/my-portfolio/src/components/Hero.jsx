@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Hero = () => {
   const [text, setText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
-  const fullText = "I do AI / Full Stack Development.";
+  const fullText = "I do AI / ML / Full Stack.";
   const typingSpeed = 150; // milliseconds per character
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Hero = () => {
           className='text-secondary font-bold animate-fadeIn drop-shadow-[0_0_8px_rgba(100,255,218,0.3)] font-bold'
           style={{ fontSize: '3.5rem', lineHeight: '0.3' }}
         >
-          Hello, I'm Nischal
+          Hello, I'm Nischal.
         </p>
 
 

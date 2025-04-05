@@ -35,7 +35,6 @@ const Contact = () => {
         className='flex flex-col max-w-[800px] w-full animate-fadeIn mx-auto space-y-6'  // Added space-y-6 for vertical space
       >
         <div className='pb-12 text-center mb-12'>
-          <p className='text-5xl sm:text-6xl font-bold inline border-b-4 border-secondary text-gray-300 drop-shadow-[0_0_2px_rgba(226,232,240,0.2)]'>Contact</p>
           <p className='text-gray-300 py-8 text-2xl max-w-[700px] mx-auto mt-10 leading-relaxed'>
             Have a question or want to work together? Leave your details and I'll get back to you as soon as possible.
           </p>

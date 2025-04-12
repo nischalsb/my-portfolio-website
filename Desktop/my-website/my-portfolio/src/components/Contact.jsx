@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ContactForm = () => {
   // State to manage form input values
@@ -10,9 +10,61 @@ const ContactForm = () => {
     message: ''
   });
 
-  // State to control the visibility of the thank you message
-  // Initially set to false (hidden)
-  const [showThanks, setShowThanks] = useState(false);
+  // State for form submission status and messages
+  const [submitStatus, setSubmitStatus] = useState({
+    loading: false,
+    success: false,
+    error: false,
+    message: ''
+  });
+
+  // State to store the server port
+  const [serverPort, setServerPort] = useState(5000);
+  const [portChecked, setPortChecked] = useState(false);
+
+  // Effect to fetch the server port when component mounts
+  useEffect(() => {
+    const checkServerPort = async () => {
+      try {
+        // Try to fetch port.txt from the server directory
+        const response = await fetch('/server/port.txt');
+        if (response.ok) {
+          const port = await response.text();
+          setServerPort(parseInt(port.trim(), 10));
+          console.log(`Using server port from file: ${port}`);
+        } else {
+          console.log('Port file not found, trying known ports...');
+          // Try some common ports in sequence
+          const portsToTry = [5000, 5001, 5002, 5003, 5004, 5005];
+          
+          for (const port of portsToTry) {
+            try {
+              // Try to ping the server on this port
+              const testResponse = await fetch(`http://localhost:${port}/api/messages`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+              });
+              
+              if (testResponse.ok) {
+                setServerPort(port);
+                console.log(`Found working server on port ${port}`);
+                break;
+              }
+            } catch (err) {
+              // This port didn't work, continue to the next one
+              console.log(`Port ${port} not responding`);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error finding server port:', error);
+      } finally {
+        setPortChecked(true);
+      }
+    };
+
+    checkServerPort();
+  }, []);
 
   // Handler for input field changes
   // Updates the corresponding property in formData state
@@ -27,33 +79,93 @@ const ContactForm = () => {
   };
 
   // Form submission handler
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // Prevent the default form submission behavior (page reload)
     e.preventDefault();
 
     // Form validation logic
     // Check if required fields (name, email, message) are filled
     if (!formData.name || !formData.email || !formData.message) {
-      alert('Please fill the required fields.');
+      setSubmitStatus({
+        loading: false,
+        success: false,
+        error: true,
+        message: 'Please fill all required fields.'
+      });
       return; // Exit the function if validation fails
     }
     
-    // Log form data to console (would be replaced with actual submission logic)
-    console.log('Form submitted:', formData);
-    
-    // Reset form fields after submission
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
+    // Set loading state
+    setSubmitStatus({
+      loading: true,
+      success: false,
+      error: false,
+      message: 'Sending message...'
     });
     
-    // Show the thank you message
-    setShowThanks(true);
-    
-    // Hide the thank you message after 5 seconds (5000ms)
-    setTimeout(() => setShowThanks(false), 5000);
+    try {
+      // Send data to the backend API using the detected port
+      const response = await fetch(`http://localhost:${serverPort}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+      
+      // Success state
+      setSubmitStatus({
+        loading: false,
+        success: true,
+        error: false,
+        message: data.message
+      });
+      
+      // Reset form fields after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+      // Hide the success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus(prevState => ({
+          ...prevState,
+          success: false,
+          message: ''
+        }));
+      }, 5000);
+      
+    } catch (error) {
+      // Error state
+      setSubmitStatus({
+        loading: false,
+        success: false,
+        error: true,
+        message: error.message || 'Something went wrong. Please try again.'
+      });
+      
+      // Hide the error message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus(prevState => ({
+          ...prevState,
+          error: false,
+          message: ''
+        }));
+      }, 5000);
+    }
   };
 
   return (
@@ -82,11 +194,24 @@ const ContactForm = () => {
           Let's get in touch!
         </p>
         
-        {/* Conditional thank you message - shows only when showThanks is true */}
-        {/* text-green-600: Green text color for success */}
-        {/* text-center: Centers text horizontally */}
-        {/* font-medium: Medium font weight for emphasis */}
-        {showThanks && <p className="text-green-600 text-center font-medium">Thanks for your message. Will get back to you shortly!</p>}
+        {/* Status messages - success, error, or loading */}
+        {submitStatus.success && (
+          <p className="text-green-600 text-center font-medium mt-2 mb-4">
+            {submitStatus.message}
+          </p>
+        )}
+        
+        {submitStatus.error && (
+          <p className="text-red-600 text-center font-medium mt-2 mb-4">
+            {submitStatus.message}
+          </p>
+        )}
+        
+        {submitStatus.loading && (
+          <p className="text-blue-600 text-center font-medium mt-2 mb-4">
+            {submitStatus.message}
+          </p>
+        )}
         
         {/* Form element with submit handler */}
         {/* centered-form: Custom class for styling */}
@@ -101,6 +226,7 @@ const ContactForm = () => {
             value={formData.name}
             onChange={handleChange}
             className="custom-textarea"
+            disabled={submitStatus.loading || !portChecked}
           />
           <br></br>
           
@@ -113,6 +239,7 @@ const ContactForm = () => {
             value={formData.email}
             onChange={handleChange}
             className="custom-textarea"
+            disabled={submitStatus.loading || !portChecked}
           />
           <br></br>
           
@@ -127,6 +254,7 @@ const ContactForm = () => {
             onChange={handleChange}
             className="custom-textarea resize-y"
             rows="5"
+            disabled={submitStatus.loading || !portChecked}
           />
           <br></br>
           
@@ -145,8 +273,9 @@ const ContactForm = () => {
             <button 
               type="submit"
               className="button-primary inline-block hover:drop-shadow-[0_4px_12px_rgba(100,255,218,0.3)] transition-all duration-300 text-lg px-6 py-3"
+              disabled={submitStatus.loading || !portChecked}
             >
-              Submit
+              {submitStatus.loading ? 'Sending...' : 'Submit'}
             </button>
           </div>
         </form>

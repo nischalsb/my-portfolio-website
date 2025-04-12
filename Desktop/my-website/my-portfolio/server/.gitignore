@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Database
+db/portfolio.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
+.env
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo 

@@ -1,6 +1,6 @@
 # My Portfolio Website
 
-A modern, responsive personal portfolio website built with React and Tailwind CSS.
+A modern, responsive personal portfolio website built with React and Tailwind CSS, with a backend server for storing contact form submissions.
 
 ## 🌟 Features
 
@@ -10,7 +10,7 @@ A modern, responsive personal portfolio website built with React and Tailwind CS
 - Typing animation effect on the homepage
 - Skills section with attractive hoverable icons
 - Projects showcase with preview images
-- Contact form with validation
+- Contact form with validation and backend storage
 - Dark theme optimized for readability
 
 ## 🚀 Technologies Used
@@ -20,6 +20,8 @@ A modern, responsive personal portfolio website built with React and Tailwind CS
 - **React Icons**: For including various tech stack icons
 - **React Scroll**: For smooth scrolling navigation
 - **Vite**: Next generation frontend tooling
+- **Express**: Backend server framework
+- **SQLite**: Lightweight database for storing contact form submissions
 
 
 ## 📋 Project Structure
@@ -37,6 +39,45 @@ A modern, responsive personal portfolio website built with React and Tailwind CS
 - `src/assets/`: Contains images and SVG files
 - `public/`: Static files
 - `tailwind.config.js`: Tailwind CSS configuration
+- `server/`: Backend server for handling contact form
+  - `server.js`: Express server setup
+  - `db/`: SQLite database for storing submissions
+
+## 🔧 Setup and Installation
+
+### Frontend
+1. Install frontend dependencies:
+   ```
+   npm install
+   ```
+
+2. Start the development server:
+   ```
+   npm run dev
+   ```
+
+### Backend
+1. Navigate to the server directory:
+   ```
+   cd server
+   ```
+
+2. Install backend dependencies:
+   ```
+   npm install
+   ```
+
+3. Start the server:
+   ```
+   npm start
+   ```
+   
+   For development with auto-reload:
+   ```
+   npm run dev
+   ```
+
+The backend server will automatically find an available port (starting from 5000) and communicate it to the frontend.
 
 ## 🎨 Customization
 

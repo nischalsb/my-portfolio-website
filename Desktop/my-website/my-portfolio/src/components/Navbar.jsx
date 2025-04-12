@@ -15,9 +15,12 @@ const Navbar = () => {
           {/* font-bold: Heavy font weight */}
           {/* text-secondary: Teal/cyan color */}
           {/* drop-shadow: Creates subtle glow around text */}
-          <h1 className='text-3xl font-bold text-secondary drop-shadow-[0_0_8px_rgba(100,255,218,0.3)]'>
-            NISCHAL S. BISTA
-          </h1>
+          {/* Added Link component and cursor-pointer for navigation to home */}
+          <Link to='home' smooth={true} duration={500}>
+            <h1 className='text-3xl font-bold text-secondary drop-shadow-[0_0_8px_rgba(100,255,218,0.3)] cursor-pointer'>
+              NISCHAL S. BISTA
+            </h1>
+          </Link>
         </div>
 
         {/* Navigation menu - horizontal list with spacing */}

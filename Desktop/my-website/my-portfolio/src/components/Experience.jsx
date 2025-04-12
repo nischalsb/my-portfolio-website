@@ -6,7 +6,7 @@ const Experience = () => {
     {
       id: 1,
       period: 'Academic Year 2024 - 2025', // Timeframe of the experience
-      title: 'Research Scholar Under Professor Mayra I. Oyola Merced', // Job title
+      title: 'Undergraduate Research Scholar Under Professor Mayra I. Oyola Merced', // Job title
       company: 'University of Wisconsin-Madison', // Company/organization name
       description: [
         'Conducted research on Clear Air Turbulence (CAT) forecasting using AI, analyzing NASA\'s MERRA-2 reanalysis and topographical datasets to address high-altitude turbulence challenges in Nepal.',

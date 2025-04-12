@@ -64,7 +64,7 @@ const ContactForm = () => {
     // from-blue-500 to-blue-300: Blue gradient color scheme
     // flex justify-center items-center: Centers content both horizontally and vertically
     // p-4: Adds padding (16px) on all sides
-    <div name="contact" className="w-full min-h-screen bg-gradient-to-r from-blue-500 to-blue-300 flex justify-center items-center p-4" style={{ minHeight: '90vh' }}>
+    <div name="contact" className="w-full min-h-screen bg-gradient-to-r from-blue-500 to-blue-300 flex justify-center items-center p-4" style={{ minHeight: '89vh' }}>
       {/* Form container - white background with rounded corners and shadow */}
       {/* bg-white: White background color */}
       {/* rounded-lg: Rounds the corners (large radius) */}
@@ -72,13 +72,15 @@ const ContactForm = () => {
       {/* max-w-md: Sets maximum width */}
       {/* w-full: Takes full width up to the max-width */}
       {/* p-8: Adds padding (32px) on all sides */}
-      <div className="bg-white rounded-lg shadow-md max-w-md w-full p-8">
-        {/* Form title - large, bold, centered */}
-        {/* text-4xl: Very large text size */}
-        {/* font-bold: Heavy font weight */}
-        {/* mb-8: Bottom margin (32px) */}
-        {/* text-center: Centers text horizontally */}
-        <h1 className="text-4xl font-bold mb-8 text-center">Let's get in touch!</h1>
+      <div className='w-full text-center mb-[50px]'>
+        {/* Form title with teal glow effect and custom sizing */}
+        {/* text-secondary: Applies the teal/aqua brand color */}
+        {/* drop-shadow-[0_0_8px_rgba(100,255,218,0.3)]: Creates subtle teal glow around text */}
+        {/* fontSize: 2.5rem: Custom large font size (40px) for prominence */}
+        {/* lineHeight: 1.3: Slightly increased line height for better readability */}
+        <p className='text-secondary drop-shadow-[0_0_8px_rgba(100,255,218,0.3)]' style={{ fontSize: '2.5rem', lineHeight: '1.3' }}>
+          Let's get in touch!
+        </p>
         
         {/* Conditional thank you message - shows only when showThanks is true */}
         {/* text-green-600: Green text color for success */}
@@ -114,13 +116,17 @@ const ContactForm = () => {
           />
           <br></br>
           
-          {/* Message textarea - multiline text input */}
+          {/* Message textarea - scrollable multiline text input */}
+          {/* custom-textarea: Consistent styling with other form fields */}
+          {/* rows="5": Sets initial height to 5 lines of text */}
+          {/* resize-y: Allows vertical resizing only */}
           <textarea
             name="message"
             placeholder="Message"
             value={formData.message}
             onChange={handleChange}
-            className="custom-textarea"
+            className="custom-textarea resize-y"
+            rows="5"
           />
           <br></br>
           
@@ -129,15 +135,16 @@ const ContactForm = () => {
           {/* mt-10: Top margin (40px) */}
           {/* flex justify-center: Centers the button horizontally */}
           <div className="relative mt-10 flex justify-center">
-            {/* Submit button with hover effects */}
+            {/* Submit button with hover effects - matches resume button styling */}
             {/* button-primary: Custom primary button styling */}
-            {/* hover:drop-shadow: Adds glow effect on hover */}
-            {/* transition-all duration-300: Smooth transition for hover effects */}
-            {/* text-2xl: Large text size */}
-            {/* px-8 py-4: Horizontal (32px) and vertical (16px) padding */}
+            {/* inline-block: Displays as inline-block for proper spacing */}
+            {/* hover:drop-shadow: Adds teal glow effect on hover (4px vertical offset, 12px blur) */}
+            {/* transition-all duration-300: Smooth transition for hover effects taking 300ms */}
+            {/* text-lg: Large text size (18px) */}
+            {/* px-6 py-3: Padding of 24px horizontal, 12px vertical */}
             <button 
               type="submit"
-              className="button-primary inline-block hover:drop-shadow-[0_4px_12px_rgba(100,255,218,0.3)] transition-all duration-300 text-2xl px-8 py-4"
+              className="button-primary inline-block hover:drop-shadow-[0_4px_12px_rgba(100,255,218,0.3)] transition-all duration-300 text-lg px-6 py-3"
             >
               Submit
             </button>

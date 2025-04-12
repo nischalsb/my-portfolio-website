@@ -142,3 +142,46 @@ p {
 .button-primary:hover {
   background-color: rgba(100, 255, 218, 0.1);
 }
+
+.custom-textarea {
+  width: 50%;
+  padding: 10px 16px;
+  background-color: #f3f4f6; /* Light gray */
+  border-radius: 9999px; /* Fully rounded */
+  border: 1px solid #d1d5db; /* Light border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  resize: none;
+  outline: none;
+  height: 50px; /* Fixed height */
+  font-size: 16px;
+  color: #374151; /* Dark gray text */
+}
+
+.custom-textarea:focus {
+  border-color: #64ffda; /* Green border on focus */
+  box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.3); /* Focus shadow */
+}
+
+.centered-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.centered-form input,
+.centered-form textarea {
+  margin-bottom: -5px; /* Space between elements */
+}
+
+
+.my-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(100, 255, 218, 0.3);
+  flex-shrink: 0; /* prevents it from shrinking on smaller screens */
+}
+
+
+

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   FaHtml5, 
   FaCss3Alt, 
@@ -15,42 +15,105 @@ import {
 
 const Skills = () => {
   const skills = [
-    { icon: <FaHtml5 size={30} />, delay: '100', name: 'HTML' },
-    { icon: <FaReact size={30} />, delay: '200', name: 'React' },
-    { icon: <SiJavascript size={30} />, delay: '300', name: 'JavaScript' },
-    { icon: <FaCss3Alt size={30} />, delay: '400', name: 'CSS' },
-    { icon: <FaGitAlt size={30} />, delay: '500', name: 'Git' },
-    { icon: <FaJava size={30} />, delay: '600', name: 'Java' },
-    { icon: <SiPython size={30} />, delay: '700', name: 'Python' },
-    { icon: <SiNextdotjs size={30} />, delay: '800', name: 'Next.js' },
-    { icon: <FaNodeJs size={30} />, delay: '900', name: 'Node.js' }
+    { icon: <FaHtml5 size={50} />, name: 'HTML', color: '#E34F26' },
+    { icon: <FaReact size={50} />, name: 'React', color: '#61DAFB' },
+    { icon: <SiJavascript size={50} />, name: 'JavaScript', color: '#F7DF1E' },
+    { icon: <FaCss3Alt size={50} />, name: 'CSS', color: '#1572B6' },
+    { icon: <FaGitAlt size={50} />, name: 'Git', color: '#F05032' },
+    { icon: <FaJava size={50} />, name: 'Java', color: '#007396' },
+    { icon: <SiPython size={50} />, name: 'Python', color: '#3776AB' },
+    { icon: <SiNextdotjs size={50} />, name: 'Next.js', color: '#000000' },
+    { icon: <FaNodeJs size={50} />, name: 'Node.js', color: '#339933' }
   ];
 
+  useEffect(() => {
+    const styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerHTML = `
+      @keyframes scrollLogos {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      
+      .tech-icon {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background-color: #0F172A;
+        margin: 10px auto;
+        padding: 18px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      
+      .tech-icon:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      }
+    `;
+    document.head.appendChild(styleSheet);
+    
+    return () => {
+      document.head.removeChild(styleSheet);
+    };
+  }, []);
+
   return (
-    <div name='skills' className='w-full min-h-screen py-24 bg-primary text-gray-300'>
-      {/* Container */}
-      <div className='max-w-[1100px] mx-auto p-4 flex flex-col justify-center items-center w-full h-full'>
-        <div className='animate-slideIn text-center mb-16'>
-          <p className='py-8 text-slate font -bold text-2xl max-w-[800px] text-center mt-4 leading-relaxed'>
-            My Tech Stack
+    <div name='skills' className='w-full h-[50vh] flex flex-col justify-center items-center bg-primary text-gray-300'>
+      <div className='w-full max-w-[80%]'>
+        <div className='text-center mb-[100px]'>
+          <p className='text-secondary font-bold drop-shadow-[0_0_8px_rgba(100,255,218,0.3)]' style={{ fontSize: '2.5rem', lineHeight: '1.3' }}>
+            Technologies
           </p>
         </div>
-
-        <div className='w-full grid grid-cols-2 sm:grid-cols-5 gap-10 text-center py-8 mt-8'>
-          {skills.map((skill, index) => (
-            <div 
-              key={index} 
-              className='group mb-8'
-            >
-              <div 
-                className='skill-icon mx-auto animate-float hover:animate-bounce hover:bg-gradient-to-b hover:from-secondary/20 hover:to-secondary/5 shadow-[0_8px_30px_rgba(0,0,0,0.2)] w-[60px] h-[60px]'
-                style={{ animationDelay: `${skill.delay}ms` }}
-              >
-                {skill.icon}
-              </div>
-              <p className='mt-5 text-xl font-medium text-gray-300 group-hover:text-secondary transition-colors duration-300'>{skill.name}</p>
+        
+        <div className='relative w-full overflow-hidden'>
+          <div 
+            className='flex w-[200%]' 
+            style={{ 
+              animation: 'scrollLogos 25s linear infinite',
+            }}
+          >
+            <div className='flex w-1/2 justify-around mx-20 px-10'>
+              {skills.map((skill, index) => (
+                <div 
+                  key={index}
+                  className='flex flex-col items-center justify-center mx-8'
+                  style={{ minWidth: '100px' }}
+                >
+                  <div 
+                    className='tech-icon'
+                    style={{ color: skill.color }}
+                  >
+                    {skill.icon}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+            <div className='flex w-1/2 justify-around mx-20 px-10'>
+              {skills.map((skill, index) => (
+                <div 
+                  key={`copy-${index}`}
+                  className='flex flex-col items-center justify-center mx-8'
+                  style={{ minWidth: '100px' }}
+                >
+                  <div 
+                    className='tech-icon'
+                    style={{ color: skill.color }}
+                  >
+                    {skill.icon}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

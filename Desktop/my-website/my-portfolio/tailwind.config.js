@@ -21,6 +21,11 @@ export default {
         slideIn: 'slideIn 0.8s ease-in-out',
         bounce: 'bounce 1s infinite',
         float: 'float 3s ease-in-out infinite',
+        carousel: 'carousel 20s linear infinite',
+        scroll: 'scroll 20s linear infinite',
+        'scroll-left': 'scroll-left 25s linear infinite',
+        'marquee': 'marquee 20s linear infinite',
+        'scroll-logos': 'scroll-logos 25s linear infinite'
       },
       keyframes: {
         fadeIn: {
@@ -43,8 +48,28 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
+        carousel: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }
+        },
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(calc(-50%))' }
+        },
+        'scroll-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }
+        },
+        'marquee': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }
+        },
+        'scroll-logos': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }
+        }
       },
     },
   },
   plugins: [],
-} 
+}

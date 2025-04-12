@@ -1,83 +1,110 @@
 import React from 'react';
 
-const Projects = () => {
-  const projects = [
+const Experience = () => {
+  const experiences = [
     {
-      name: 'Social Media App',
-      image: 'https://via.placeholder.com/500x300',
-      demo: '/',
-      code: '/',
-      delay: '100'
+      id: 1,
+      period: 'Sep 2024 - Present',
+      title: 'Research Scholar Under Professor Mayra I. Oyola Merced',
+      company: 'University of Wisconsin-Madison',
+      location: 'Madison, WI',
+      description: [
+        'Conducted research on Clear Air Turbulence (CAT) forecasting using AI, analyzing NASA\'s MERRA-2 reanalysis and topographical datasets to address high-altitude turbulence challenges in Nepal.',
+        'Developed and optimized ML models, including Random Forest and SVM, improving CAT prediction accuracy through feature engineering and data preprocessing.',
+        'Utilized Python (Cartopy, Pandas, Scikit-learn) and Jupyter Notebook to create dynamic visualizations of CAT-prone zones, enabling intuitive interpretation of risk areas and enhancing aviation safety.'
+      ],
+      skills: ['Python', 'Machine Learning', 'Data Analysis', 'Cartopy', 'Pandas', 'Scikit-learn']
     },
     {
-      name: 'Messaging App',
-      image: 'https://via.placeholder.com/500x300',
-      demo: '/',
-      code: '/',
-      delay: '300'
+      id: 2,
+      period: 'June 2024 - Aug 2024',
+      title: 'Software Development Intern',
+      company: 'Farm 2 Facts',
+      location: 'Madison, WI',
+      description: [
+        'Designed and implemented dynamic front-end components using Vue.js, integrated them with a RESTful API and SQL database, which improved data management efficiency and reduced retrieval times by 30%.',
+        'Developed multilingual frontend instruments with i18next framework, introducing dynamic language toggles that significantly advanced internationalization capabilities.'
+      ],
+      skills: ['Vue.js', 'RESTful API', 'SQL', 'i18next', 'Frontend Development']
     },
     {
-      name: 'Pixel Sketch App',
-      image: 'https://via.placeholder.com/500x300',
-      demo: '/',
-      code: '/',
-      delay: '500'
+      id: 3,
+      period: 'May 2024 - September 2024',
+      title: 'Engineering Team',
+      company: 'IssakaAI Technologies',
+      location: 'Remote',
+      description: [
+        'Developed a full-stack React Native mobile application with multi-language support, leveraging Firebase for robust authentication (OAuth, email/password sign-up, and token-based sign-in).',
+        'Developed Python scripts to automate the translation process by integrating with Smartling API, enabling support for over 15 languages, including several African endangered languages.',
+        'Diagnosed and debugged critical bugs within the Base mobile app, leading to enhanced functionality and improved user experience.'
+      ],
+      skills: ['React Native', 'Firebase', 'Python', 'Smartling API', 'Mobile Development']
     },
     {
-      name: 'Task Management App',
-      image: 'https://via.placeholder.com/500x300',
-      demo: '/',
-      code: '/',
-      delay: '700'
+      id: 4,
+      period: 'April 2023 - May 2024',
+      title: 'Full Stack Developer',
+      company: 'Educate Nepal Initiative',
+      location: 'Kathmandu, Nepal',
+      description: [
+        'Engineered the redesign and optimization of the NGO\'s website, improving UI/UX and ensuring mobile responsiveness, resulting in a 20% increase in user engagement and improved cross-browser compatibility.',
+        'Integrated SEO best practices and analytics tracking (Google Analytics, schema markup) to drive data-driven improvements and boost search engine rankings, enhancing visibility by 30%.',
+        'Collaborated with the NGO team to update content and align the website with ongoing campaigns, effectively communicating the organization\'s mission and increasing donations.'
+      ],
+      skills: ['UI/UX Design', 'SEO', 'Google Analytics', 'Web Development', 'Content Management']
     }
   ];
 
   return (
-    <div name='projects' className='w-full min-h-screen py-28 text-gray-300 bg-primary'>
-      <div className='max-w-[1200px] mx-auto p-4 flex flex-col justify-center items-center w-full h-full'>
-        <div className='pb-12 animate-slideIn text-center'>
-          <p className='py-8 text-2xl text-slate max-w-[800px] mx-auto mt-4 leading-relaxed'>
-            Check out some of my recent projects
+    <div name='experience' className='w-full min-h-screen py-16 bg-primary text-gray-300'>
+      <div className='max-w-[1200px] mx-auto p-4'>
+        {/* Section Title */}
+        <div className='w-full text-center mb-16'>
+          <p className='text-secondary font-bold drop-shadow-[0_0_8px_rgba(100,255,218,0.3)]' style={{ fontSize: '2.5rem', lineHeight: '1.3' }}>
+            Experience
           </p>
         </div>
 
-        {/* Outer container with centering */}
-        <div className='flex justify-center w-full'>
-          {/* Inner container for horizontal scrolling */}
-          <div className='flex flex-nowrap overflow-x-auto gap-8 pt-8 pb-4' style={{ maxWidth: '100%' }}>
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                style={{ backgroundImage: `url('${project.image}')` }}
-                className='shadow-[0_20px_50px_rgba(8,_112,_184,_0.2)] group rounded-lg flex-shrink-0 flex justify-center items-center transition-all duration-500 transform hover:scale-105 hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.4)] animate-fadeIn h-[320px] w-[280px]'
-                data-aos="fade-up"
-                data-aos-delay={project.delay}
-              >
-                {/* Hover Effects */}
-                <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-b from-[rgba(5,10,21,0.8)] to-[rgba(5,10,21,0.9)] w-full h-full flex flex-col justify-center items-center rounded-lg'>
-                  <span className='text-4xl font-bold text-white tracking-wider mb-6 px-4 text-center'>
-                    {project.name}
-                  </span>
-                  <div className='pt-8 text-center space-x-6'>
-                    <a href={project.demo} target='_blank' rel="noreferrer">
-                      <button className='text-center rounded-lg px-8 py-4 m-2 bg-[#0F172A] text-secondary font-bold text-xl border border-secondary hover:bg-secondary hover:text-[#0F172A] transition-all duration-300'>
-                        Demo
-                      </button>
-                    </a>
-                    <a href={project.code} target='_blank' rel="noreferrer">
-                      <button className='text-center rounded-lg px-8 py-4 m-2 bg-[#0F172A] text-secondary font-bold text-xl border border-secondary hover:bg-secondary hover:text-[#0F172A] transition-all duration-300'>
-                        Code
-                      </button>
-                    </a>
-                  </div>
+        {/* Experience Timeline */}
+        <div className='max-w-[1000px] mx-auto'>
+          {experiences.map((exp) => (
+            <div key={exp.id} className='mb-16 grid grid-cols-[200px_1fr] gap-6'>
+              {/* Left Column - Time Period and Location */}
+              <div className='text-left'>
+                <p className='text-gray-400 text-lg mb-1'>{exp.period}</p>
+                <p className='text-gray-500 text-sm'>{exp.location}</p>
+              </div>
+              
+              {/* Right Column - Experience Details */}
+              <div>
+                <h3 className='text-xl font-semibold text-white'>{exp.title}</h3>
+                <h4 className='text-lg text-secondary mb-4'>{exp.company}</h4>
+                
+                {/* Description bullets */}
+                <ul className='list-disc pl-5 mb-4 space-y-2'>
+                  {exp.description.map((item, idx) => (
+                    <li key={idx} className='text-gray-300'>{item}</li>
+                  ))}
+                </ul>
+                
+                {/* Skills */}
+                <div className='flex flex-wrap gap-2 mt-3'>
+                  {exp.skills.map((skill, index) => (
+                    <span 
+                      key={index} 
+                      className='px-3 py-1 text-sm bg-[#1A2330] text-purple-400 rounded-md'
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default Projects;
+export default Experience;

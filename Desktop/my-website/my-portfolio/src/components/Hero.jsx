@@ -4,7 +4,8 @@ const Hero = () => {
   const [text, setText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   const fullText = "I do AI / ML / Full Stack.";
-  const typingSpeed = 150; // milliseconds per character
+  const typingSpeed = 100; // milliseconds per character
+  const resetDelay = 2000; // delay before restarting the typing effect
 
   useEffect(() => {
     if (text.length < fullText.length) {
@@ -12,6 +13,11 @@ const Hero = () => {
         setText(fullText.slice(0, text.length + 1));
       }, typingSpeed);
       return () => clearTimeout(timeout);
+    } else {
+      const resetTimeout = setTimeout(() => {
+        setText('');
+      }, resetDelay);
+      return () => clearTimeout(resetTimeout);
     }
   }, [text]);
 
@@ -33,7 +39,6 @@ const Hero = () => {
         >
           Hello, I'm Nischal.
         </p>
-
 
         <h2 className='text-5xl sm:text-8xl font-bold text-slate h-24 mt-02'>
           {text}

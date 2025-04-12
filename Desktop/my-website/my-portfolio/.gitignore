@@ -1,24 +1,67 @@
-# Logs
-logs
-*.log
+# Dependency directories
+node_modules/
+/.pnp
+.pnp.js
+
+# Build files
+/build
+/dist
+.next/
+out/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Personal directories (to stop them appearing in git status)
+/Pictures/
+/Documents/
+/Downloads/
+/Movies/
+/Music/
+/Public/
+/.ssh/
+/.bash_history
+/.zsh_history
+/.zsh_sessions/
+/.npm/
+/.bundle/
+/.expo/
+/.idlerc/
+/.lesshst
+/.vim/
+
+# Keep the project scope limited to the actual repository
+../../../*
+../../*
+../*/*
+**/Desktop
+**/Pictures
+**/Documents
+**/Downloads

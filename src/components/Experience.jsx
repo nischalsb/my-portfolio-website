@@ -53,76 +53,51 @@ const Experience = () => {
   ];
 
   return (
-    // Main container - full width, min screen height, vertical padding, dark background, light gray text
-    <div name='experience' className='w-full min-h-screen py-16 bg-primary text-gray-300'>
-      {/* Content container - max width with auto margins and padding */}
-      {/* max-w-[1200px]: Sets maximum width of content area */}
-      {/* mx-auto: Centers the container horizontally */}
-      {/* p-4: Adds 16px padding on all sides */}
-      {/* pt-[120px]: Adds 120px padding at the top to push content down */}
-      <div className='max-w-[1200px] mx-auto p-4 pt-[120px]'>
-        {/* Section Title Container */}
-        {/* mb-[50px]: Adds 50px space below the title */}
-        <div className='w-full text-center mb-[50px]'>
-          {/* Section title with teal color, bold weight, and subtle glow effect */}
-          {/* text-secondary: Sets teal/cyan text color */}
-          {/* font-bold: Makes text bold */}
-          {/* drop-shadow: Adds subtle glow effect around text */}
-          <p className='text-secondary font-bold drop-shadow-[0_0_8px_rgba(100,255,218,0.3)]' style={{ fontSize: '2.5rem', lineHeight: '1.3' }}>
+    // Main container with responsive padding
+    <div name='experience' className='w-full min-h-screen py-8 sm:py-12 lg:py-16 bg-primary text-gray-300'>
+      {/* Content container with responsive margins and padding */}
+      <div className='max-w-[1200px] mx-auto p-4 sm:p-6 lg:p-8 pt-16 sm:pt-20 lg:pt-[120px]'>
+        {/* Section Title Container with responsive spacing */}
+        <div className='w-full text-center mb-8 sm:mb-12 lg:mb-[50px]'>
+          {/* Section title with responsive font sizing */}
+          <p className='text-secondary font-bold drop-shadow-[0_0_8px_rgba(100,255,218,0.3)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight'>
             Experience
           </p>
         </div>
 
-        {/* Experience Timeline Container - slightly narrower than the section container */}
+        {/* Experience Timeline Container */}
         <div className='max-w-[1000px] mx-auto'>
           {/* Map through each experience to create entries */}
           {experiences.map((exp, index) => (
             <div key={exp.id}>
-              {/* Single experience container - 32px bottom margin */}
-              <div className='mb-8'>
-                {/* Two-column grid layout for period and content */}
-                {/* grid-cols-[150px_1fr]: First column fixed at 150px, second takes remaining space */}
-                {/* gap-16: Adds 64px space between columns */}
-                <div className='grid grid-cols-[150px_1fr] gap-16'>
-                  {/* Left column - Period/timeframe */}
-                  {/* text-gray-400: Light gray color */}
-                  {/* text-xl: Larger text size */}
-                  <p className='text-gray-400 text-xl'>{exp.period}</p>
+              {/* Single experience container with responsive spacing */}
+              <div className='mb-6 sm:mb-8'>
+                {/* Responsive grid layout - stacked on mobile, side-by-side on larger screens */}
+                <div className='grid grid-cols-1 md:grid-cols-[150px_1fr] gap-4 md:gap-8 lg:gap-16'>
+                  {/* Period/timeframe - full width on mobile */}
+                  <p className='text-gray-400 text-base sm:text-lg lg:text-xl mb-2 md:mb-0'>{exp.period}</p>
                   
-                  {/* Right column - All content (title, company, description, skills) */}
+                  {/* Content section */}
                   <div>
-                    {/* Title and company container with no space between them */}
-                    {/* space-y-0: Removes vertical space between children */}
-                    {/* mb-[4px]: Adds 4px space below this group */}
-                    <div className="space-y-0 mb-[4px]">
-                      {/* Job title - large, bold, white text */}
-                      <p className='text-2xl font-bold text-white'>{exp.title}</p>
-                      {/* Company name - teal color, italic style */}
-                      <p className='text-xl text-secondary font-normal italic'>{exp.company}</p>
+                    {/* Title and company container */}
+                    <div className="space-y-1 mb-3 sm:mb-4">
+                      {/* Job title with responsive sizing */}
+                      <p className='text-lg sm:text-xl lg:text-2xl font-bold text-white leading-tight'>{exp.title}</p>
+                      {/* Company name */}
+                      <p className='text-base sm:text-lg lg:text-xl text-secondary font-normal italic'>{exp.company}</p>
                     </div>
                     
-                    {/* Description paragraph - gray text with bottom margin */}
-                    <p className='text-gray-300 mb-4'>{exp.description[0]}</p>
+                    {/* Description with responsive text size */}
+                    <p className='text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base lg:text-lg leading-relaxed'>{exp.description[0]}</p>
                     
-                    {/* Skills container - 32px top margin */}
-                    <div className='mt-8'>
-                      {/* Map through skills to create pill-like tags */}
+                    {/* Skills container with responsive spacing */}
+                    <div className='mt-4 sm:mt-6 lg:mt-8'>
+                      {/* Skills with responsive spacing and layout */}
                       {exp.skills.map((skill, index) => (
                         <span 
                           key={index}
-                          // Skill tag styling
-                          // inline-block: Allows tags to flow in lines
-                          // px-4 py-2: Horizontal and vertical padding
-                          // text-sm: Smaller text size
-                          // text-purple-400: Purple text color
-                          // mr-8 mb-5: Spacing between skill tags
-                          // font-medium: Slightly bolder than normal text
-                          className='inline-block px-4 py-2 text-sm text-purple-400 rounded-md mr-8 mb-5 font-medium'
-                          // Additional custom styling
-                          // marginRight: Explicit right margin between skills
-                          // textShadow: Creates a purple glow effect
+                          className='inline-block px-3 sm:px-4 py-2 text-xs sm:text-sm text-purple-400 rounded-md mr-2 sm:mr-4 lg:mr-8 mb-2 sm:mb-3 lg:mb-5 font-medium'
                           style={{ 
-                            marginRight: '32px',
                             textShadow: '0 0 8px rgba(192, 132, 252, 0.7)'
                           }}
                         >
@@ -134,17 +109,11 @@ const Experience = () => {
                 </div>
               </div>
               
-              {/* Divider line between experiences (except after the last one) */}
+              {/* Responsive divider line between experiences */}
               {index < experiences.length - 1 && (
                 <>
-                  {/* Space above divider - 10px height */}
                   <div className="h-[10px]"></div>
-                  {/* Horizontal divider line */}
-                  {/* border-gray-700: Dark gray color */}
-                  {/* border-t-[1px]: 1px thick top border */}
-                  {/* mx-16: 64px horizontal margin to make line shorter than content */}
-                  <hr className='border-gray-700 border-t-[1px] mx-16' />
-                  {/* Space below divider - 10px height */}
+                  <hr className='border-gray-700 border-t-[1px] mx-4 sm:mx-8 lg:mx-16' />
                   <div className="h-[10px]"></div>
                 </>
               )}

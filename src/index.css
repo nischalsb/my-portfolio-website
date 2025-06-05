@@ -144,35 +144,45 @@ p {
 }
 
 .custom-textarea {
-  width: 50%;
-  padding: 10px 16px;
-  background-color: #f3f4f6; /* Light gray */
-  border-radius: 9999px; /* Fully rounded */
-  border: 1px solid #d1d5db; /* Light border */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 16px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   resize: none;
   outline: none;
-  height: 50px; /* Fixed height */
+  min-height: 50px;
   font-size: 16px;
-  color: #374151; /* Dark gray text */
+  color: #374151;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .custom-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+  }
 }
 
 .custom-textarea:focus {
-  border-color: #64ffda; /* Green border on focus */
-  box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.3); /* Focus shadow */
+  border-color: #64ffda;
+  box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.3);
 }
 
 .centered-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .centered-form input,
 .centered-form textarea {
-  margin-bottom: -5px; /* Space between elements */
+  margin-bottom: 16px;
 }
-
 
 .my-image {
   width: 140px;
@@ -180,7 +190,21 @@ p {
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 4px 12px rgba(100, 255, 218, 0.3);
-  flex-shrink: 0; /* prevents it from shrinking on smaller screens */
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .my-image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .my-image {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 

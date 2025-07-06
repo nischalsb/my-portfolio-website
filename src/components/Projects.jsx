@@ -17,7 +17,7 @@ const Projects = () => {
       year: '2024',
       status: 'Live',
       github: 'https://github.com/nischalsb/hustle-chha',
-      image: '../assets/hustlechha.png',
+      image: '/assets/hustlechha.png',
       features: ['Real-time data synchronization', 'Interactive analytics dashboard', 'Mood tracking with AI insights', 'Progressive Web App']
     },
     {
@@ -28,7 +28,7 @@ const Projects = () => {
       year: '2024',
       status: 'Research',
       demo: 'https://drive.google.com/file/d/1AVuJrI_pG4iLBuhBWwp6kloaHaoZ2EZu/view?usp=sharing',
-      image: '../assets/turbulence.png',
+      image: '/assets/turbulence.png',
       features: ['500GB+ data processing', '15% accuracy improvement', 'Interactive geospatial visualization', 'Real-time risk assessment']
     },
     {
@@ -40,7 +40,7 @@ const Projects = () => {
       status: 'Live',
       github: 'https://github.com/nischalsb/EduN-Website',
       demo: 'https://edunep.org',
-      image: '../assets/educate-nepal.png',
+      image: '/assets/portfolio.png',
       features: ['20% increase in user engagement', '30% improvement in search visibility', 'Mobile-first responsive design', 'Analytics-driven optimization']
     },
     
@@ -53,7 +53,7 @@ const Projects = () => {
       status: 'Live',
       github: 'https://github.com/nischalsb/my-portfolio-website',
       demo: 'https://n1-sb.com',
-      image: '../assets/portfolio.png',
+      image: '/assets/portfolio.png',
       features: ['Smooth Framer Motion animations', 'Interactive tech stack', 'Mobile-first responsive design', 'Modern black-white aesthetic']
     }
   ]

@@ -35,6 +35,15 @@ jobs:
     - name: Build
       run: npm run build
       
+    - name: List dist contents for debugging
+      run: |
+        echo "=== Contents of dist directory ==="
+        ls -la dist/
+        echo "=== Contents of dist/assets directory ==="
+        ls -la dist/assets/
+        echo "=== Image files in dist ==="
+        find dist -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.svg" | head -10
+        
     - name: Setup Pages
       uses: actions/configure-pages@v4
       

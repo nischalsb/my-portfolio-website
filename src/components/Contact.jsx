@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Check, X } from 'lucide-react'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -11,6 +11,10 @@ const Contact = () => {
     email: '',
     message: ''
   })
+  
+  // New state for form submission
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null) // 'success', 'error', or null
 
   const handleChange = (e) => {
     setFormData({
@@ -19,12 +23,40 @@ const Contact = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    // Reset form
-    setFormData({ name: '', email: '', message: '' })
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+    
+    try {
+      const response = await fetch('http://localhost:8000/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      
+      if (response.ok) {
+        const result = await response.json()
+        console.log('Message saved with ID:', result.id)
+        
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', message: '' })
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => setSubmitStatus(null), 5000)
+      } else {
+        const error = await response.json()
+        console.error('Error:', error)
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      console.error('Network error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -172,7 +204,8 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-colors"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-colors disabled:bg-gray-50 disabled:cursor-not-allowed"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -188,7 +221,8 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-colors"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-colors disabled:bg-gray-50 disabled:cursor-not-allowed"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -203,21 +237,60 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={isSubmitting}
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-colors resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-colors resize-none disabled:bg-gray-50 disabled:cursor-not-allowed"
                     placeholder="Tell me about your project or just say hello..."
                   />
                 </div>
 
+                {/* Submit Button */}
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full bg-black text-white py-3 px-6 rounded-lg font-medium tracking-wide hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center space-x-2"
+                  disabled={isSubmitting}
+                  whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+                  className={`w-full py-3 px-6 rounded-lg font-medium tracking-wide transition-colors duration-200 flex items-center justify-center space-x-2 ${
+                    isSubmitting 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-black hover:bg-gray-800'
+                  } text-white`}
                 >
-                  <Send size={20} />
-                  <span>Send Message</span>
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send size={20} />
+                      <span>Send Message</span>
+                    </>
+                  )}
                 </motion.button>
+
+                {/* Status Messages */}
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg flex items-center space-x-2"
+                  >
+                    <Check size={20} />
+                    <span>✅ Message sent successfully! I'll get back to you soon.</span>
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg flex items-center space-x-2"
+                  >
+                    <X size={20} />
+                    <span>❌ Error sending message. Please try again or email me directly.</span>
+                  </motion.div>
+                )}
               </form>
             </motion.div>
           </div>
@@ -232,7 +305,7 @@ const Contact = () => {
         className="mt-20 pt-8 border-t border-gray-200 text-center"
       >
         <p className="text-gray-600">
-          © {new Date().getFullYear()} Nischal Singh Bista. Built with React and Tailwind CSS.
+          © {new Date().getFullYear()} Nischal Singh Bista. Built with React, Tailwind CSS, and FastAPI.
         </p>
       </motion.div>
     </section>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 
+
 const Home = () => {
   const scrollToAbout = () => {
     document.querySelector('#about').scrollIntoView({ behavior: 'smooth' })
@@ -148,7 +149,7 @@ const Home = () => {
               <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300 shadow-xl">
                 {/* Profile image */}
                 <img
-                                      src="/assets/profile.jpeg"
+                  src="../dist/assets/profile.jpeg"
                   alt="Nischal Singh Bista"
                   className="w-full h-full object-cover object-center"
                   onError={(e) => {

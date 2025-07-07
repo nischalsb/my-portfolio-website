@@ -44,33 +44,35 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="font-playfair font-bold text-xl cursor-pointer"
-            onClick={() => handleNavClick('#home')}
-          >
-            NSB
-          </motion.div>
+          {/* Logo - Aligned with main content */}
+          <div className="flex items-center w-full lg:grid lg:grid-cols-2 lg:gap-8 lg:gap-16">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="font-playfair font-bold text-xl cursor-pointer"
+              onClick={() => handleNavClick('#home')}
+            >
+              <span className="tracking-widest">N S B.</span>
+            </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.a
-                key={item.label}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleNavClick(item.href)}
-                className="text-sm font-medium tracking-wide cursor-pointer hover:text-gray-600 transition-colors duration-200"
-              >
-                {item.label}
-              </motion.a>
-            ))}
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center justify-end space-x-8 lg:col-start-2">
+              {navItems.map((item) => (
+                <motion.a
+                  key={item.label}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handleNavClick(item.href)}
+                  className="text-sm font-medium tracking-wide cursor-pointer hover:text-gray-600 transition-colors duration-200"
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden ml-auto">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}

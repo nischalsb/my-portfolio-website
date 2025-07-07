@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Dependencies
 node_modules/
 npm-debug.log*
@@ -6,38 +5,16 @@ yarn-debug.log*
 yarn-error.log*
 
 # Production builds
-# dist/  # Commented out to allow GitHub Pages to serve built files
+# dist/ commented out to allow GitHub Pages to serve built files
 build/
 
 # Environment variables
-=======
-# Dependency directories
-node_modules/
-/.pnp
-.pnp.js
-
-# Build files
-/build
-/dist
-.next/
-out/
-
-# Environment files
->>>>>>> 9178ac2a372fe82da17b4a7c32893217f6e0025d
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-<<<<<<< HEAD
-# IDE and editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-=======
 # Debug logs
 npm-debug.log*
 yarn-debug.log*
@@ -51,7 +28,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
->>>>>>> 9178ac2a372fe82da17b4a7c32893217f6e0025d
+*.swp
+*.swo
+*~
 
 # OS generated files
 .DS_Store
@@ -62,7 +41,6 @@ yarn-error.log*
 ehthumbs.db
 Thumbs.db
 
-<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -121,32 +99,4 @@ temp/
 .fusebox/
 
 # DynamoDB Local files
-.dynamodb/ 
-=======
-# Personal directories (to stop them appearing in git status)
-/Pictures/
-/Documents/
-/Downloads/
-/Movies/
-/Music/
-/Public/
-/.ssh/
-/.bash_history
-/.zsh_history
-/.zsh_sessions/
-/.npm/
-/.bundle/
-/.expo/
-/.idlerc/
-/.lesshst
-/.vim/
-
-# Keep the project scope limited to the actual repository
-../../../*
-../../*
-../*/*
-**/Desktop
-**/Pictures
-**/Documents
-**/Downloads
->>>>>>> 9178ac2a372fe82da17b4a7c32893217f6e0025d
+.dynamodb/

@@ -40,7 +40,7 @@ const Projects = () => {
       status: 'Live',
       github: 'https://github.com/nischalsb/EduN-Website',
       demo: 'https://edunep.org',
-      image: '/assets/portfolio.png',
+      image: '',
       features: ['20% increase in user engagement', '30% improvement in search visibility', 'Mobile-first responsive design', 'Analytics-driven optimization']
     },
     

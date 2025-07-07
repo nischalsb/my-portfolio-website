@@ -15,7 +15,7 @@ const Projects = () => {
       longDescription: 'HustleChha is a comprehensive productivity platform that combines AI-powered insights with intuitive task management. The application features a sophisticated Pomodoro timer, mood tracking capabilities, and real-time analytics to help users optimize their productivity patterns. Built with React and TypeScript for type safety, Firebase for real-time synchronization, and includes progressive web app capabilities.',
       technologies: ['React', 'TypeScript', 'Firebase', 'CSS', 'HTML'],
       year: '2024',
-      status: 'Live',
+      status: 'In Development',
       github: 'https://github.com/nischalsb/hustle-chha',
       image: '/assets/hustlechha.png',
       features: ['Real-time data synchronization', 'Interactive analytics dashboard', 'Mood tracking with AI insights', 'Progressive Web App']

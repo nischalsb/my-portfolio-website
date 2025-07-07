@@ -132,7 +132,7 @@ const Home = () => {
               className="space-y-6"
             >
               <p className="text-lg leading-relaxed max-w-2xl text-justify">
-              Hey, I'm Nischal! I'm a sophomore at the University of Wisconsin–Madison, majoring in Computer Science. From building full-stack applications to experimenting with AI/ML, I love turning random ideas into real, working things. I'm all about clean code, clever design, and solving problems.
+              Hey, I'm Nischal! I'm a rising junior at the University of Wisconsin–Madison, majoring in Computer Science. From building full-stack applications to experimenting with AI/ML, I love turning random ideas into real, working things. I'm all about clean code, clever design, and solving problems.
               Outside of coding, you might catch me messing with side projects, browsing tech Reddit, or pretending to understand the latest AI papers.
               </p>
             </motion.div>

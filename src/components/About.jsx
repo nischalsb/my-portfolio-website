@@ -6,6 +6,16 @@ const About = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
+  // Download resume function
+  const downloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/assets/resume.jpg';
+    link.download = 'Nischal_Singh_Bista_Resume.jpg'; // Custom filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -121,7 +131,10 @@ const About = () => {
 
                 {/* Download Button */}
                 <div className="pt-2">
-                  <button className="w-full bg-black text-white py-2 px-4 rounded text-sm font-medium hover:bg-gray-800 transition-colors duration-200">
+                  <button 
+                    onClick={downloadResume}
+                    className="w-full bg-black text-white py-2 px-4 rounded text-sm font-medium hover:bg-gray-800 transition-colors duration-200"
+                  >
                     Download Resume
                   </button>
                 </div>

@@ -302,9 +302,9 @@ const Contact = () => {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="mt-20 pt-8 border-t border-gray-200 text-center"
+        className="mt-2 pt-6 pb-0 border-t border-gray-200 text-center"
       >
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-lg">
           © {new Date().getFullYear()} Nischal Singh Bista. Built with React, Tailwind CSS, and FastAPI.
         </p>
       </motion.div>

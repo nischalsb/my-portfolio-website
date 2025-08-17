@@ -238,9 +238,9 @@ const TechStack = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
                 { label: 'Years of Experience', value: '2+' },
-                { label: 'Projects Completed', value: '15+' },
-                { label: 'Research Papers', value: '1+' },
-                { label: 'Technologies Mastered', value: '20+' }
+                { label: 'Projects Completed', value: '5+' },
+                { label: 'Research Papers', value: 'Soon' },
+                { label: 'Technologies Mastered', value: '10+' }
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}

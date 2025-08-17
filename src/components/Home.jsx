@@ -104,38 +104,31 @@ const Home = () => {
               className="space-y-4"
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-playfair font-bold leading-tight">
-                <span className="block">Nischal Singh</span>
-                <span className="block gradient-text">Bista</span>
+                <span className="block">Nischal Singh Bista</span>
               </h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl sm:text-2xl font-light text-gray-600 font-inter flex items-center gap-3"
-              >
-                I do AI/ ML/ Full Stack
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  className="inline-block"
-                >
-                  
+              <div className="text-xl sm:text-2xl font-light text-gray-600 font-inter flex items-center gap-3 h-8">
+                <motion.span className="relative">
+                  {'I do AI/ ML/ Full Stack'.split('').map((letter, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 3.0,
+                        delay: 0.9 + (index * 0.05),
+                        repeat: Infinity,
+                        repeatDelay: 3.5,
+                        repeatType: 'mirror',
+                      }}
+                    >
+                      {letter}
+                    </motion.span>
+                  ))}
                 </motion.span>
-              </motion.p>
+              </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="space-y-6"
-            >
-              <p className="text-lg leading-relaxed max-w-2xl text-justify">
-              Hey, I'm Nischal! I'm a rising junior at the University of Wisconsin–Madison, majoring in Computer Science. From building full-stack applications to experimenting with AI/ML, I love turning random ideas into real, working things. I'm all about clean code, clever design, and solving problems.
-              Outside of coding, you might catch me messing with side projects, browsing tech Reddit, or pretending to understand the latest AI papers.
-              </p>
-            </motion.div>
+            
           </div>
 
           {/* Profile Image */}

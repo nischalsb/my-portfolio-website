@@ -58,9 +58,9 @@ const About = () => {
 
             <motion.div variants={itemVariants} className="space-y-6">
               <p className="text-lg leading-relaxed text-justify">
-                I'm a Computer Science student at the University of Wisconsin-Madison, pursuing my Bachelor's 
-                degree with an expected graduation in May 2027. As a King Morgridge Scholar with a full-ride 
-                scholarship, I'm committed to academic excellence and making a meaningful impact through technology.
+              Hey, I'm Nischal! I'm a rising junior at the University of Wisconsin–Madison, majoring in Computer Science. 
+              From building full-stack applications to experimenting with AI/ML, I love turning random ideas into real, working things. 
+              I'm all about clean code, clever design, and solving problems.
               </p>
               
               <p className="text-lg leading-relaxed text-justify">

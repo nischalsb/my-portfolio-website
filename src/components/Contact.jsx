@@ -277,7 +277,7 @@ const Contact = () => {
                     className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg flex items-center space-x-2"
                   >
                     <Check size={20} />
-                    <span>✅ Message sent successfully! I'll get back to you soon.</span>
+                    <span> Message sent successfully! I'll get back to you soon.</span>
                   </motion.div>
                 )}
 

@@ -1,8 +1,57 @@
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
+import { useState, useEffect } from 'react'
 
 
 const Home = () => {
+  const [displayedText, setDisplayedText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [loopIndex, setLoopIndex] = useState(0)
+  const [showCursor, setShowCursor] = useState(true)
+  
+  const roles = [
+    'I do AI/ ML/ Full Stack'
+  ]
+  
+  useEffect(() => {
+    const currentRole = roles[loopIndex]
+    const typingSpeed = isDeleting ? 50 : 100
+    const pauseTime = 2000 // Pause at end before deleting
+    
+    const handleTyping = () => {
+      if (!isDeleting) {
+        // Typing forward
+        if (displayedText.length < currentRole.length) {
+          setDisplayedText(currentRole.substring(0, displayedText.length + 1))
+        } else {
+          // Finished typing, pause then start deleting
+          setTimeout(() => setIsDeleting(true), pauseTime)
+          return
+        }
+      } else {
+        // Deleting
+        if (displayedText.length > 0) {
+          setDisplayedText(currentRole.substring(0, displayedText.length - 1))
+        } else {
+          // Finished deleting, move to next role
+          setIsDeleting(false)
+          setLoopIndex((prev) => (prev + 1) % roles.length)
+        }
+      }
+    }
+    
+    const timer = setTimeout(handleTyping, typingSpeed)
+    return () => clearTimeout(timer)
+  }, [displayedText, isDeleting, loopIndex])
+  
+  // Cursor blink effect
+  useEffect(() => {
+    const cursorTimer = setInterval(() => {
+      setShowCursor((prev) => !prev)
+    }, 500)
+    return () => clearInterval(cursorTimer)
+  }, [])
+  
   const scrollToAbout = () => {
     document.querySelector('#about').scrollIntoView({ behavior: 'smooth' })
   }
@@ -106,25 +155,13 @@ const Home = () => {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-playfair font-bold leading-tight">
                 <span className="block">Nischal Singh Bista</span>
               </h1>
-              <div className="text-xl sm:text-2xl font-light text-gray-600 font-inter flex items-center gap-3 h-8">
-                <motion.span className="relative">
-                  {'I do AI/ ML/ Full Stack'.split('').map((letter, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 3.0,
-                        delay: 0.9 + (index * 0.05),
-                        repeat: Infinity,
-                        repeatDelay: 3.5,
-                        repeatType: 'mirror',
-                      }}
-                    >
-                      {letter}
-                    </motion.span>
-                  ))}
-                </motion.span>
+              <div className="text-xl sm:text-2xl font-light text-gray-600 font-inter flex items-center gap-1 h-8">
+                <span className="relative min-h-[2rem]">
+                  {displayedText}
+                  <span 
+                    className={`inline-block w-0.5 h-6 bg-gray-600 ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}
+                  />
+                </span>
               </div>
             </motion.div>
 

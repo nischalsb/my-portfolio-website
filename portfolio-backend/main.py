@@ -1,6 +1,6 @@
 # main.py (COMPLETE VERSION)
 import os
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from dotenv import load_dotenv
@@ -10,6 +10,7 @@ from database import get_db, engine
 from models import Base
 from schemas import ContactMessageCreate, ContactMessageResponse
 import crud
+from email_service import send_contact_notification
 
 # Load environment variables
 load_dotenv()
@@ -48,14 +49,23 @@ def read_root():
 @app.post("/contact", response_model=ContactMessageResponse)
 def create_contact(
     contact: ContactMessageCreate, 
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     """
-    Create a new contact message
+    Create a new contact message and send email notification
     """
     try:
         # Save to database
         db_contact = crud.create_contact_message(db=db, contact=contact)
+        
+        # Send email notification in background (non-blocking)
+        background_tasks.add_task(
+            send_contact_notification,
+            db_contact.name,
+            db_contact.email,
+            db_contact.message
+        )
         
         return ContactMessageResponse(
             id=db_contact.id,

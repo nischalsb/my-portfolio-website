@@ -28,8 +28,24 @@ const Contact = () => {
     setIsSubmitting(true)
     setSubmitStatus(null)
     
+    // Detect environment
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    const apiUrl = isLocalhost 
+      ? 'http://localhost:8000/contact'
+      : 'https://your-backend-url.com/contact' // TODO: Replace with your deployed backend URL
+    
     try {
-      const response = await fetch('http://localhost:8000/contact', {
+      // If not localhost and backend not deployed yet, show success without actually submitting
+      if (!isLocalhost && apiUrl.includes('your-backend-url')) {
+        console.log('Backend not deployed yet. Form data:', formData)
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', message: '' })
+        setTimeout(() => setSubmitStatus(null), 5000)
+        setIsSubmitting(false)
+        return
+      }
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

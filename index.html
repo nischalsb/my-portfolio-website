@@ -1,20 +1,1738 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/assets/profile.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/assets/profile.jpeg" />
-    <meta name="msapplication-TileImage" content="/assets/profile.jpeg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nischal Singh Bista - Portfolio</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html> 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nischal Singh Bista — Selected Works, Ed. I</title>
+<meta name="description" content="A typeset engineering monograph. Full-stack products, serverless backends, and applied machine learning. UW–Madison '27.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS & BASE
+   ============================================================ */
+:root{
+  --paper:#f3efe6;
+  --ink:#171310;
+  --red:#df3d10;
+  --mut:#776f61;
+  --hair:rgba(23,19,16,.22);
+  --hair2:rgba(23,19,16,.12);
+  --disp:'Bricolage Grotesque', sans-serif;
+  --serif:'Newsreader', Georgia, serif;
+  --mono:'Space Mono', ui-monospace, monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-padding-top:64px}
+@media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth} }
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--serif); font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+/* paper grain — flat noise, nothing glossy */
+body::after{
+  content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--red);color:var(--paper)}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px dashed var(--red);outline-offset:3px}
+h1,h2,h3{font-family:var(--disp);font-optical-sizing:none;font-variation-settings:'opsz' 96;line-height:.9;letter-spacing:-.015em;text-wrap:balance}
+.mono{font-family:var(--mono)}
+.k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.k::before{content:"";display:inline-block;width:8px;height:8px;background:var(--red);margin-right:10px;transform:translateY(0px)}
+.wrap{max-width:1440px;margin:0 auto;padding:0 4vw}
+
+/* riso cursor trail */
+#trail{position:fixed;inset:0;z-index:70;pointer-events:none;mix-blend-mode:multiply}
+
+/* progress hairline + running head */
+#prog{position:fixed;top:0;left:0;height:2px;background:var(--red);width:0;z-index:90}
+.rh{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:11px 3vw;border-bottom:1px solid var(--hair);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(243,239,230,.88);backdrop-filter:blur(6px);
+}
+.rh b{font-weight:700}
+.rh-sec{color:var(--red)}
+.rh-page{font-variant-numeric:tabular-nums}
+@media(max-width:720px){.rh-sec{display:none}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease var(--d,0s),transform .7s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
+.rv.on{opacity:1;transform:none}
+
+/* ============================================================
+   COVER / HERO
+   ============================================================ */
+#cover{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:76px 4vw 4vh;position:relative}
+.cropmarks i{position:absolute;width:16px;height:16px;pointer-events:none}
+.cropmarks i:nth-child(1){top:64px;left:2vw;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.cropmarks i:nth-child(2){top:64px;right:2vw;border-top:1px solid var(--ink);border-right:1px solid var(--ink)}
+.cropmarks i:nth-child(3){bottom:14px;left:2vw;border-bottom:1px solid var(--ink);border-left:1px solid var(--ink)}
+.cropmarks i:nth-child(4){bottom:14px;right:2vw;border-bottom:1px solid var(--ink);border-right:1px solid var(--ink)}
+.cover-top{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:auto;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.cover-top .rd{color:var(--red)}
+.hero-name{font-weight:800;font-size:clamp(3.4rem,16.4vw,18rem);line-height:.82;letter-spacing:-.028em;text-transform:uppercase;margin:5vh 0 3.5vh;user-select:none}
+.hero-name .line{display:block;white-space:nowrap}
+.kl{display:inline-block;overflow:hidden;padding-right:.06em;margin-right:-.06em;padding-bottom:.05em;vertical-align:top}
+.ki{
+  display:inline-block;position:relative;
+  font-variation-settings:'opsz' 96,'wght' 260,'wdth' 86;
+  transform:translateY(112%);
+  transition:transform 1s cubic-bezier(.16,1,.3,1) var(--d),font-variation-settings 1.1s ease var(--d);
+}
+.ki::before{
+  content:attr(data-c);position:absolute;left:0;top:0;z-index:-1;color:var(--red);
+  transform:translate(.2em,.14em);
+  transition:transform 1.4s cubic-bezier(.16,1,.3,1) calc(var(--d) + .3s);
+}
+.inked .ki{transform:translateY(0);font-variation-settings:'opsz' 96,'wght' 800,'wdth' 93}
+.inked .ki::before{transform:translate(.048em,.036em)}
+.inked .ki{transition:transform 1s cubic-bezier(.16,1,.3,1) var(--d),font-variation-settings .5s ease}
+@media (prefers-reduced-motion: no-preference){
+  .inked .ki:hover{font-variation-settings:'opsz' 96,'wght' 300,'wdth' 86}
+  .inked .ki:hover::before{transform:translate(.1em,.07em)}
+}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;border-top:1px solid var(--ink);padding-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.hero-meta .dotsep{color:var(--red)}
+.hero-dek{max-width:44em;font-size:clamp(1.05rem,1.6vw,1.3rem);font-style:italic;margin:14px 0 3vh;color:rgba(23,19,16,.85)}
+.stamp{
+  position:absolute;right:6vw;top:16vh;transform:rotate(-5deg);
+  border:2px solid var(--red);color:var(--red);padding:8px 12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  opacity:0;transition:opacity .5s ease 1.5s;
+}
+.inked ~ .stamp, .inked.stamp{opacity:.92}
+.cover-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--hair);margin-top:3vh;padding-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.cover-foot a{text-decoration:none;border-bottom:1px solid var(--hair)}
+.cover-foot a:hover{color:var(--red);border-color:var(--red)}
+@media(max-width:720px){.stamp{display:none}.cover-top span:nth-child(2){display:none}}
+
+/* ============================================================
+   CONTENTS
+   ============================================================ */
+#contents{padding:8vh 0 10vh}
+.toc-cap{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+.toc-row{
+  display:grid;grid-template-columns:70px 1fr auto auto;gap:18px;align-items:baseline;width:100%;
+  text-align:left;padding:16px 4px;border-top:1px solid var(--hair);
+  font-family:var(--mono);font-size:clamp(12px,1.4vw,15px);letter-spacing:.1em;text-transform:uppercase;
+  transition:background .25s ease,padding-left .25s ease;
+}
+.toc-row:last-of-type{border-bottom:1px solid var(--hair)}
+.toc-row:hover{background:rgba(223,61,16,.06);padding-left:16px}
+.toc-num{color:var(--red);font-weight:700}
+.toc-note{color:var(--mut);font-size:11px;display:none}
+@media(min-width:860px){.toc-note{display:block}}
+.toc-pp{color:var(--red);font-variant-numeric:tabular-nums}
+.toc-row:hover .toc-name{color:var(--red)}
+
+/* ============================================================
+   CHAPTER HEADS
+   ============================================================ */
+.chap{display:flex;align-items:flex-end;gap:2.6vw;flex-wrap:wrap;padding:11vh 4vw 4vh;border-top:1px solid var(--ink)}
+.chap-n{font-family:var(--disp);font-weight:800;font-size:clamp(4rem,9vw,8.5rem);line-height:.78;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.chap h2{font-size:clamp(2.4rem,5.6vw,4.8rem);font-weight:800;text-transform:uppercase}
+.chap-note{margin-left:auto;max-width:30em;font-style:italic;font-size:1.02rem;color:rgba(23,19,16,.75)}
+@media(max-width:860px){.chap-note{margin-left:0}}
+
+/* ============================================================
+   WORKS — SPREADS
+   ============================================================ */
+.works-stage{position:relative}
+.works.sticky .works-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.spread{position:relative;padding:9vh 4vw 7vh;border-top:1px solid var(--hair)}
+.works.sticky .spread{position:absolute;inset:0;border-top:none;background:var(--paper);visibility:hidden;will-change:transform,opacity}
+.spread-scroll{height:100%;overflow-y:auto;scrollbar-width:none}
+.spread-scroll::-webkit-scrollbar{display:none}
+.works.sticky .spread-scroll{padding-top:52px}
+.spread-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:3.4vw;max-width:1440px;margin:0 auto}
+@media(max-width:980px){.spread-grid{grid-template-columns:1fr;gap:5vh}}
+.sp-rail{
+  position:absolute;left:.9vw;top:50%;transform:translateY(-50%) rotate(180deg);
+  writing-mode:vertical-rl;font-family:var(--mono);font-size:10px;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--mut);white-space:nowrap;
+}
+@media(max-width:1220px){.sp-rail{display:none}}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.kicker::before{content:"";display:inline-block;width:8px;height:8px;background:var(--red);margin-right:10px}
+.sp-title{font-size:clamp(2.8rem,6.4vw,6rem);font-weight:800;text-transform:uppercase}
+.dek{font-style:italic;font-size:clamp(1.1rem,1.7vw,1.35rem);margin:12px 0 3vh;color:rgba(23,19,16,.85)}
+.sss section{margin-bottom:2.2vh}
+.sss h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.sss h4 em{color:var(--red);font-style:normal}
+.sss p{max-width:36em;font-size:1rem;line-height:1.62}
+.sp-links{display:flex;gap:22px;flex-wrap:wrap;margin-top:2.4vh;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.sp-links a,.sp-links button{text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.sp-links a:hover,.sp-links button:hover{color:var(--red);border-color:var(--red)}
+.sp-links .nolink{opacity:.55;letter-spacing:.14em}
+.fold-btn{letter-spacing:.14em;text-transform:uppercase;font-family:var(--mono);font-size:11px;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.fold-btn:hover{color:var(--red);border-color:var(--red)}
+.fold-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.open>.fold-body{grid-template-rows:1fr}
+.fold-body>div,.fold-body>p{overflow:hidden}
+.fold-body p{font-size:.95rem;font-style:italic;color:rgba(23,19,16,.8);padding-top:12px;max-width:36em}
+.sp-side{display:flex;flex-direction:column;gap:2.6vh;min-width:0}
+figure.dgf{border:1px solid var(--ink);padding:14px 14px 10px;position:relative;background:var(--paper)}
+figure.dgf figcaption{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);border-top:1px solid var(--hair2);margin-top:8px;padding-top:8px}
+.reprint{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+.reprint:hover{text-decoration:underline}
+.metrics{display:flex;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.metrics>div{flex:1;padding:12px 14px 10px;min-width:0}
+.metrics>div+div{border-left:1px solid var(--hair)}
+.metrics b{display:block;font-family:var(--disp);font-variation-settings:'opsz' 96;font-weight:800;font-size:clamp(1.5rem,2.6vw,2.5rem);line-height:1;font-variant-numeric:tabular-nums}
+.metrics span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-top:6px}
+.sp-folio{position:absolute;right:4vw;bottom:2.4vh;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+@media(max-width:980px){.sp-folio{position:static;display:block;margin-top:4vh}}
+
+/* works HUD */
+.works-hud{
+  position:absolute;left:0;right:0;bottom:0;z-index:5;display:none;align-items:center;justify-content:space-between;
+  padding:10px 4vw;border-top:1px solid var(--ink);background:var(--paper);
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+}
+.works.sticky .works-hud{display:flex}
+.hud-dots{display:flex;gap:14px}
+.hud-dots button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mut);padding:4px 2px;border-bottom:2px solid transparent}
+.hud-dots button.act{color:var(--red);border-color:var(--red)}
+.hud-dots button:hover{color:var(--ink)}
+
+/* ============================================================
+   FILM-STRIP STACK SWATCHES
+   ============================================================ */
+.strip{
+  position:relative;background:var(--ink);overflow:hidden;cursor:grab;touch-action:pan-y;
+  user-select:none;-webkit-user-select:none;
+}
+.strip:active{cursor:grabbing}
+.strip::before,.strip::after{
+  content:"";position:absolute;left:0;right:0;height:7px;z-index:2;pointer-events:none;
+  background-image:radial-gradient(circle,var(--paper) 2px,transparent 2.5px);
+  background-size:13px 7px;background-position:center;
+}
+.strip::before{top:3px}
+.strip::after{bottom:3px}
+.strip-track{display:flex;width:max-content;will-change:transform;padding:15px 0}
+.fr{display:inline-flex;align-items:center;gap:8px;padding:4px 18px;border-right:1px solid rgba(243,239,230,.28);color:var(--paper);font-family:var(--mono);font-size:10px;letter-spacing:.16em;white-space:nowrap}
+.fr i{width:7px;height:7px;background:var(--red);flex:none}
+.strip-cap{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-top:6px}
+
+/* ============================================================
+   DIAGRAMS (type-plate figures)
+   ============================================================ */
+.dg{width:100%;height:auto;display:block}
+.dg text{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.05em;fill:var(--ink)}
+.dg .sub,.dg .el{font-weight:400;fill:var(--mut);font-size:8.5px}
+.dg .el{letter-spacing:.12em}
+.dg .rlab{fill:var(--red)}
+.dg rect{fill:var(--paper);stroke:var(--ink);stroke-width:1.3}
+.dg .acc rect{fill:var(--red);stroke:var(--red)}
+.dg .acc circle{fill:var(--red)}
+.dg .acc text{fill:var(--paper)}
+.dg .e{fill:none;stroke:var(--ink);stroke-width:1.2}
+.dg .e.dash{stroke-dasharray:3 4;stroke:var(--red)}
+.dg .ar{fill:var(--ink);stroke:none}
+.dg .n{opacity:0;transform:scale(.86);transform-box:fill-box;transform-origin:center;
+  transition:opacity .45s ease var(--d,0s),transform .55s cubic-bezier(.2,.9,.3,1.25) var(--d,0s)}
+.dg .e{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s ease var(--d,0s)}
+.dg .e.dash{stroke-dasharray:3 4;stroke-dashoffset:0;opacity:0;transition:opacity .6s ease var(--d,0s)}
+.dg.on .n{opacity:1;transform:none}
+.dg.on .e{stroke-dashoffset:0}
+.dg.on .e.dash{opacity:1}
+@media (prefers-reduced-motion: reduce){
+  .dg .n{opacity:1;transform:none;transition:none}
+  .dg .e{stroke-dashoffset:0;transition:none}
+  .dg .e.dash{opacity:1}
+}
+
+/* ============================================================
+   SPECIMENS — PASTE-UP BOARD
+   ============================================================ */
+.board-wrap{padding:2vh 4vw 10vh}
+.board{
+  position:relative;border:1px solid var(--ink);min-height:560px;
+  background-image:radial-gradient(var(--hair2) 1px,transparent 1.3px);
+  background-size:26px 26px;
+}
+.board-hint{
+  position:absolute;left:50%;top:10px;transform:translateX(-50%);
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);
+  white-space:nowrap;pointer-events:none;
+}
+@media(max-width:979px){.board-hint{display:none}}
+.spec{
+  background:var(--paper);border:1px solid var(--ink);
+  box-shadow:8px 8px 0 rgba(23,19,16,.14);
+  width:min(470px,92vw);
+}
+@media(min-width:980px){
+  .board{height:800px}
+  .spec{position:absolute;left:0;top:0;touch-action:none}
+}
+.spec.lift{box-shadow:14px 14px 0 rgba(223,61,16,.3);cursor:grabbing}
+.spec-head{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:grab}
+.spec-head .pl{background:var(--red);color:var(--paper);padding:2px 7px;font-weight:700}
+.spec-head .gl{margin-left:auto;color:var(--mut);font-variant-numeric:tabular-nums}
+.spec pre{counter-reset:ln;padding:14px 14px 6px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7}
+.cl{display:block;counter-increment:ln;white-space:pre}
+.cl::before{content:counter(ln,decimal-leading-zero);display:inline-block;width:2.4em;color:var(--mut);opacity:.7}
+.tk{color:var(--red);font-weight:700}
+.cm{color:var(--mut);font-style:italic}
+.mk{color:var(--red);font-weight:700;font-size:.72em;vertical-align:super}
+.spec .ans{border-top:1px solid var(--hair);margin:0 14px;padding:10px 0 12px;list-style:none}
+.spec .ans li{font-size:.86rem;font-style:italic;color:rgba(23,19,16,.82);padding-left:1.5em;position:relative;margin-bottom:4px}
+.spec .ans sup{font-family:var(--mono);color:var(--red);font-style:normal;position:absolute;left:0}
+.spec-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--ink);padding:10px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.pull{color:var(--red);letter-spacing:.14em}
+.pull:hover{text-decoration:underline}
+
+/* ============================================================
+   RESEARCH & HONORS
+   ============================================================ */
+.research-body{padding:1vh 4vw 8vh}
+.plate{border:1px solid var(--ink);box-shadow:8px 8px 0 rgba(23,19,16,.14);max-width:920px;margin:0 auto 6vh;position:relative}
+.fp{
+  position:relative;aspect-ratio:16/9;background:var(--ink);color:var(--paper);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(16px,3vw,34px);overflow:hidden;
+}
+.fp .k{color:rgba(243,239,230,.6)}
+.fp-big{
+  font-family:var(--disp);font-variation-settings:'opsz' 96;font-weight:800;
+  font-size:clamp(1.7rem,4.4vw,3.4rem);line-height:1.02;text-transform:uppercase;letter-spacing:-.01em;
+  text-shadow:.05em .04em 0 rgba(223,61,16,.5);
+}
+.fp-big .rd{color:var(--red);text-shadow:none}
+.fp-meta{
+  display:flex;gap:10px 28px;flex-wrap:wrap;border-top:1px solid rgba(243,239,230,.25);
+  padding-top:12px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(243,239,230,.65);
+}
+.plate figcaption{border-top:1px solid var(--ink);padding:9px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.ix-cap{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:6vh 0 10px}
+.ix-row{border-top:1px solid var(--hair)}
+.ix-row:last-child{border-bottom:1px solid var(--hair)}
+.ix-head{display:grid;grid-template-columns:1fr auto 30px;gap:16px;align-items:baseline;width:100%;text-align:left;padding:16px 4px;transition:background .25s ease}
+.ix-head:hover{background:rgba(223,61,16,.05)}
+.ix-title{font-family:var(--disp);font-variation-settings:'opsz' 60;font-weight:600;font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.15}
+.ix-meta{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-align:right}
+.ix-x{font-family:var(--mono);color:var(--red);justify-self:end;transition:transform .35s ease}
+.ix-row.open .ix-x{transform:rotate(45deg)}
+.ix-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.ix-row.open .ix-body{grid-template-rows:1fr}
+.ix-inner{overflow:hidden}
+.ix-inner p{max-width:52em;font-style:italic;font-size:.98rem;color:rgba(23,19,16,.8);padding:0 4px 16px}
+.ix-inner a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);text-decoration:none;display:inline-block;margin:0 4px 18px;border-bottom:1px solid var(--red)}
+@media(max-width:720px){.ix-head{grid-template-columns:1fr 30px}.ix-meta{grid-column:1;text-align:left;order:3}}
+/* syllabus — static two-column index */
+.syl{display:grid;grid-template-columns:1fr 1fr;gap:0 4vw}
+.syl>div{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--hair);padding:12px 4px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.syl>div:nth-last-child(-n+2){border-bottom:1px solid var(--hair)}
+.syl span:last-child{color:var(--mut)}
+@media(max-width:720px){.syl{grid-template-columns:1fr}.syl>div:nth-last-child(-n+2){border-bottom:none}.syl>div:last-child{border-bottom:1px solid var(--hair)}}
+
+/* ============================================================
+   CONTACT & COLOPHON
+   ============================================================ */
+.contact-body{padding:2vh 4vw 0}
+.contact-big{font-size:clamp(2.6rem,8.4vw,8rem);font-weight:800;text-transform:uppercase;line-height:.92;max-width:12em}
+.contact-big .rd{color:var(--red)}
+.mailrow{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:5vh 0 4vh}
+.mail{
+  font-family:var(--mono);font-weight:700;font-size:clamp(1.05rem,3.4vw,2.4rem);letter-spacing:-.02em;
+  text-decoration:none;border:2px solid var(--ink);padding:.28em .5em;transition:background .25s,color .25s;
+}
+.mail:hover{background:var(--ink);color:var(--paper)}
+.chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--ink);padding:10px 16px;text-decoration:none;display:inline-block;
+  transition:background .25s,color .25s;
+}
+.chip:hover{background:var(--red);border-color:var(--red);color:var(--paper)}
+.avail{font-style:italic;max-width:44em;color:rgba(23,19,16,.8)}
+.colophon{margin-top:9vh;border-top:1px solid var(--ink);padding:4vh 0 2vh;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4vw}
+@media(max-width:860px){.colophon{grid-template-columns:1fr}}
+.colophon h5{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.colophon p{font-size:.9rem;color:rgba(23,19,16,.82)}
+.foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--hair);margin-top:5vh;padding:16px 0 26px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.foot a{text-decoration:none;color:inherit}
+.foot a:hover{color:var(--red)}
+
+/* toast */
+#toast{
+  position:fixed;left:18px;bottom:18px;z-index:95;background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  padding:12px 16px;transform:translateY(140%);transition:transform .4s cubic-bezier(.2,.9,.3,1);
+  pointer-events:none;max-width:80vw;
+}
+#toast.show{transform:none}
+#toast::before{content:"";display:inline-block;width:7px;height:7px;background:var(--red);margin-right:10px}
+
+/* ============================================================
+   REDUCED MOTION / PRINT / TOUCH
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .ki,.ki::before{transition:none!important}
+  .toc-row,.ix-head{transition:none}
+  .ix-body,.fold-body{transition:none}
+  .strip-track{will-change:auto}
+  .ki:hover{font-variation-settings:'opsz' 96,'wght' 800,'wdth' 93}
+}
+@media print{
+  #trail,.rh,#prog,.works-hud,.reprint,.pull,.fp{display:none!important}
+  body::after{display:none}
+  .spread{page-break-before:always}
+}
+</style>
+</head>
+<body>
+
+<canvas id="trail" aria-hidden="true"></canvas>
+<div id="prog" aria-hidden="true"></div>
+
+<!-- RUNNING HEAD -->
+<header class="rh">
+  <b>Nischal Singh Bista</b>
+  <span>B.S. Computer Science, UW–Madison ’27</span>
+  <span class="rh-page" id="rhPage">P. 001 / 096</span>
+</header>
+
+<main>
+<!-- ================= COVER ================= -->
+<section id="cover" class="cropmarks">
+  <i></i><i></i><i></i><i></i>
+  <div class="cover-top">
+    <span>Full-Stack · Serverless · Applied Machine Learning</span>
+    <span>Madison, Wisconsin</span>
+  </div>
+
+  <h1 class="hero-name" aria-label="Nischal Singh Bista">
+    <span class="line" data-text="NISCHAL&nbsp;S."></span>    <span class="line" data-text="BISTA"></span>
+  </h1>
+
+  
+  <p class="hero-dek" style="opacity:0" id="heroDek">Full-stack products, serverless backends, and applied machine learning.
+  Six spreads follow; the tradeoffs are printed honestly.</p>
+
+  <div class="stamp" id="heroStamp">Ed. I — Open to SWE Internships</div>
+
+  <div class="cover-foot">
+    <a href="#contents">Table of Contents</a>
+    <span>96 pp. — set &amp; printed in the browser</span>
+    <a href="#works">Begin ↓</a>
+  </div>
+</section>
+
+<!-- ================= CONTENTS ================= -->
+<nav id="contents" class="wrap" aria-label="Table of contents">
+  <p class="toc-cap">Table of Contents</p>
+  <button class="toc-row" data-goto="#works">
+    <span class="toc-num">I</span><span class="toc-name">Works </span>
+    <span class="toc-note">Problem · Architecture · Tradeoffs</span><span class="toc-pp">pp. 12–71</span>
+  </button>
+  <button class="toc-row" data-goto="#specimens">
+    <span class="toc-num">II</span><span class="toc-name">Specimens &amp; Plates</span>
+    <span class="toc-note">Annotated code, pulled proofs</span><span class="toc-pp">pp. 72–83</span>
+  </button>
+  <button class="toc-row" data-goto="#research">
+    <span class="toc-num">III</span><span class="toc-name">Research &amp; Honors</span>
+    <span class="toc-note">Lab work, awards, syllabus</span><span class="toc-pp">pp. 84–91</span>
+  </button>
+  <button class="toc-row" data-goto="#contact">
+    <span class="toc-num">IV</span><span class="toc-name">Contact &amp; Colophon</span>
+    <span class="toc-note">Email, GitHub, résumé</span><span class="toc-pp">pp. 92–96</span>
+  </button>
+</nav>
+
+<!-- ================= I — WORKS ================= -->
+<section id="works" class="works">
+  <header class="chap" id="worksHead">
+    <span class="chap-n" aria-hidden="true">I</span>
+    <h2>Works</h2>
+    <p class="chap-note">Six spreads — the problem, the architecture, the tradeoffs. Scroll; the press turns the page.</p>
+  </header>
+
+  <div class="works-stage" id="worksStage">
+
+    <!-- SPREAD 01 — THE DAILY FIT -->
+    <article class="spread" data-name="THE DAILY FIT">
+      <div class="spread-scroll"><span class="sp-rail">Spread 01 — The Daily Fit — A Wordle for Wardrobes, Scored by Vector Search</span>
+      <div class="spread-grid">
+        <div class="sp-copy">
+          <p class="kicker rv">Work 01 · Capstone — Amazon Shopbop · Serverless · Sep 2026 – Present</p>
+          <h3 class="sp-title rv" style="--d:.05s">The Daily Fit</h3>
+          <p class="dek rv" style="--d:.1s">A Wordle-style fashion puzzle, scored by semantic similarity.</p>
+          <div class="sss">
+            <section class="rv" style="--d:.15s"><h4><em>§1</em> The Problem</h4>
+              <p>Shopbop sells fashion; the capstone brief asked for a daily habit to match — a guessing game
+              where the score isn’t letter colours but <em>closeness of taste</em>. Judging “semantically
+              similar” between outfits is exactly the kind of problem humans argue about and vector search
+              doesn’t. It also had to persist streaks, or a daily game is just a page refresh away from
+              forgetting you existed.</p></section>
+            <section class="rv" style="--d:.2s"><h4><em>§2</em> The Architecture</h4>
+              <p>A web client talks to a serverless AWS spine: API Gateway fronts Lambda functions that generate
+              the daily puzzle, score every guess through Shopbop’s vector search API, and persist puzzles,
+              guesses, and streaks in DynamoDB. No servers, no schedules to babysit — the game is data, and
+              the data is small.</p></section>
+            <section class="rv" style="--d:.25s"><h4><em>§3</em> The Tradeoffs</h4>
+              <p>Serverless is the right tradeoff because the load is a daily spike, not a stream — cold starts
+              matter less than a zero-ops bill. One DynamoDB table holds puzzles, guesses, and streaks;
+              denormalizing around known access patterns beat a relational schema for this. And the similarity
+              judge lives in Shopbop’s own vector search API, which means we inherit their notion of style —
+              for a fashion product, that is the correct dependency to have.</p></section>
+          </div>
+          <div class="sp-links rv" style="--d:.3s">
+            <a href="https://www.shopbop.com" target="_blank" rel="noopener">Shopbop.com ↗</a>
+            <span><button class="fold-btn" aria-expanded="false">Design note +</button>
+            <span class="fold-body"><p>Serverless earns its keep here because the traffic is a daily spike, not a
+            stream. A game that resets every day doesn’t need a fleet — it needs one table that never lies
+            about a streak.</p></span></span>
+          </div>
+        </div>
+        <div class="sp-side">
+          <figure class="dgf rv">
+            <svg class="dg" viewBox="0 0 620 250" role="img" aria-label="Daily Fit request path diagram">
+              <path class="e" pathLength="1" style="--d:.6s" d="M126 140 H166"/>
+              <path class="e" pathLength="1" style="--d:.72s" d="M276 140 H316"/>
+              <path class="e" pathLength="1" style="--d:.84s" d="M446 140 H486"/>
+              <path class="e dash" pathLength="1" style="--d:1s" d="M390 64 V118"/>
+              <text class="el" x="146" y="128" text-anchor="middle" style="--d:.95s">GUESS</text>
+              <text class="el" x="296" y="128" text-anchor="middle" style="--d:1.05s">SCORE</text>
+              <text class="el" x="466" y="128" text-anchor="middle" style="--d:1.15s">PUT</text>
+              <text class="el rlab" x="400" y="95" style="--d:1.2s">THE JUDGE</text>
+              <text class="el rlab" x="16" y="206" style="--d:1.25s">SERVERS MANAGED: 0</text>
+              <text class="el" x="604" y="206" text-anchor="end" style="--d:1.3s">ONE TABLE · KNOWN ACCESS PATTERNS</text>
+              <g class="n" style="--d:.05s"><rect x="16" y="118" width="110" height="44"/><text x="71" y="142" text-anchor="middle">WEB CLIENT</text><text class="sub" x="71" y="156" text-anchor="middle">DAILY CADENCE</text></g>
+              <g class="n" style="--d:.15s"><rect x="166" y="118" width="110" height="44"/><text x="221" y="142" text-anchor="middle">API GATEWAY</text><text class="sub" x="221" y="156" text-anchor="middle">HTTPS · REST</text></g>
+              <g class="n" style="--d:.25s"><rect x="316" y="118" width="130" height="44"/><text x="381" y="142" text-anchor="middle">LAMBDA</text><text class="sub" x="381" y="156" text-anchor="middle">SCORE · PERSIST</text></g>
+              <g class="n" style="--d:.35s"><rect x="486" y="118" width="118" height="44"/><text x="545" y="142" text-anchor="middle">DYNAMODB</text><text class="sub" x="545" y="156" text-anchor="middle">GUESSES · STREAKS</text></g>
+              <g class="n" style="--d:.5s"><rect x="316" y="16" width="148" height="48"/><text x="390" y="38" text-anchor="middle">VECTOR SEARCH</text><text class="sub" x="390" y="53" text-anchor="middle">SEMANTIC SIMILARITY</text></g>
+              <path class="n ar" style="--d:.72s" d="M166 140 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.84s" d="M316 140 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.96s" d="M486 140 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:1.15s" d="M390 118 l-4.5 -9 h9 z"/>
+            </svg>
+            <figcaption><span>Fig. 01 — Request path. The judge is a vector search API.</span>
+              <button class="reprint">Re-print ↻</button></figcaption>
+          </figure>
+          <div class="metrics rv" style="--d:.1s">
+            <div><b data-c="0">0</b><span>servers to manage</span></div>
+            <div><b data-c="1">1</b><span>DynamoDB table, three access patterns</span></div>
+            <div><b data-c="24h">24h</b><span>puzzle rotation</span></div>
+          </div>
+          <div class="rv" style="--d:.15s">
+            <div class="strip" data-dir="1" aria-label="Daily Fit stack — drag to scrub">
+              <div class="strip-track">
+                <span class="fr"><i></i>AWS LAMBDA</span><span class="fr"><i></i>API GATEWAY</span>
+                <span class="fr"><i></i>DYNAMODB</span><span class="fr"><i></i>REACT</span>
+                <span class="fr"><i></i>VECTOR SEARCH</span><span class="fr"><i></i>SEMANTIC SIMILARITY</span>
+                <span class="fr"><i></i>SERVERLESS</span><span class="fr"><i></i>REST</span>
+              </div>
+            </div>
+            <p class="strip-cap">Stack — drag the strip to scrub</p>
+          </div>
+        </div>
+      </div>
+      <span class="sp-folio">Spread 01 — pp. 12–21</span>
+      </div>
+    </article>
+
+    <!-- SPREAD 02 — TRAIL LAB -->
+    <article class="spread" data-name="TRAIL LAB">
+      <div class="spread-scroll"><span class="sp-rail">Spread 02 — Trail Lab — PDF Q&A and Multilingual Audio Pipelines</span>
+      <div class="spread-grid">
+        <div class="sp-copy">
+          <p class="kicker rv">Work 02 · Internship — Trail Lab · Applied AI · Sep 2025 – Present</p>
+          <h3 class="sp-title rv" style="--d:.05s">Trail Lab</h3>
+          <p class="dek rv" style="--d:.1s">PDF question-answering and multilingual audio, at conversation speed.</p>
+          <div class="sss">
+            <section class="rv" style="--d:.15s"><h4><em>§1</em> The Problem</h4>
+              <p>Trail Lab’s knowledge lives in PDFs and recordings — papers, field notes, interviews. Search
+              finds documents; it doesn’t answer questions. And every change waited on a fifteen-minute deploy,
+              which is how CI quietly becomes a tax on shipping anything at all.</p></section>
+            <section class="rv" style="--d:.2s"><h4><em>§2</em> The Architecture</h4>
+              <p>Two FastAPI pipelines under one Next.js front end. PDFs are chunked, embedded, and stored so
+              retrieval returns context in under 0.2 seconds, with Groq models doing the answering. Audio runs
+              through Groq for transcription, summarization, and translation across 10+ languages. CI/CD moved
+              to GitHub Actions with GCP Cloud Build, gated by test suites.</p></section>
+            <section class="rv" style="--d:.25s"><h4><em>§3</em> The Tradeoffs</h4>
+              <p>Groq-hosted inference trades control for speed — I’d rather tune retrieval than babysit GPUs.
+              The 0.2-second budget shaped the architecture more than any model choice: embeddings are
+              precomputed and the retriever stays deliberately simple. And the deploy went from fifteen minutes
+              to two, which changed behaviour more than any feature — fast CI actually gets run.</p></section>
+          </div>
+          <div class="sp-links rv" style="--d:.3s">
+            <span class="nolink">Internal — Trail Lab, Madison WI</span>
+            <span><button class="fold-btn" aria-expanded="false">Design note +</button>
+            <span class="fold-body"><p>The 0.2-second budget is a product decision, not a benchmark. Answers that
+            arrive late feel wrong even when they’re right, so the embeddings are precomputed and the retriever
+            is allowed to be boring.</p></span></span>
+          </div>
+        </div>
+        <div class="sp-side">
+          <figure class="dgf rv">
+            <svg class="dg" viewBox="0 0 620 250" role="img" aria-label="Trail Lab pipeline diagram">
+              <path class="e" pathLength="1" style="--d:.6s" d="M108 50 H136"/>
+              <path class="e" pathLength="1" style="--d:.68s" d="M228 50 H256"/>
+              <path class="e" pathLength="1" style="--d:.76s" d="M348 50 H376"/>
+              <path class="e" pathLength="1" style="--d:.62s" d="M108 142 H136"/>
+              <path class="e" pathLength="1" style="--d:.7s" d="M246 142 H274"/>
+              <path class="e" pathLength="1" style="--d:.9s" d="M476 50 H556 V76"/>
+              <path class="e" pathLength="1" style="--d:.95s" d="M404 142 H556 V132"/>
+              <text class="el rlab" x="376" y="100" style="--d:1.05s">RETRIEVAL ≤ 0.2 S</text>
+              <text class="el rlab" x="404" y="206" style="--d:1.15s">DEPLOY: 15 TO 2 MIN</text>
+              <text class="el" x="16" y="206" style="--d:1.2s">FASTAPI · NEXT.JS CLIENT</text>
+              <g class="n" style="--d:.05s"><rect x="16" y="28" width="92" height="44"/><text x="62" y="52" text-anchor="middle">PDF Q&amp;A</text><text class="sub" x="62" y="66" text-anchor="middle">UPLOADS</text></g>
+              <g class="n" style="--d:.15s"><rect x="136" y="28" width="92" height="44"/><text x="182" y="52" text-anchor="middle">CHUNK</text></g>
+              <g class="n" style="--d:.25s"><rect x="256" y="28" width="92" height="44"/><text x="302" y="52" text-anchor="middle">EMBED</text></g>
+              <g class="n" style="--d:.35s"><rect x="376" y="28" width="100" height="44"/><text x="426" y="52" text-anchor="middle">VECTOR STORE</text><text class="sub" x="426" y="66" text-anchor="middle">PRECOMPUTED</text></g>
+              <g class="n acc" style="--d:.45s"><rect x="506" y="76" width="100" height="56"/><text x="556" y="100" text-anchor="middle">GROQ LLM</text><text class="sub" x="556" y="116" text-anchor="middle" style="fill:rgba(243,239,230,.8)">ANSWERS</text></g>
+              <g class="n" style="--d:.3s"><rect x="16" y="120" width="92" height="44"/><text x="62" y="144" text-anchor="middle">AUDIO</text><text class="sub" x="62" y="158" text-anchor="middle">RECORDINGS</text></g>
+              <g class="n" style="--d:.4s"><rect x="136" y="120" width="110" height="44"/><text x="191" y="144" text-anchor="middle">GROQ · STT</text><text class="sub" x="191" y="158" text-anchor="middle">TRANSCRIBE</text></g>
+              <g class="n" style="--d:.5s"><rect x="274" y="120" width="130" height="44"/><text x="339" y="144" text-anchor="middle">SUMMARIZE</text><text class="sub" x="339" y="158" text-anchor="middle">TRANSLATE · 10+ LANG</text></g>
+              <path class="n ar" style="--d:.72s" d="M136 50 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.8s" d="M256 50 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.88s" d="M376 50 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.74s" d="M136 142 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.82s" d="M274 142 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:1.02s" d="M556 76 l-4.5 -9 h9 z"/>
+              <path class="n ar" style="--d:1.07s" d="M556 132 l-4.5 9 h9 z"/>
+            </svg>
+            <figcaption><span>Fig. 02 — Two pipelines, one budget: retrieval under 0.2 s.</span>
+              <button class="reprint">Re-print ↻</button></figcaption>
+          </figure>
+          <div class="metrics rv" style="--d:.1s">
+            <div><b data-c="0.2s">0.2s</b><span>context retrieval</span></div>
+            <div><b data-c="10+">10+</b><span>languages translated</span></div>
+            <div><b data-c="2min">2min</b><span>deploys, was 15</span></div>
+          </div>
+          <div class="rv" style="--d:.15s">
+            <div class="strip" data-dir="-1" aria-label="Trail Lab stack — drag to scrub">
+              <div class="strip-track">
+                <span class="fr"><i></i>FASTAPI</span><span class="fr"><i></i>NEXT.JS</span>
+                <span class="fr"><i></i>GROQ</span><span class="fr"><i></i>EMBEDDINGS</span>
+                <span class="fr"><i></i>PYTHON</span><span class="fr"><i></i>TYPESCRIPT</span>
+                <span class="fr"><i></i>GITHUB ACTIONS</span><span class="fr"><i></i>GCP CLOUD BUILD</span>
+              </div>
+            </div>
+            <p class="strip-cap">Stack — drag the strip to scrub</p>
+          </div>
+        </div>
+      </div>
+      <span class="sp-folio">Spread 02 — pp. 22–30</span>
+      </div>
+    </article>
+
+    <!-- SPREAD 03 — BADGER CODE -->
+    <article class="spread" data-name="BADGER CODE">
+      <div class="spread-scroll"><span class="sp-rail">Spread 03 — Badger Code — A Coding Agent, Graded on 89 Tasks</span>
+      <div class="spread-grid">
+        <div class="sp-copy">
+          <p class="kicker rv">Work 03 · Agents &amp; Evaluation · Terminal-Bench · Ongoing</p>
+          <h3 class="sp-title rv" style="--d:.05s">Badger Code</h3>
+          <p class="dek rv" style="--d:.1s">A Qwen coding agent, graded honestly on 89 terminal tasks.</p>
+          <div class="sss">
+            <section class="rv" style="--d:.15s"><h4><em>§1</em> The Problem</h4>
+              <p>Coding agents fail in ways that are hard to see and harder to reproduce. The question was never
+              whether Qwen could write code — it was how often it could <em>finish a real terminal task</em>,
+              in a sandbox it can’t escape, measured the same way every single time.</p></section>
+            <section class="rv" style="--d:.2s"><h4><em>§2</em> The Architecture</h4>
+              <p>A Qwen-powered coding agent runs autonomous shell workflows through Harbor, each attempt inside
+              its own isolated Docker environment. A reproducible Terminal-Bench pipeline evaluates across 89
+              tasks, tracking every action the agent takes and scoring completion honestly: 40+ of 89 finished
+              end-to-end.</p></section>
+            <section class="rv" style="--d:.25s"><h4><em>§3</em> The Tradeoffs</h4>
+              <p>Isolation is expensive — a container per attempt is slower than sharing a machine — but it’s
+              the only configuration where a benchmark means anything. Terminal-Bench over a custom suite,
+              because a standard everyone can check beats a leaderboard only I can verify. And the failures are
+              kept, not hidden; the unfinished tasks are the interesting part.</p></section>
+          </div>
+          <div class="sp-links rv" style="--d:.3s">
+            <!-- TODO: point at the real Badger Code repository URL -->
+            <a href="https://github.com/n1-sb" target="_blank" rel="noopener">GitHub ↗</a>
+            <span><button class="fold-btn" aria-expanded="false">Design note +</button>
+            <span class="fold-body"><p>A container per attempt is the whole trick: slow to provision, impossible
+            to cheat, and every run replays the same way. Reproducibility is a feature you pay for in seconds.</p></span></span>
+          </div>
+        </div>
+        <div class="sp-side">
+          <figure class="dgf rv">
+            <svg class="dg" viewBox="0 0 620 250" role="img" aria-label="Badger Code agent loop diagram">
+              <path class="e" pathLength="1" style="--d:.55s" d="M126 134 H176"/>
+              <path class="e" pathLength="1" style="--d:.65s" d="M286 134 H336"/>
+              <path class="e" pathLength="1" style="--d:.75s" d="M466 134 H506"/>
+              <path class="e" pathLength="1" style="--d:.9s" d="M556 110 V72"/>
+              <path class="e dash" pathLength="1" style="--d:.95s" d="M400 110 C 380 56, 270 56, 236 110"/>
+              <text class="el" x="316" y="60" text-anchor="middle" style="--d:1.05s">SHELL ACTIONS · OBSERVE</text>
+              <text class="el" x="151" y="126" text-anchor="middle" style="--d:.9s">RUN</text>
+              <text class="el" x="311" y="126" text-anchor="middle" style="--d:1s">EXEC</text>
+              <text class="el" x="486" y="126" text-anchor="middle" style="--d:1.1s">GRADE</text>
+              <text class="el rlab" x="16" y="206" style="--d:1.2s">A CONTAINER PER ATTEMPT</text>
+              <g class="n" style="--d:.05s"><rect x="16" y="110" width="110" height="48"/><text x="71" y="136" text-anchor="middle">TASKS</text><text class="sub" x="71" y="152" text-anchor="middle">TERMINAL-BENCH · 89</text></g>
+              <g class="n" style="--d:.15s"><rect x="176" y="110" width="110" height="48"/><text x="231" y="136" text-anchor="middle">AGENT</text><text class="sub" x="231" y="152" text-anchor="middle">QWEN · HARBOR</text></g>
+              <g class="n" style="--d:.25s"><rect x="336" y="110" width="130" height="48"/><text x="401" y="136" text-anchor="middle">DOCKER SANDBOX</text><text class="sub" x="401" y="152" text-anchor="middle">ISOLATED PER RUN</text></g>
+              <g class="n" style="--d:.35s"><rect x="506" y="110" width="100" height="48"/><text x="556" y="136" text-anchor="middle">RESULTS</text><text class="sub" x="556" y="152" text-anchor="middle">LOGGED · SCORED</text></g>
+              <g class="n acc" style="--d:.45s"><rect x="506" y="28" width="100" height="44"/><text x="556" y="50" text-anchor="middle">40+ / 89</text><text class="sub" x="556" y="65" text-anchor="middle" style="fill:rgba(243,239,230,.8)">COMPLETED</text></g>
+              <path class="n ar" style="--d:.67s" d="M176 134 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.77s" d="M336 134 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.87s" d="M506 134 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:1s" d="M556 72 l-4.5 9 h9 z"/>
+              <path class="n ar" style="--d:1.1s" d="M236 110 l-4.5 -9 h9 z"/>
+            </svg>
+            <figcaption><span>Fig. 03 — Agent loop. Every attempt replays the same way.</span>
+              <button class="reprint">Re-print ↻</button></figcaption>
+          </figure>
+          <div class="metrics rv" style="--d:.1s">
+            <div><b data-c="89">89</b><span>tasks evaluated</span></div>
+            <div><b data-c="40+">40+</b><span>completed autonomously</span></div>
+            <div><b data-c="1">1</b><span>container per attempt</span></div>
+          </div>
+          <div class="rv" style="--d:.15s">
+            <div class="strip" data-dir="1" aria-label="Badger Code stack — drag to scrub">
+              <div class="strip-track">
+                <span class="fr"><i></i>PYTHON</span><span class="fr"><i></i>QWEN</span>
+                <span class="fr"><i></i>HARBOR</span><span class="fr"><i></i>TERMINAL-BENCH</span>
+                <span class="fr"><i></i>DOCKER</span><span class="fr"><i></i>SHELL WORKFLOWS</span>
+                <span class="fr"><i></i>EVALUATION</span><span class="fr"><i></i>REPRODUCIBILITY</span>
+              </div>
+            </div>
+            <p class="strip-cap">Stack — drag the strip to scrub</p>
+          </div>
+        </div>
+      </div>
+      <span class="sp-folio">Spread 03 — pp. 31–39</span>
+      </div>
+    </article>
+
+    <!-- SPREAD 04 — MERRA-2 -->
+    <article class="spread" data-name="MERRA-2">
+      <div class="spread-scroll"><span class="sp-rail">Spread 04 — MERRA-2 — Atmospheric Machine Learning, UW AOS</span>
+      <div class="spread-grid">
+        <div class="sp-copy">
+          <p class="kicker rv">Work 04 · Research — UW–Madison AOS · Machine Learning · May–Aug 2025</p>
+          <h3 class="sp-title rv" style="--d:.05s">MERRA-2</h3>
+          <p class="dek rv" style="--d:.1s">Five hundred gigabytes of atmosphere, taught to behave.</p>
+          <div class="sss">
+            <section class="rv" style="--d:.15s"><h4><em>§1</em> The Problem</h4>
+              <p>The Department of Atmospheric &amp; Oceanic Sciences sat on 500GB+ of NASA MERRA-2 reanalysis
+              data and a stack of ensemble models that were neither fast nor consistently accurate. Analysis was
+              manual, and experiment workflows varied by whoever happened to run them.</p></section>
+            <section class="rv" style="--d:.2s"><h4><em>§2</em> The Architecture</h4>
+              <p>Feature engineering and ensemble optimization in Python — Pandas and NumPy for the heavy
+              lifting, scikit-learn for the models — with automated processing and visualization pipelines
+              replacing the manual loop. Cross-validation was formalized so every experiment is comparable.
+              Accuracy improved 15%; manual analysis time halved.</p></section>
+            <section class="rv" style="--d:.25s"><h4><em>§3</em> The Tradeoffs</h4>
+              <p>Ensembles over deep networks: the data is wide, tabular, and expensive to move, so the wins came
+              from features and validation rather than architecture heroics. scikit-learn over PyTorch here is a
+              deliberate downgrade in fashion and an upgrade in honesty — every result cross-checked, every
+              pipeline reproducible by the next student in the lab.</p></section>
+          </div>
+          <div class="sp-links rv" style="--d:.3s">
+            <a href="https://aos.wisc.edu" target="_blank" rel="noopener">UW AOS ↗</a>
+            <span><button class="fold-btn" aria-expanded="false">Design note +</button>
+            <span class="fold-body"><p>At 500GB, IO dominates everything: the pipeline preprocesses once and caches
+            features, because recomputing them is the most expensive sentence in the codebase.</p></span></span>
+          </div>
+        </div>
+        <div class="sp-side">
+          <figure class="dgf rv">
+            <svg class="dg" viewBox="0 0 620 250" role="img" aria-label="MERRA-2 research pipeline diagram">
+              <path class="e" pathLength="1" style="--d:.6s" d="M116 134 H136"/>
+              <path class="e" pathLength="1" style="--d:.7s" d="M236 134 H256"/>
+              <path class="e" pathLength="1" style="--d:.8s" d="M356 134 H376"/>
+              <path class="e" pathLength="1" style="--d:.9s" d="M476 134 H496"/>
+              <text class="el rlab" x="306" y="96" text-anchor="middle" style="--d:1.05s">ACCURACY +15%</text>
+              <text class="el rlab" x="551" y="96" text-anchor="middle" style="--d:1.15s">ANALYSIS TIME −50%</text>
+              <text class="el" x="16" y="206" style="--d:1.25s">REPRODUCIBLE BY THE NEXT STUDENT</text>
+              <g class="n" style="--d:.05s"><rect x="16" y="110" width="100" height="48"/><text x="66" y="136" text-anchor="middle">MERRA-2</text><text class="sub" x="66" y="152" text-anchor="middle">NASA · 500 GB+</text></g>
+              <g class="n" style="--d:.15s"><rect x="136" y="110" width="100" height="48"/><text x="186" y="136" text-anchor="middle">FEATURES</text><text class="sub" x="186" y="152" text-anchor="middle">PANDAS · NUMPY</text></g>
+              <g class="n" style="--d:.25s"><rect x="256" y="110" width="100" height="48"/><text x="306" y="136" text-anchor="middle">ENSEMBLES</text><text class="sub" x="306" y="152" text-anchor="middle">SCIKIT-LEARN</text></g>
+              <g class="n acc" style="--d:.35s"><rect x="376" y="110" width="100" height="48"/><text x="426" y="136" text-anchor="middle">CROSS-VAL</text><text class="sub" x="426" y="152" text-anchor="middle" style="fill:rgba(243,239,230,.8)">K-FOLD</text></g>
+              <g class="n" style="--d:.45s"><rect x="496" y="110" width="110" height="48"/><text x="551" y="136" text-anchor="middle">DASHBOARDS</text><text class="sub" x="551" y="152" text-anchor="middle">LAB VIZ</text></g>
+              <path class="n ar" style="--d:.72s" d="M136 134 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.82s" d="M256 134 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.92s" d="M376 134 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:1.02s" d="M496 134 l-9 -4.5 v9 z"/>
+            </svg>
+            <figcaption><span>Fig. 04 — Research pipeline. Every experiment cross-checked.</span>
+              <button class="reprint">Re-print ↻</button></figcaption>
+          </figure>
+          <div class="metrics rv" style="--d:.1s">
+            <div><b data-c="500GB+">500GB+</b><span>NASA data, processed</span></div>
+            <div><b data-c="15%">15%</b><span>accuracy, up</span></div>
+            <div><b data-c="50%">50%</b><span>manual analysis, cut</span></div>
+          </div>
+          <div class="rv" style="--d:.15s">
+            <div class="strip" data-dir="-1" aria-label="MERRA-2 stack — drag to scrub">
+              <div class="strip-track">
+                <span class="fr"><i></i>PYTHON</span><span class="fr"><i></i>PANDAS</span>
+                <span class="fr"><i></i>NUMPY</span><span class="fr"><i></i>SCIKIT-LEARN</span>
+                <span class="fr"><i></i>NASA MERRA-2</span><span class="fr"><i></i>ENSEMBLES</span>
+                <span class="fr"><i></i>CROSS-VALIDATION</span><span class="fr"><i></i>VISUALIZATION</span>
+              </div>
+            </div>
+            <p class="strip-cap">Stack — drag the strip to scrub</p>
+          </div>
+        </div>
+      </div>
+      <span class="sp-folio">Spread 04 — pp. 40–48</span>
+      </div>
+    </article>
+
+    <!-- SPREAD 05 — EDUCATE NEPAL -->
+    <article class="spread" data-name="EDUCATE NEPAL">
+      <div class="spread-scroll"><span class="sp-rail">Spread 05 — Educate Nepal — A Non-Profit Platform on AWS</span>
+      <div class="spread-grid">
+        <div class="sp-copy">
+          <p class="kicker rv">Work 05 · Non-Profit — Educate Nepal Initiative · Full-Stack · Live</p>
+          <h3 class="sp-title rv" style="--d:.05s">Educate Nepal</h3>
+          <p class="dek rv" style="--d:.1s">A non-profit platform, ten thousand readers strong.</p>
+          <div class="sss">
+            <section class="rv" style="--d:.15s"><h4><em>§1</em> The Problem</h4>
+              <p>The Educate Nepal Initiative needed a real platform — 10K+ monthly users, authentication,
+              content, a database that doesn’t fall over on the day it matters — with a non-profit budget and a
+              volunteer engineering team of one.</p></section>
+            <section class="rv" style="--d:.2s"><h4><em>§2</em> The Architecture</h4>
+              <p>A three-tier platform: React + TypeScript front end, Node.js APIs, PostgreSQL — on AWS. I owned
+              the database design, authentication, backend APIs, and cloud deployment end to end, schema to DNS,
+              and architected it to stay legible to whoever maintains it after me.</p></section>
+            <section class="rv" style="--d:.25s"><h4><em>§3</em> The Tradeoffs</h4>
+              <p>One volunteer owning the whole stack isn’t good architecture on paper; it’s what a volunteer
+              budget buys, and it holds up at ten thousand readers a month. Postgres over a managed PaaS database
+              kept costs near zero and the schema auditable. AWS over shared hosting, because a non-profit’s
+              worst outcome is being down on the day it matters.</p></section>
+          </div>
+          <div class="sp-links rv" style="--d:.3s">
+            <!-- TODO: swap in the real repository / live-site URL for Educate Nepal -->
+            <a href="https://github.com/n1-sb" target="_blank" rel="noopener">Repository ↗</a>
+            <span><button class="fold-btn" aria-expanded="false">Design note +</button>
+            <span class="fold-body"><p>Every layer chosen to be boring on purpose: relational data, stateless APIs,
+            one cloud. The interesting decisions were the schema and the auth flow — everything else is plumbing
+            that stays out of the way.</p></span></span>
+          </div>
+        </div>
+        <div class="sp-side">
+          <figure class="dgf rv">
+            <svg class="dg" viewBox="0 0 620 250" role="img" aria-label="Educate Nepal architecture diagram">
+              <path class="e" pathLength="1" style="--d:.55s" d="M116 134 H156"/>
+              <path class="e" pathLength="1" style="--d:.65s" d="M256 134 H296"/>
+              <path class="e" pathLength="1" style="--d:.75s" d="M406 134 H446"/>
+              <rect class="e dash" style="--d:.9s" x="146" y="64" width="420" height="126"/>
+              <text class="el" x="136" y="126" text-anchor="middle" style="--d:.9s">HTTPS</text>
+              <text class="el" x="276" y="126" text-anchor="middle" style="--d:1s">REST</text>
+              <text class="el" x="426" y="126" text-anchor="middle" style="--d:1.1s">SQL</text>
+              <text class="el rlab" x="556" y="82" text-anchor="end" style="--d:1.15s">AWS</text>
+              <text class="el rlab" x="16" y="206" style="--d:1.25s">END-TO-END: SCHEMA TO DEPLOY</text>
+              <g class="n" style="--d:.05s"><rect x="16" y="110" width="100" height="48"/><text x="66" y="136" text-anchor="middle">USERS</text><text class="sub" x="66" y="152" text-anchor="middle">10K+ MONTHLY</text></g>
+              <g class="n" style="--d:.15s"><rect x="156" y="110" width="100" height="48"/><text x="206" y="136" text-anchor="middle">REACT + TS</text><text class="sub" x="206" y="152" text-anchor="middle">FRONT END</text></g>
+              <g class="n acc" style="--d:.25s"><rect x="296" y="110" width="110" height="48"/><text x="351" y="136" text-anchor="middle">NODE.JS APIS</text><text class="sub" x="351" y="152" text-anchor="middle" style="fill:rgba(243,239,230,.8)">AUTH · REST</text></g>
+              <g class="n" style="--d:.35s"><rect x="446" y="110" width="110" height="48"/><text x="501" y="136" text-anchor="middle">POSTGRESQL</text><text class="sub" x="501" y="152" text-anchor="middle">SCHEMA OWNED</text></g>
+              <path class="n ar" style="--d:.67s" d="M156 134 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.77s" d="M296 134 l-9 -4.5 v9 z"/>
+              <path class="n ar" style="--d:.87s" d="M446 134 l-9 -4.5 v9 z"/>
+            </svg>
+            <figcaption><span>Fig. 05 — Three tiers on AWS. One owner, zero budget, 10K users.</span>
+              <button class="reprint">Re-print ↻</button></figcaption>
+          </figure>
+          <div class="metrics rv" style="--d:.1s">
+            <div><b data-c="10K+">10K+</b><span>monthly users</span></div>
+            <div><b data-c="100%">100%</b><span>owned, schema to deploy</span></div>
+            <div><b data-c="3">3</b><span>tiers on AWS</span></div>
+          </div>
+          <div class="rv" style="--d:.15s">
+            <div class="strip" data-dir="1" aria-label="Educate Nepal stack — drag to scrub">
+              <div class="strip-track">
+                <span class="fr"><i></i>REACT</span><span class="fr"><i></i>TYPESCRIPT</span>
+                <span class="fr"><i></i>NODE.JS</span><span class="fr"><i></i>POSTGRESQL</span>
+                <span class="fr"><i></i>AWS</span><span class="fr"><i></i>AUTHENTICATION</span>
+                <span class="fr"><i></i>REST APIS</span><span class="fr"><i></i>NON-PROFIT</span>
+              </div>
+            </div>
+            <p class="strip-cap">Stack — drag the strip to scrub</p>
+          </div>
+        </div>
+      </div>
+      <span class="sp-folio">Spread 05 — pp. 49–57</span>
+      </div>
+    </article>
+
+    <!-- SPREAD 06 — BADGERRIDES -->
+    <article class="spread" data-name="BADGERRIDES">
+      <div class="spread-scroll"><span class="sp-rail">Spread 06 — BadgerRides — Real-Time Carpooling for UW–Madison</span>
+      <div class="spread-grid">
+        <div class="sp-copy">
+          <p class="kicker rv">Work 06 · Full-Stack Product · Real-Time · Shipped</p>
+          <h3 class="sp-title rv" style="--d:.05s">BadgerRides</h3>
+          <p class="dek rv" style="--d:.1s">Ride matching for Badgers, with a chat that keeps up.</p>
+          <div class="sss">
+            <section class="rv" style="--d:.15s"><h4><em>§1</em> The Problem</h4>
+              <p>UW–Madison students coordinate carpools in group chats: rides buried under memes, no matching,
+              no record of who’s going where. BadgerRides gives the campus a purpose-built platform — ride
+              matching, profiles, and a chat that behaves like chat should.</p></section>
+            <section class="rv" style="--d:.2s"><h4><em>§2</em> The Architecture</h4>
+              <p>A React + TypeScript client over a Node.js/Express REST API, PostgreSQL as the source of truth,
+              JWT for stateless authentication, and Socket.IO for real-time messaging — each ride is a room, and
+              every message is scoped to the carpool you’re actually in.</p></section>
+            <section class="rv" style="--d:.25s"><h4><em>§3</em> The Tradeoffs</h4>
+              <p>Socket.IO over polling trades connection management for an interface that feels live — the right
+              tradeoff for chat, the wrong one for anything a user can afford to refresh. JWT keeps the servers
+              stateless and horizontal scaling boring. Ride matching lives server-side, where it can be tested,
+              not in the client, where it can be faked.</p></section>
+          </div>
+          <div class="sp-links rv" style="--d:.3s">
+            <!-- TODO: point at the real BadgerRides repository URL -->
+            <a href="https://github.com/n1-sb" target="_blank" rel="noopener">Repository ↗</a>
+            <span><button class="fold-btn" aria-expanded="false">Design note +</button>
+            <span class="fold-body"><p>Rooms per ride keep the chat scoped: you only hear the carpool you joined.
+            JWT keeps the server stateless; Postgres keeps the truth. Everything else is an optimization.</p></span></span>
+          </div>
+        </div>
+        <div class="sp-side">
+          <figure class="dgf rv">
+            <svg class="dg" viewBox="0 0 620 250" role="img" aria-label="BadgerRides realtime diagram">
+              <path class="e" pathLength="1" style="--d:.6s" d="M116 54 H331 V104"/>
+              <path class="e" pathLength="1" style="--d:.65s" d="M116 206 H331 V160"/>
+              <path class="e" pathLength="1" style="--d:.7s" d="M406 132 H486"/>
+              <rect class="e dash" style="--d:.95s" x="10" y="26" width="400" height="210"/>
+              <text class="el rlab" x="216" y="18" text-anchor="middle" style="--d:1.05s">ONE ROOM PER RIDE</text>
+              <text class="el" x="446" y="124" text-anchor="middle" style="--d:.95s">PERSIST</text>
+              <text class="el rlab" x="341" y="90" style="--d:1s">JWT AT THE GATE</text>
+              <g class="n" style="--d:.05s"><rect x="16" y="36" width="100" height="36"/><text x="66" y="58" text-anchor="middle">RIDER A</text></g>
+              <g class="n" style="--d:.15s"><rect x="16" y="188" width="100" height="36"/><text x="66" y="210" text-anchor="middle">RIDER B</text></g>
+              <g class="n acc" style="--d:.25s"><rect x="256" y="104" width="150" height="56"/><text x="331" y="128" text-anchor="middle">SOCKET.IO</text><text class="sub" x="331" y="144" text-anchor="middle" style="fill:rgba(243,239,230,.8)">NODE · EXPRESS · JWT</text></g>
+              <g class="n" style="--d:.35s"><rect x="486" y="110" width="110" height="44"/><text x="541" y="134" text-anchor="middle">POSTGRESQL</text><text class="sub" x="541" y="148" text-anchor="middle">RIDES · MESSAGES</text></g>
+              <path class="n ar" style="--d:.75s" d="M331 104 l-4.5 -9 h9 z"/>
+              <path class="n ar" style="--d:.8s" d="M331 160 l-4.5 9 h9 z"/>
+              <path class="n ar" style="--d:.85s" d="M486 132 l-9 -4.5 v9 z"/>
+            </svg>
+            <figcaption><span>Fig. 06 — Rooms, not refreshes. Scope is the security model.</span>
+              <button class="reprint">Re-print ↻</button></figcaption>
+          </figure>
+          <div class="metrics rv" style="--d:.1s">
+            <div><b>RT</b><span>Socket.IO live messaging</span></div>
+            <div><b>JWT</b><span>stateless auth end to end</span></div>
+            <div><b>REST</b><span>API backbone, Express</span></div>
+          </div>
+          <div class="rv" style="--d:.15s">
+            <div class="strip" data-dir="-1" aria-label="BadgerRides stack — drag to scrub">
+              <div class="strip-track">
+                <span class="fr"><i></i>REACT</span><span class="fr"><i></i>TYPESCRIPT</span>
+                <span class="fr"><i></i>NODE.JS</span><span class="fr"><i></i>EXPRESS</span>
+                <span class="fr"><i></i>POSTGRESQL</span><span class="fr"><i></i>SOCKET.IO</span>
+                <span class="fr"><i></i>JWT</span><span class="fr"><i></i>REST</span>
+              </div>
+            </div>
+            <p class="strip-cap">Stack — drag the strip to scrub</p>
+          </div>
+        </div>
+      </div>
+      <span class="sp-folio">Spread 06 — pp. 58–71</span>
+      </div>
+    </article>
+
+    <!-- HUD -->
+    <div class="works-hud">
+      <span>Spread <span id="hudIdx">01</span> / 06 — <span id="hudName" style="color:var(--red)">THE DAILY FIT</span></span>
+      <span class="hud-dots" id="hudDots">
+        <button data-i="0">01</button><button data-i="1">02</button>
+        <button data-i="2">03</button><button data-i="3">04</button>
+        <button data-i="4">05</button><button data-i="5">06</button>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= II — SPECIMENS ================= -->
+<section id="specimens">
+  <header class="chap">
+    <span class="chap-n" aria-hidden="true">II</span>
+    <h2>Specimens &amp; Plates</h2>
+    <p class="chap-note">Three plates — Python, TypeScript, and a pipeline. Drag them around the composing stick;
+    pinch — or scroll with the control key — to set your own measure. Every plate pulls its own PDF proof,
+    generated here, bytes and all.</p>
+  </header>
+
+  <div class="board-wrap">
+    <div class="board cropmarks" id="board">
+      <p class="board-hint">Drag to arrange — pinch / ctrl + scroll to resize — arrow keys nudge</p>
+
+      <!-- SPECIMEN A -->
+      <article class="spec" data-title="SPECIMEN A — PYTHON" data-sub="TRAIL LAB · PDF Q&A · RETRIEVAL PATH" tabindex="0" aria-label="Specimen A, Python code plate, draggable">
+        <div class="spec-head"><span class="pl">A</span><span>Python — Trail Lab · qa/retrieve.py</span><span class="gl" data-glyphs></span></div>
+<pre><span class="cl"><span class="tk">def</span> retrieve(query: <span class="tk">str</span>, k: <span class="tk">int</span> = 5) -&gt; <span class="tk">list</span>[Chunk]:</span><span class="cl">    qvec = embed(query)<span class="cm">        # cached: one model, many queries</span><sup class="mk">1</sup></span><span class="cl">    hits = index.search(qvec, k)<span class="cm">  # ANN, well inside 0.2 s</span></span><span class="cl">    <span class="tk">return</span> [Chunk(h.id, h.text, h.score)</span><span class="cl">            <span class="tk">for</span> h <span class="tk">in</span> hits <span class="tk">if</span> h.score &gt;= THRESHOLD]</span><span class="cl"></span><span class="cl"><span class="tk">def</span> answer(query: <span class="tk">str</span>) -&gt; <span class="tk">str</span>:</span><span class="cl">    context = <span class="cm">"\n---\n"</span>.join(c.text <span class="tk">for</span> c <span class="tk">in</span> retrieve(query))</span><span class="cl">    <span class="tk">return</span> groq.chat(</span><span class="cl">        PROMPT.render(question=query, context=context),</span><span class="cl">        temperature=0.2,<span class="cm">      # facts, not flourishes</span><sup class="mk">2</sup></span><span class="cl">    )</span></pre>
+        <ul class="ans">
+          <li><sup>1</sup>Embeddings are precomputed at ingest. The query path is one search and one model call — that is the 0.2-second budget, kept.</li>
+          <li><sup>2</sup>temperature=0.2: the product sells the document, not the prose.</li>
+        </ul>
+        <div class="spec-foot"><button class="pull" data-pdf="a">Pull PDF proof ↓</button><span class="lc" data-lines></span></div>
+      </article>
+
+      <!-- SPECIMEN B -->
+      <article class="spec" data-title="SPECIMEN B — TYPESCRIPT" data-sub="BADGERRIDES · REALTIME · CONNECTION GATE" tabindex="0" aria-label="Specimen B, TypeScript code plate, draggable">
+        <div class="spec-head"><span class="pl">B</span><span>TypeScript — BadgerRides · realtime/gate.ts</span><span class="gl" data-glyphs></span></div>
+<pre><span class="cl"><span class="tk">const</span> gate = (socket, next) =&gt; {</span><span class="cl">  <span class="tk">if</span> (!verifyJwt(socket.handshake.auth?.token))</span><span class="cl">    <span class="tk">return</span> next(<span class="tk">new</span> Error(<span class="cm">"unauthorized"</span>));<span class="cm"> // same gate as REST</span></span><span class="cl">  next();</span><span class="cl">};</span><span class="cl"></span><span class="cl">io.on(<span class="cm">"connection"</span>, (socket) =&gt; {</span><span class="cl">  socket.on(<span class="cm">"ride:join"</span>, <span class="tk">async</span> ({ rideId }) =&gt; {</span><span class="cl">    <span class="tk">if</span> (!(<span class="tk">await</span> canAccess(socket.userId, rideId))) <span class="tk">return</span>;<sup class="mk">1</sup></span><span class="cl">    socket.join(room(rideId));<span class="cm">     // one room per ride</span><sup class="mk">2</sup></span><span class="cl">    socket.to(room(rideId)).emit(<span class="cm">"rider:joined"</span>, {</span><span class="cl">      user: socket.userId,</span><span class="cl">    });</span><span class="cl">  });</span><span class="cl">});</span></pre>
+        <ul class="ans">
+          <li><sup>1</sup>The room is scoped twice: JWT at the connection gate, per-ride access here.</li>
+          <li><sup>2</sup>Emit to the room, never to io. Scope is the security model.</li>
+        </ul>
+        <div class="spec-foot"><button class="pull" data-pdf="b">Pull PDF proof ↓</button><span class="lc" data-lines></span></div>
+      </article>
+
+      <!-- SPECIMEN C -->
+      <article class="spec" data-title="SPECIMEN C — YAML" data-sub="TRAIL LAB · CI/CD · DEPLOY PIPELINE" tabindex="0" aria-label="Specimen C, YAML pipeline plate, draggable">
+        <div class="spec-head"><span class="pl">C</span><span>YAML — Trail Lab · .github/workflows/deploy.yml</span><span class="gl" data-glyphs></span></div>
+<pre><span class="cl"><span class="tk">name</span>: deploy</span><span class="cl"><span class="tk">on</span>:</span><span class="cl">  <span class="tk">push</span>: { branches: [main] }</span><span class="cl"><span class="tk">jobs</span>:</span><span class="cl">  <span class="tk">test</span>:</span><span class="cl">    <span class="tk">steps</span>:</span><span class="cl">      - run: npm ci &amp;&amp; npm test<span class="cm">   # gate, not suggestion</span><sup class="mk">1</sup></span><span class="cl">  <span class="tk">build</span>:</span><span class="cl">    <span class="tk">needs</span>: test</span><span class="cl">    <span class="tk">steps</span>:</span><span class="cl">      - run: gcloud builds submit<span class="cm"> # GCP Cloud Build</span></span><span class="cl">  <span class="tk">deploy</span>:</span><span class="cl">    <span class="tk">needs</span>: build</span><span class="cl">    <span class="tk">steps</span>:</span><span class="cl">      - run: ./deploy.sh<span class="cm">        # 15 min to 2 min, end to end</span><sup class="mk">2</sup></span></pre>
+        <ul class="ans">
+          <li><sup>1</sup>Tests gate the build. Fast CI only helps if it can still say no.</li>
+          <li><sup>2</sup>Fifteen minutes to two: the pipeline got shorter the same week it got stricter.</li>
+        </ul>
+        <div class="spec-foot"><button class="pull" data-pdf="c">Pull PDF proof ↓</button><span class="lc" data-lines></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= III — RESEARCH & HONORS ================= -->
+<section id="research">
+  <header class="chap">
+    <span class="chap-n" aria-hidden="true">III</span>
+    <h2>Research &amp; Honors</h2>
+    <p class="chap-note">The lab work, the honors list, and the syllabus. No conference talks yet — the press is
+    warmed up for the first one.</p>
+  </header>
+
+  <div class="research-body">
+    <figure class="plate rv" id="plate07">
+      <div class="fp">
+        <span class="k">Plate 07 — Frontispiece</span>
+        <p class="fp-big">500GB+ of atmosphere,<br>modeled, validated,<br><span class="rd">reproducible.</span></p>
+        <div class="fp-meta">
+          <span>Dept. of Atmospheric &amp; Oceanic Sciences</span>
+          <span>UW–Madison</span>
+          <span>May – Aug 2025</span>
+        </div>
+      </div>
+      <figcaption>Frontispiece — research plate. The full index, below.</figcaption>
+    </figure>
+
+    <p class="ix-cap">Research &amp; Lab Work</p>
+    <div class="ix-list">
+      <div class="ix-row">
+        <button class="ix-head" aria-expanded="false">
+          <span class="ix-title">MERRA-2 Ensemble Optimization</span>
+          <span class="ix-meta">UW AOS · May–Aug 2025 · Research</span><span class="ix-x">+</span>
+        </button>
+        <div class="ix-body"><div class="ix-inner">
+          <p>Optimized ensemble models and engineered features on 500GB+ of NASA MERRA-2 data, improving accuracy
+          by 15%. Built automated processing and visualization pipelines that cut manual analysis time by half,
+          and formalized reproducible workflows with cross-validation across the lab.</p>
+          <a href="#works">Spread 04 ↓</a>
+        </div></div>
+      </div>
+      <div class="ix-row">
+        <button class="ix-head" aria-expanded="false">
+          <span class="ix-title">Semantic Fashion Game — Capstone</span>
+          <span class="ix-meta">Amazon Shopbop · Sep 2026–Present · Capstone</span><span class="ix-x">+</span>
+        </button>
+        <div class="ix-body"><div class="ix-inner">
+          <p>A daily Wordle-style fashion guessing game scored by semantic similarity via Shopbop’s vector search
+          API, on a serverless AWS backend — Lambda, API Gateway, DynamoDB — persisting puzzles, guesses, and
+          streaks.</p>
+          <a href="#works">Spread 01 ↓</a>
+        </div></div>
+      </div>
+      <div class="ix-row">
+        <button class="ix-head" aria-expanded="false">
+          <span class="ix-title">PDF Q&amp;A + Multilingual Audio Pipelines</span>
+          <span class="ix-meta">Trail Lab · Sep 2025–Present · Internship</span><span class="ix-x">+</span>
+        </button>
+        <div class="ix-body"><div class="ix-inner">
+          <p>FastAPI + Next.js pipelines over Groq APIs: document question-answering with context retrieved in
+          under 0.2 seconds, and audio transcription, summarization, and translation across 10+ languages. CI/CD
+          on GitHub Actions and GCP Cloud Build, deploys from 15 minutes to 2.</p>
+          <a href="#works">Spread 02 ↓</a>
+        </div></div>
+      </div>
+    </div>
+
+    <p class="ix-cap">Honors &amp; Awards</p>
+    <div class="ix-list">
+      <div class="ix-row">
+        <button class="ix-head" aria-expanded="false">
+          <span class="ix-title">King Morgridge Scholar</span>
+          <span class="ix-meta">UW–Madison · Full-Ride</span><span class="ix-x">+</span>
+        </button>
+        <div class="ix-body"><div class="ix-inner">
+          <p>A full-ride scholarship to the University of Wisconsin–Madison, funding the degree through May 2027.</p>
+        </div></div>
+      </div>
+      <div class="ix-row">
+        <button class="ix-head" aria-expanded="false">
+          <span class="ix-title">Undergraduate Research Scholar</span>
+          <span class="ix-meta">UW–Madison · Research Program</span><span class="ix-x">+</span>
+        </button>
+        <div class="ix-body"><div class="ix-inner">
+          <p>Placed in the Department of Atmospheric &amp; Oceanic Sciences, May–Aug 2025 — see Spread 04.</p>
+        </div></div>
+      </div>
+      <div class="ix-row">
+        <button class="ix-head" aria-expanded="false">
+          <span class="ix-title">L&amp;S STEM Scholar</span>
+          <span class="ix-meta">College of Letters &amp; Science</span><span class="ix-x">+</span>
+        </button>
+        <div class="ix-body"><div class="ix-inner">
+          <p>Scholar designation for STEM students in the College of Letters &amp; Science.</p>
+        </div></div>
+      </div>
+      <div class="ix-row">
+        <button class="ix-head" aria-expanded="false">
+          <span class="ix-title">Dean’s List</span>
+          <span class="ix-meta">UW–Madison</span><span class="ix-x">+</span>
+        </button>
+        <div class="ix-body"><div class="ix-inner">
+          <p>Semester honors for academic distinction. GPA 3.6, minor in Data Science.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <p class="ix-cap">Syllabus — Selected Coursework</p>
+    <div class="syl rv">
+      <div><span>Distributed Systems</span><span>Docker</span></div>
+      <div><span>Deep Learning &amp; Generative Models</span><span>PyTorch</span></div>
+      <div><span>Database Management Systems</span><span>SQL</span></div>
+      <div><span>Operating Systems</span><span>Core</span></div>
+      <div><span>Data Structures &amp; Algorithms</span><span>Core</span></div>
+      <div><span>Probability</span><span>Statistics</span></div>
+      <div><span>Object-Oriented Programming</span><span>Java</span></div>
+      <div><span>Minor</span><span>Data Science</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IV — CONTACT ================= -->
+<section id="contact">
+  <header class="chap">
+    <span class="chap-n" aria-hidden="true">IV</span>
+    <h2>Contact &amp; Colophon</h2>
+    <p class="chap-note">Correspondence answered within one business day, usually faster.</p>
+  </header>
+
+  <div class="contact-body">
+    <h3 class="contact-big rv">Put something<br>on paper<span class="rd">.</span></h3>
+    <div class="mailrow rv" style="--d:.1s">
+      <a class="mail" href="mailto:nischalsinghbista@gmail.com">NISCHALSINGHBISTA@GMAIL.COM</a>
+      <button class="chip" id="copyMail">Copy address</button>
+      <a class="chip" href="tel:+16087220825">+1 (608) 722-0825</a>
+    </div>
+    <p class="avail rv" style="--d:.15s">Open to software engineering internships — Summer 2027 — and new-grad roles
+    from May 2027. If your problem involves pipelines, PDFs, or a stubborn model, I already have opinions.</p>
+    <div class="mailrow rv" style="--d:.2s">
+      <!-- TODO: verify these two URLs — the resume linked them without addresses -->
+      <a class="chip" href="https://github.com/n1-sb" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="chip" href="https://www.linkedin.com/in/nischalsinghbista" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="chip" href="https://www.n1-sb.com" target="_blank" rel="noopener">www.n1-sb.com ↗</a>
+      <button class="chip" id="resumeBtn">Résumé — pull PDF ↓</button>
+    </div>
+
+    <div class="colophon rv">
+      <div><h5>Type &amp; Ink</h5>
+        <p>Set in Bricolage Grotesque for display, Newsreader for text, and Space Mono for anything that smells
+        like data. One colour of ink — #DF3D10 — on #F3EFE6 uncoated stock. The cursor leaves risograph dots
+        because real presses never register perfectly, and neither should this page.</p></div>
+      <div><h5>Education</h5>
+        <p>B.S. Computer Science, minor in Data Science — University of Wisconsin–Madison, expected May 2027 ·
+        GPA 3.6. King Morgridge Scholar (full ride), Dean’s List, L&amp;S STEM Scholar, Undergraduate Research
+        Scholar.</p></div>
+      <div><h5>Edition</h5>
+        <p>First edition. A single HTML file: no framework, no build step, no analytics, no cookies. The résumé
+        PDF is typeset by the page itself, on demand. Reduced-motion readers get a still press.</p></div>
+    </div>
+
+    <div class="foot">
+      <span>© Nischal Singh Bista — set &amp; printed in the browser</span>
+      <span>n1-sb.com</span>
+      <a href="#cover">Back to cover ↑</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   0 · ENV & HELPERS
+   ============================================================ */
+const $  = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => [...c.querySelectorAll(s)];
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+const RM   = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE = matchMedia('(pointer: fine)').matches;
+let toastT;
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+/* ============================================================
+   1 · RISOGRAPH CURSOR TRAIL
+   ============================================================ */
+const Trail = (()=>{
+  if (RM || !FINE) return { draw(){}, resize(){} };
+  const c = $('#trail'), x = c.getContext('2d');
+  let W, H, dots = [], px = -1, py = -1;
+  function resize(){
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    c.width = W * dpr; c.height = H * dpr;
+    c.style.width = W+'px'; c.style.height = H+'px';
+    x.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resize();
+  function spawn(bx, by, burst){
+    const j = ()=> (Math.random()-.5)*3;
+    dots.push({ x:bx+j(), y:by+j(), r:.8+Math.random()*2.1, l:1, k:.016+Math.random()*.02, red:Math.random()<.82 });
+    if (burst) for(let a=0;a<10;a++){
+      const t = a/10*Math.PI*2;
+      dots.push({ x:bx+Math.cos(t)*10, y:by+Math.sin(t)*10, r:1+Math.random()*1.6, l:1, k:.03, red:true });
+    }
+    if (dots.length > 170) dots.splice(0, dots.length-170);
+  }
+  addEventListener('pointermove', e=>{
+    if (e.pointerType !== 'mouse') return;
+    if (px >= 0){
+      const dx = e.clientX-px, dy = e.clientY-py, d = Math.hypot(dx,dy);
+      const steps = Math.min(Math.floor(d/16), 3);
+      for (let s=0; s<steps; s++) spawn(px+dx*(s+1)/steps, py+dy*(s+1)/steps);
+    }
+    px = e.clientX; py = e.clientY;
+  }, {passive:true});
+  addEventListener('click', e=>{ if (e.pointerType === 'mouse') spawn(e.clientX, e.clientY, true); }, {passive:true});
+  return {
+    resize,
+    draw(){
+      x.clearRect(0,0,W,H);
+      for (let i=dots.length-1; i>=0; i--){
+        const d = dots[i]; d.l -= d.k;
+        if (d.l <= 0){ dots.splice(i,1); continue; }
+        const a = d.l*d.l*.4;
+        x.globalAlpha = a; x.fillStyle = d.red ? '#df3d10' : '#171310';
+        x.beginPath(); x.arc(d.x-1.2, d.y-1, d.r, 0, 7); x.fill();
+        x.globalAlpha = a*.35; x.fillStyle = '#171310';
+        x.beginPath(); x.arc(d.x+1.4, d.y+1.2, d.r*.8, 0, 7); x.fill();
+      }
+      x.globalAlpha = 1;
+    }
+  };
+})();
+
+/* ============================================================
+   2 · KINETIC HERO
+   ============================================================ */
+(function hero(){
+  const cover = $('#cover');
+  $$('#cover .line').forEach((line, li)=>{
+    [...line.dataset.text].forEach((ch, i)=>{
+      const w = document.createElement('span'); w.className = 'kl';
+      const inner = document.createElement('span'); inner.className = 'ki';
+      inner.textContent = ch; inner.dataset.c = ch;
+      inner.style.setProperty('--d', (li*.16 + i*.045).toFixed(3)+'s');
+      w.appendChild(inner); line.appendChild(w);
+    });
+  });
+  let done = false;
+  const start = ()=>{ if (done) return; done = true;
+    cover.classList.add('inked');
+    $('#heroMeta').style.transition = $('#heroDek').style.transition = 'opacity .8s ease .9s';
+    $('#heroMeta').style.opacity = $('#heroDek').style.opacity = 1;
+  };
+  if (RM){ start(); return; }
+  Promise.race([document.fonts.ready, new Promise(r=>setTimeout(r,1200))]).then(start);
+})();
+
+/* ============================================================
+   3 · RUNNING HEAD
+   ============================================================ */
+const rhPage = $('#rhPage'), prog = $('#prog'), rhSec = $('#rhSec');
+function folio(){
+  const max = document.documentElement.scrollHeight - innerHeight;
+  const p = max > 0 ? clamp(scrollY/max, 0, 1) : 0;
+  rhPage.textContent = 'P. ' + String(1+Math.round(p*95)).padStart(3,'0') + ' / 096';
+  prog.style.width = (p*100).toFixed(2)+'%';
+}
+const SEC_NAMES = [['cover','Cover'],['works','I — Works'],['specimens','II — Specimens'],['research','III — Research & Honors'],['contact','IV — Contact']];
+const secIO = new IntersectionObserver(es=>es.forEach(e=>{
+  if (e.isIntersecting){
+    const n = SEC_NAMES.find(s=>s[0]===e.target.id);
+    if (n) rhSec.textContent = n[1];
+  }
+}), {rootMargin:'-42% 0px -52% 0px'});
+SEC_NAMES.forEach(([id])=>{ const el = document.getElementById(id); if (el) secIO.observe(el); });
+
+/* ============================================================
+   4 · REVEALS, DIAGRAMS, COUNT-UPS
+   ============================================================ */
+function countUp(el){
+  if (el._done) return; el._done = true;
+  const m = el.dataset.c.match(/^([\d.]+)(.*)$/); if (!m) return;
+  const target = parseFloat(m[1]), suf = m[2]||'';
+  const dec = (m[1].split('.')[1]||'').length;
+  if (RM){ el.textContent = el.dataset.c; return; }
+  const t0 = performance.now(), D = 950;
+  (function f(t){
+    const k = clamp((t-t0)/D, 0, 1), e = 1-Math.pow(1-k,3);
+    el.textContent = (target*e).toFixed(dec)+suf;
+    if (k < 1) requestAnimationFrame(f);
+  })(t0);
+}
+function fire(el){
+  el.classList.add('on');
+  $$('[data-c]', el).forEach(countUp);
+}
+const rvIO = new IntersectionObserver(es=>es.forEach(e=>{
+  const inStickyWorks = e.target.closest('#worksStage') && Works.isSticky();
+  if (!e.isIntersecting || inStickyWorks) return;
+  fire(e.target); rvIO.unobserve(e.target);
+}), {threshold:.2, rootMargin:'0px 0px -6% 0px'});
+ $$('.rv, .dg, .metrics').forEach(el=>rvIO.observe(el));
+ $$('.reprint').forEach(b=>b.addEventListener('click', ()=>{
+  const fig = b.closest('.dgf').querySelector('.dg');
+  fig.classList.remove('on'); void fig.offsetWidth;
+  if (!RM) requestAnimationFrame(()=>fig.classList.add('on')); else fig.classList.add('on');
+}));
+
+/* ============================================================
+   5 · WORKS — scroll-driven spreads
+   ============================================================ */
+const Works = (()=>{
+  const sec = $('#works'), stage = $('#worksStage');
+  const spreads = $$('.spread', sec);
+  const hudIdx = $('#hudIdx'), hudName = $('#hudName'), dots = $$('#hudDots button');
+  const N = spreads.length;
+  let sticky = false, per = 0, stageTop = 0, active = -1;
+  const canSticky = ()=> !RM && innerWidth >= 980 && innerHeight >= 560;
+  const api = { isSticky: ()=>sticky };
+
+  function measure(){
+    const wasSticky = sticky;
+    sticky = canSticky();
+    sec.classList.toggle('sticky', sticky);
+    if (sticky){
+      const dwell = innerHeight*.95, fade = innerHeight*.55;
+      per = dwell + fade;
+      sec.style.height = (N*per - fade + innerHeight) + 'px';
+    } else {
+      sec.style.height = '';
+      spreads.forEach(s=>{ s.style.opacity=''; s.style.transform=''; s.style.visibility=''; s.style.pointerEvents=''; });
+    }
+    stageTop = sec.getBoundingClientRect().top + scrollY + $('#worksHead').offsetHeight;
+    if (sticky && !wasSticky){ active = -1; frame(); }
+    if (!sticky && wasSticky){ spreads[0].classList.add('on'); $$('#worksStage .rv, #worksStage .dg, #worksStage .metrics').forEach(fire); }
+  }
+  function activate(i){
+    const s = spreads[i];
+    $$('.rv, .dg, .metrics', s).forEach(fire);
+    s.querySelectorAll('.dg').forEach(d=>d.classList.add('on'));
+  }
+  function frame(){
+    if (!sticky) return;
+    const p = clamp((scrollY - stageTop)/per, 0, N-1);
+    for (let i=0; i<N; i++){
+      const d = p - i, t = Math.abs(d), s = spreads[i];
+      const op = t <= .32 ? 1 : Math.max(0, 1-(t-.32)/.36);
+      s.style.visibility = op > 0 ? 'visible' : 'hidden';
+      s.style.opacity = op.toFixed(3);
+      s.style.transform = 'translateX(' + (d*9).toFixed(2) + 'vw)';
+      s.style.pointerEvents = op > .6 ? '' : 'none';
+    }
+    const idx = Math.round(p);
+    if (idx !== active){
+      active = idx;
+      hudIdx.textContent = String(idx+1).padStart(2,'0');
+      hudName.textContent = spreads[idx].dataset.name;
+      dots.forEach((b,i)=>b.classList.toggle('act', i===idx));
+      activate(idx);
+    }
+  }
+  function goto(i){
+    if (sticky) scrollTo({ top: stageTop + i*per + 2, behavior: RM ? 'auto' : 'smooth' });
+    else spreads[i].scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
+  }
+  dots.forEach(b=>b.addEventListener('click', ()=>goto(+b.dataset.i)));
+  return { measure, frame, goto, api };
+})();
+
+/* ============================================================
+   6 · FILM-STRIP STACK SWATCHES
+   ============================================================ */
+const strips = [];
+ $$('.strip').forEach(el=>{
+  const track = $('.strip-track', el);
+  const base = track.innerHTML;
+  let x = 0, v = 0, dragging = false, lastX = 0, hover = false;
+  const dir = +el.dataset.dir || 1;
+  function fill(){ let guard = 0; while (track.scrollWidth < el.offsetWidth*2 && guard++ < 6) track.innerHTML += base; }
+  fill();
+  el.addEventListener('pointerdown', e=>{
+    dragging = true; lastX = e.clientX; v = 0;
+    el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener('pointermove', e=>{
+    if (!dragging) return;
+    const dx = e.clientX - lastX; lastX = e.clientX;
+    x -= dx; v = -dx;
+  });
+  ['pointerup','pointercancel'].forEach(ev=>el.addEventListener(ev, ()=>dragging = false));
+  el.addEventListener('pointerenter', ()=>hover = true);
+  el.addEventListener('pointerleave', ()=>hover = false);
+  strips.push({
+    tick(){
+      if (!dragging){
+        if (!hover && !RM) v += (0.35*dir - v)*0.015;
+        else v *= 0.92;
+        x += v;
+      }
+      const half = track.scrollWidth/2;
+      if (half > 0){ if (x >= half) x -= half; if (x < 0) x += half; }
+      const skew = clamp(v*.35, -5, 5);
+      track.style.transform = 'translate3d('+(-x).toFixed(1)+'px,0,0)' + (Math.abs(skew)>.2 ? ' skewX('+skew.toFixed(1)+'deg)' : '');
+    },
+    refill: fill
+  });
+});
+
+/* ============================================================
+   7 · SPECIMEN PLATES — drag, pinch, nudge
+   ============================================================ */
+const Board = (()=>{
+  const board = $('#board'), cards = $$('.spec', board);
+  const mode = ()=> matchMedia('(min-width: 980px)').matches;
+  let zTop = 5;
+  const state = cards.map(()=>({ x:0, y:0, s:1 }));
+  const spots = [ {f:.03, y:30}, {f:.37, y:330}, {f:.64, y:60} ];
+
+  function apply(i){
+    const st = state[i];
+    cards[i].style.transform = 'translate('+st.x+'px,'+st.y+'px) scale('+st.s+')';
+  }
+  function clampPos(i){
+    const st = state[i], card = cards[i];
+    st.x = clamp(st.x, -30, board.clientWidth  - card.offsetWidth *st.s + 30);
+    st.y = clamp(st.y, -20, board.clientHeight - card.offsetHeight*st.s + 20);
+  }
+  function layout(){
+    if (!mode()){ cards.forEach(c=>c.style.transform=''); return; }
+    cards.forEach((card, i)=>{
+      const st = state[i];
+      st.x = spots[i].f * board.clientWidth;
+      st.y = spots[i].y;
+      clampPos(i); apply(i);
+    });
+  }
+  cards.forEach((card, i)=>{
+    const st = state[i];
+    const ptrs = new Map();
+    let dragBase = null, pinchBase = null;
+    card.addEventListener('pointerdown', e=>{
+      if (!mode() || e.button !== 0) return;
+      if (e.target.closest('a,button')) return;
+      card.setPointerCapture(e.pointerId);
+      ptrs.set(e.pointerId, {x:e.clientX, y:e.clientY});
+      card.style.zIndex = ++zTop;
+      card.classList.add('lift');
+      if (ptrs.size === 1) dragBase = { x: st.x - e.clientX, y: st.y - e.clientY };
+      if (ptrs.size === 2){
+        const [a,b] = [...ptrs.values()];
+        pinchBase = { d: Math.hypot(a.x-b.x, a.y-b.y)||1, s: st.s,
+                      cx:(a.x+b.x)/2, cy:(a.y+b.y)/2, px:st.x, py:st.y };
+        dragBase = null;
+      }
+      e.preventDefault();
+    });
+    card.addEventListener('pointermove', e=>{
+      if (!ptrs.has(e.pointerId)) return;
+      ptrs.set(e.pointerId, {x:e.clientX, y:e.clientY});
+      if (ptrs.size === 2 && pinchBase){
+        const [a,b] = [...ptrs.values()];
+        const d = Math.hypot(a.x-b.x, a.y-b.y)||1;
+        st.s = clamp(pinchBase.s * d/pinchBase.d, .55, 1.8);
+        st.x = pinchBase.px + (a.x+b.x)/2 - pinchBase.cx;
+        st.y = pinchBase.py + (a.y+b.y)/2 - pinchBase.cy;
+      } else if (dragBase){
+        st.x = e.clientX + dragBase.x; st.y = e.clientY + dragBase.y;
+      }
+      clampPos(i); apply(i);
+    });
+    const end = e=>{
+      ptrs.delete(e.pointerId);
+      if (ptrs.size === 1){
+        const [p] = [...ptrs.values()];
+        dragBase = { x: st.x - p.x, y: st.y - p.y }; pinchBase = null;
+      } else if (ptrs.size === 0){
+        dragBase = null; pinchBase = null; card.classList.remove('lift');
+      }
+    };
+    card.addEventListener('pointerup', end);
+    card.addEventListener('pointercancel', end);
+    card.addEventListener('wheel', e=>{
+      if (!mode() || !e.ctrlKey) return;
+      e.preventDefault();
+      st.s = clamp(st.s * Math.pow(1.002, -e.deltaY), .55, 1.8);
+      apply(i);
+    }, {passive:false});
+    card.addEventListener('keydown', e=>{
+      if (!mode()) return;
+      const step = e.shiftKey ? 32 : 12; let used = true;
+      if (e.key === 'ArrowLeft')  st.x -= step;
+      else if (e.key === 'ArrowRight') st.x += step;
+      else if (e.key === 'ArrowUp')    st.y -= step;
+      else if (e.key === 'ArrowDown')  st.y += step;
+      else if (e.key === '+' || e.key === '=') st.s = clamp(st.s+.08,.55,1.8);
+      else if (e.key === '-') st.s = clamp(st.s-.08,.55,1.8);
+      else used = false;
+      if (used){ clampPos(i); apply(i); e.preventDefault(); }
+    });
+  });
+  return { layout, mode };
+})();
+
+/* specimen meta: real line + glyph counts */
+ $$('.spec').forEach(card=>{
+  const lines = $$('.cl', card);
+  const glyphs = lines.reduce((n,l)=>n + l.textContent.replace(/\s/g,'').length, 0);
+  $('[data-lines]', card).textContent = lines.length + ' lines · ' + glyphs.toLocaleString('en-US') + ' glyphs';
+  $('[data-glyphs]', card).textContent = glyphs.toLocaleString('en-US') + ' GLYPHS';
+});
+
+/* ============================================================
+   8 · ACCORDIONS
+   ============================================================ */
+ $$('.ix-head, .fold-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const row = btn.parentElement;
+    const open = row.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+});
+
+/* ============================================================
+   9 · TOAST + CLIPBOARD
+   ============================================================ */
+ $('#copyMail').addEventListener('click', async ()=>{
+  const addr = 'nischalsinghbista@gmail.com';
+  try { await navigator.clipboard.writeText(addr); toast(addr + ' — copied to clipboard'); }
+  catch { toast('Address: ' + addr); }
+});
+
+/* ============================================================
+   10 · PDF PRESSES — minimal, valid PDF writer
+   ============================================================ */
+const Press = (()=>{
+  const esc = s => s.replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+  const MAP = {'\u2019':"'",'\u2018':"'",'\u201C':'"','\u201D':'"','\u2014':'--','\u2013':'-',
+               '\u2192':'->','\u2197':'->','\u00d7':'x','\u00b7':'*','\u2264':'<=','\u2265':'>=',
+               '\u00e9':'e','\u00a0':' ','\u2026':'...','\u2022':'-','\u2212':'-'};
+  const ascii = s => s.replace(/[^\x20-\x7E\n]/g, ch => MAP[ch] !== undefined ? MAP[ch] : '');
+  const INK=[.09,.075,.06], RED=[.874,.239,.063], MUT=[.45,.42,.37];
+  const T = (f,size,xx,yy,text,col=INK)=> 'BT /'+f+' '+size+' Tf '+col.join(' ')+' rg 1 0 0 1 '+
+          xx.toFixed(1)+' '+yy.toFixed(1)+' Tm ('+esc(ascii(text))+') Tj ET';
+  const R = (xx,yy,w,h,col)=> col.join(' ')+' rg '+xx+' '+yy+' '+w+' '+h+' re f';
+  function wrap(s, max){
+    const out = []; let line = '';
+    s.split(/\s+/).forEach(w=>{
+      if ((line+' '+w).trim().length > max){ out.push(line.trim()); line = w; }
+      else line += ' '+w;
+    });
+    if (line.trim()) out.push(line.trim());
+    return out;
+  }
+  function make(pages){
+    let out = '%PDF-1.4\n';
+    const offs = [];
+    const obj = b => { offs.push(out.length); out += b; };
+    obj('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+    obj('2 0 obj\n<< /Type /Pages /Kids [ '+pages.map((_,i)=>(3+i*2)+' 0 R').join(' ')+' ] /Count '+pages.length+' >>\nendobj\n');
+    pages.forEach((p,i)=>{
+      const pg = 3+i*2;
+      obj(pg+' 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 '+(5+pages.length*2)+' 0 R /F2 '+(6+pages.length*2)+' 0 R /F3 '+(7+pages.length*2)+' 0 R /F4 '+(8+pages.length*2)+' 0 R >> >> /Contents '+(pg+1)+' 0 R >>\nendobj\n');
+      const stream = p.ops.join('\n');
+      obj((pg+1)+' 0 obj\n<< /Length '+stream.length+' >>\nstream\n'+stream+'\nendstream\nendobj\n');
+    });
+    const fb = 5+pages.length*2;
+    obj(fb+' 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>\nendobj\n');
+    obj((fb+1)+' 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n');
+    obj((fb+2)+' 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>\nendobj\n');
+    obj((fb+3)+' 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>\nendobj\n');
+    const xr = out.length;
+    out += 'xref\n0 '+(offs.length+1)+'\n0000000000 65535 f\r\n';
+    offs.forEach(o=> out += String(o).padStart(10,'0')+' 00000 n\r\n');
+    out += 'trailer\n<< /Size '+(offs.length+1)+' /Root 1 0 R >>\nstartxref\n'+xr+'\n%%EOF';
+    return out;
+  }
+  function download(name, pdf){
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([pdf], {type:'application/pdf'}));
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
+  }
+  const M = 66, PW = 612;
+  function chrome(ops, label){
+    ops.push(R(M, 714, PW-2*M, 2.5, RED));
+    ops.push(T('F4', 7.5, M, 40, label+' — SET & PRINTED IN THE BROWSER · NISCHALSINGHBISTA@GMAIL.COM', MUT));
+  }
+  const clean = node => { const c = node.cloneNode(true); c.querySelectorAll('sup').forEach(s=>s.remove()); return c.textContent; };
+  function specimen(card){
+    const ops = [];
+    chrome(ops, 'PLATE PROOF · '+new Date().toISOString().slice(0,10));
+    ops.push(T('F1', 24, M, 676, card.dataset.title));
+    ops.push(T('F4', 9, M, 656, card.dataset.sub, MUT));
+    let y = 620;
+    $$('.cl', card).forEach(l=>{
+      ops.push(T('F4', 8.2, M, y, clean(l).replace(/\s+$/,'')));
+      y -= 12.6;
+    });
+    y -= 14;
+    ops.push(R(M, y+10, 60, 1.4, INK));
+    y -= 8;
+    $$('.ans li', card).forEach(li=>{
+      const num = li.querySelector('sup') ? li.querySelector('sup').textContent : '';
+      wrap(clean(li), 92).forEach((t,i)=>{
+        ops.push(T(i===0 ? 'F3' : 'F2', 9, M + (i===0?0:12), y, (i===0 ? num+'. ' : '')+t));
+        y -= 13;
+      });
+    });
+    return make([{ops}]);
+  }
+  /* ---- résumé — two pages, real data ---- */
+  const RESUME = {
+    contact: 'nischalsinghbista@gmail.com - +1 (608) 722-0825 - www.n1-sb.com - Madison, WI',
+    education: [
+      'B.S. Computer Science, Minor: Data Science - Expected May 2027 - GPA 3.6',
+      'Honors: King Morgridge Scholar (Full-Ride) - Dean\'s List - L&S STEM Scholar - Undergraduate Research Scholar',
+      'Coursework: Distributed Systems (Docker) - Deep Learning & Generative Models (PyTorch) - Operating Systems - DBMS - Probability - OOP'
+    ],
+    exp: [
+      { role:'SOFTWARE DEVELOPER - CAPSTONE', org:'Amazon Shopbop - Madison, WI', dates:'SEP 2026 - PRESENT', pts:[
+        'Daily Wordle-style fashion guessing game scored by semantic similarity via Shopbop\'s vector search API.',
+        'Serverless AWS backend (Lambda, API Gateway, DynamoDB) persisting puzzles, guesses, and user streaks.' ]},
+      { role:'SOFTWARE DEVELOPMENT INTERN', org:'Trail Lab - Madison, WI', dates:'SEP 2025 - PRESENT', pts:[
+        'PDF Q&A pipeline with FastAPI, Next.js, Groq APIs and embeddings; context retrieved in under 0.2 seconds.',
+        'FastAPI audio pipeline over Groq APIs: transcription, summarization, and translation in 10+ languages.',
+        'CI/CD with GitHub Actions and GCP Cloud Build, gated by test suites; deploy time cut from 15 to 2 minutes.' ]},
+      { role:'AI/ML RESEARCHER', org:'Dept. of Atmospheric & Oceanic Sciences, UW-Madison', dates:'MAY 2025 - AUG 2025', pts:[
+        'Optimized ensemble models and engineered features on 500GB+ of NASA MERRA-2 data, improving accuracy 15%.',
+        'Automated data processing and visualization pipelines, cutting manual analysis time by 50%.',
+        'Formalized reproducible pipelines with cross-validation, standardizing experiment workflows across the lab.' ]}
+    ],
+    skills: [
+      'Languages: Python, JavaScript, TypeScript, Java, C, SQL, Bash',
+      'Backend & APIs: FastAPI, Node.js, Express, REST APIs, PostgreSQL',
+      'Frontend: React, Next.js, React Native',
+      'Cloud & DevOps: AWS (Lambda, API Gateway, DynamoDB), GCP (Cloud Run, Cloud Functions, Cloud Build), Docker, GitHub Actions, CI/CD',
+      'AI & ML: PyTorch, scikit-learn, Pandas, NumPy, LLMs, RAG, Embeddings, LangChain'
+    ],
+    projects: [
+      { name:'BADGER CODE', stack:'Python - Docker - Harbor - Terminal-Bench - Qwen', pts:[
+        'Qwen-powered coding agent with Harbor running autonomous shell workflows in isolated Docker environments.',
+        'Reproducible Terminal-Bench evaluation pipeline across 89 tasks; successful completion on 40+ tasks.' ]},
+      { name:'BADGERRIDES - CARPOOL PLATFORM', stack:'React - TypeScript - Node.js - Express - PostgreSQL - Socket.IO', pts:[
+        'Full-stack carpool platform for UW-Madison students: JWT authentication, REST APIs, ride matching, and real-time messaging.' ]},
+      { name:'EDUCATE NEPAL INITIATIVE (NON-PROFIT)', stack:'React - TypeScript - Node.js - PostgreSQL - AWS', pts:[
+        'Full-stack platform on AWS serving 10K+ monthly users; owned PostgreSQL design, authentication, backend APIs, and cloud deployment.' ]}
+    ],
+    honors: 'King Morgridge Scholar (Full-Ride) - Dean\'s List - L&S STEM Scholar - Undergraduate Research Scholar.'
+  };
+  function resume(){
+    const p1 = [], p2 = [];
+    chrome(p1, 'RÉSUMÉ · PAGE 1 / 2'); chrome(p2, 'RÉSUMÉ · PAGE 2 / 2');
+    p1.push(T('F1', 28, M, 676, 'NISCHAL SINGH BISTA'));
+    p1.push(T('F2', 11, M, 654, 'Software Engineer — Full-Stack, Backend & Applied ML'));
+    p1.push(T('F4', 8.5, M, 634, RESUME.contact, MUT));
+    p1.push(R(M, 620, PW-2*M, 1, INK));
+    let y = 594;
+    p1.push(T('F1', 10, M, y, 'EDUCATION')); y -= 17;
+    p1.push(T('F1', 10.5, M, y, 'UNIVERSITY OF WISCONSIN–MADISON'));
+    p1.push(T('F2', 9, PW-M-140, y, 'EXPECTED MAY 2027', MUT)); y -= 13;
+    RESUME.education.forEach(t=>wrap(t, 100).forEach(l=>{ p1.push(T('F2', 9.5, M, y, l)); y -= 12.5; }));
+    y -= 12; p1.push(T('F1', 10, M, y, 'EXPERIENCE')); y -= 17;
+    RESUME.exp.forEach(e=>{
+      p1.push(T('F1', 10.5, M, y, e.role));
+      p1.push(T('F2', 9, PW-M-150, y, e.dates, MUT)); y -= 13;
+      p1.push(T('F3', 9, M, y, e.org)); y -= 13;
+      e.pts.forEach(pt=>wrap(pt, 94).forEach((t,i)=>{
+        p1.push(T('F2', 9, M+10, y, (i===0?'- ':'  ')+t)); y -= 12.5;
+      }));
+      y -= 9;
+    });
+    y = 700;
+    p2.push(T('F1', 10, M, y, 'TECHNICAL SKILLS')); y -= 17;
+    RESUME.skills.forEach(t=>wrap(t, 100).forEach(l=>{ p2.push(T('F2', 9.5, M, y, l)); y -= 12.5; }));
+    y -= 12; p2.push(T('F1', 10, M, y, 'PROJECTS')); y -= 17;
+    RESUME.projects.forEach(p=>{
+      p2.push(T('F1', 10.5, M, y, p.name)); y -= 13;
+      p2.push(T('F3', 8.5, M, y, p.stack)); y -= 13;
+      p.pts.forEach(pt=>wrap(pt, 94).forEach((t,i)=>{
+        p2.push(T('F2', 9, M+10, y, (i===0?'- ':'  ')+t)); y -= 12.5;
+      }));
+      y -= 9;
+    });
+    y -= 4; p2.push(T('F1', 10, M, y, 'HONORS')); y -= 17;
+    wrap(RESUME.honors, 100).forEach(l=>{ p2.push(T('F2', 9.5, M, y, l)); y -= 12.5; });
+    return make([{ops:p1},{ops:p2}]);
+  }
+  return { specimen, resume, download };
+})();
+ $$('.pull').forEach(b=>b.addEventListener('click', ()=>{
+  const card = b.closest('.spec');
+  Press.download('specimen-'+b.dataset.pdf+'.pdf', Press.specimen(card));
+  toast('Specimen ' + b.dataset.pdf.toUpperCase() + ' — proof pulled, 1 page');
+}));
+ $('#resumeBtn').addEventListener('click', ()=>{
+  Press.download('nischal-singh-bista-resume.pdf', Press.resume());
+  toast('Résumé pulled — 2 pages, typeset just now');
+});
+
+/* ============================================================
+   11 · NAVIGATION
+   ============================================================ */
+ $$('.toc-row').forEach(row=>row.addEventListener('click', ()=>{
+  const t = $(row.dataset.goto);
+  if (t) t.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
+}));
+
+/* ============================================================
+   12 · MAIN LOOP + SCROLL + RESIZE
+   ============================================================ */
+(function loop(){
+  Trail.draw();
+  for (const s of strips) s.tick();
+  requestAnimationFrame(loop);
+})();
+let ticking = false;
+addEventListener('scroll', ()=>{
+  if (ticking) return; ticking = true;
+  requestAnimationFrame(()=>{ ticking = false; Works.frame(); folio(); });
+}, {passive:true});
+let rzT;
+addEventListener('resize', ()=>{
+  clearTimeout(rzT);
+  rzT = setTimeout(()=>{
+    Trail.resize(); Works.measure(); Board.layout();
+    strips.forEach(s=>s.refill()); Works.frame(); folio();
+  }, 140);
+});
+addEventListener('load', ()=>{ Works.measure(); Board.layout(); Works.frame(); folio(); });
+document.fonts.ready.then(()=>{ Works.measure(); Board.layout(); Works.frame(); });
+folio();
+</script>
+</body>
+</html>

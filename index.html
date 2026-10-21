@@ -252,47 +252,6 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
 }
 
 /* ============================================================
-   SPECIMENS — PASTE-UP BOARD
-   ============================================================ */
-.board-wrap{padding:2vh 4vw 10vh}
-.board{
-  position:relative;border:1px solid var(--ink);min-height:560px;
-  background-image:radial-gradient(var(--hair2) 1px,transparent 1.3px);
-  background-size:26px 26px;
-}
-.board-hint{
-  position:absolute;left:50%;top:10px;transform:translateX(-50%);
-  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);
-  white-space:nowrap;pointer-events:none;
-}
-@media(max-width:979px){.board-hint{display:none}}
-.spec{
-  background:var(--paper);border:1px solid var(--ink);
-  box-shadow:8px 8px 0 rgba(23,19,16,.14);
-  width:min(470px,92vw);
-}
-@media(min-width:980px){
-  .board{height:800px}
-  .spec{position:absolute;left:0;top:0;touch-action:none}
-}
-.spec.lift{box-shadow:14px 14px 0 rgba(223,61,16,.3);cursor:grabbing}
-.spec-head{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:grab}
-.spec-head .pl{background:var(--red);color:var(--paper);padding:2px 7px;font-weight:700}
-.spec-head .gl{margin-left:auto;color:var(--mut);font-variant-numeric:tabular-nums}
-.spec pre{counter-reset:ln;padding:14px 14px 6px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7}
-.cl{display:block;counter-increment:ln;white-space:pre}
-.cl::before{content:counter(ln,decimal-leading-zero);display:inline-block;width:2.4em;color:var(--mut);opacity:.7}
-.tk{color:var(--red);font-weight:700}
-.cm{color:var(--mut);font-style:italic}
-.mk{color:var(--red);font-weight:700;font-size:.72em;vertical-align:super}
-.spec .ans{border-top:1px solid var(--hair);margin:0 14px;padding:10px 0 12px;list-style:none}
-.spec .ans li{font-size:.86rem;font-style:italic;color:rgba(23,19,16,.82);padding-left:1.5em;position:relative;margin-bottom:4px}
-.spec .ans sup{font-family:var(--mono);color:var(--red);font-style:normal;position:absolute;left:0}
-.spec-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--ink);padding:10px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-.pull{color:var(--red);letter-spacing:.14em}
-.pull:hover{text-decoration:underline}
-
-/* ============================================================
    RESEARCH & HONORS
    ============================================================ */
 .research-body{padding:1vh 4vw 8vh}
@@ -385,7 +344,7 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
   .ki:hover{font-variation-settings:'opsz' 96,'wght' 800,'wdth' 93}
 }
 @media print{
-  #trail,.rh,#prog,.works-hud,.reprint,.pull,.fp{display:none!important}
+  #trail,.rh,#prog,.works-hud,.reprint,.fp{display:none!important}
   body::after{display:none}
   .spread{page-break-before:always}
 }
@@ -400,7 +359,7 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
 <header class="rh">
   <b>Nischal Singh Bista</b>
   <span>B.S. Computer Science, UW–Madison ’27</span>
-  <span class="rh-page" id="rhPage">P. 001 / 096</span>
+  <span class="rh-page" id="rhPage">P. 001 / 084</span>
 </header>
 
 <main>
@@ -424,7 +383,7 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
 
   <div class="cover-foot">
     <a href="#contents">Table of Contents</a>
-    <span>96 pp. — set &amp; printed in the browser</span>
+    <span>84 pp. — set &amp; printed in the browser</span>
     <a href="#works">Begin ↓</a>
   </div>
 </section>
@@ -436,17 +395,13 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
     <span class="toc-num">I</span><span class="toc-name">Works </span>
     <span class="toc-note">Problem · Architecture · Tradeoffs</span><span class="toc-pp">pp. 12–71</span>
   </button>
-  <button class="toc-row" data-goto="#specimens">
-    <span class="toc-num">II</span><span class="toc-name">Specimens &amp; Plates</span>
-    <span class="toc-note">Annotated code, pulled proofs</span><span class="toc-pp">pp. 72–83</span>
-  </button>
   <button class="toc-row" data-goto="#research">
-    <span class="toc-num">III</span><span class="toc-name">Research &amp; Honors</span>
-    <span class="toc-note">Lab work, awards, syllabus</span><span class="toc-pp">pp. 84–91</span>
+    <span class="toc-num">II</span><span class="toc-name">Research &amp; Honors</span>
+    <span class="toc-note">Lab work, awards, syllabus</span><span class="toc-pp">pp. 72–79</span>
   </button>
   <button class="toc-row" data-goto="#contact">
-    <span class="toc-num">IV</span><span class="toc-name">Contact &amp; Colophon</span>
-    <span class="toc-note">Email, GitHub, résumé</span><span class="toc-pp">pp. 92–96</span>
+    <span class="toc-num">III</span><span class="toc-name">Contact &amp; Colophon</span>
+    <span class="toc-note">Email, GitHub, résumé</span><span class="toc-pp">pp. 80–84</span>
   </button>
 </nav>
 
@@ -949,60 +904,10 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
   </div>
 </section>
 
-<!-- ================= II — SPECIMENS ================= -->
-<section id="specimens">
-  <header class="chap">
-    <span class="chap-n" aria-hidden="true">II</span>
-    <h2>Specimens &amp; Plates</h2>
-    <p class="chap-note">Three plates — Python, TypeScript, and a pipeline. Drag them around the composing stick;
-    pinch — or scroll with the control key — to set your own measure. Every plate pulls its own PDF proof,
-    generated here, bytes and all.</p>
-  </header>
-
-  <div class="board-wrap">
-    <div class="board cropmarks" id="board">
-      <p class="board-hint">Drag to arrange — pinch / ctrl + scroll to resize — arrow keys nudge</p>
-
-      <!-- SPECIMEN A -->
-      <article class="spec" data-title="SPECIMEN A — PYTHON" data-sub="TRAIL LAB · PDF Q&A · RETRIEVAL PATH" tabindex="0" aria-label="Specimen A, Python code plate, draggable">
-        <div class="spec-head"><span class="pl">A</span><span>Python — Trail Lab · qa/retrieve.py</span><span class="gl" data-glyphs></span></div>
-<pre><span class="cl"><span class="tk">def</span> retrieve(query: <span class="tk">str</span>, k: <span class="tk">int</span> = 5) -&gt; <span class="tk">list</span>[Chunk]:</span><span class="cl">    qvec = embed(query)<span class="cm">        # cached: one model, many queries</span><sup class="mk">1</sup></span><span class="cl">    hits = index.search(qvec, k)<span class="cm">  # ANN, well inside 0.2 s</span></span><span class="cl">    <span class="tk">return</span> [Chunk(h.id, h.text, h.score)</span><span class="cl">            <span class="tk">for</span> h <span class="tk">in</span> hits <span class="tk">if</span> h.score &gt;= THRESHOLD]</span><span class="cl"></span><span class="cl"><span class="tk">def</span> answer(query: <span class="tk">str</span>) -&gt; <span class="tk">str</span>:</span><span class="cl">    context = <span class="cm">"\n---\n"</span>.join(c.text <span class="tk">for</span> c <span class="tk">in</span> retrieve(query))</span><span class="cl">    <span class="tk">return</span> groq.chat(</span><span class="cl">        PROMPT.render(question=query, context=context),</span><span class="cl">        temperature=0.2,<span class="cm">      # facts, not flourishes</span><sup class="mk">2</sup></span><span class="cl">    )</span></pre>
-        <ul class="ans">
-          <li><sup>1</sup>Embeddings are precomputed at ingest. The query path is one search and one model call — that is the 0.2-second budget, kept.</li>
-          <li><sup>2</sup>temperature=0.2: the product sells the document, not the prose.</li>
-        </ul>
-        <div class="spec-foot"><button class="pull" data-pdf="a">Pull PDF proof ↓</button><span class="lc" data-lines></span></div>
-      </article>
-
-      <!-- SPECIMEN B -->
-      <article class="spec" data-title="SPECIMEN B — TYPESCRIPT" data-sub="BADGERRIDES · REALTIME · CONNECTION GATE" tabindex="0" aria-label="Specimen B, TypeScript code plate, draggable">
-        <div class="spec-head"><span class="pl">B</span><span>TypeScript — BadgerRides · realtime/gate.ts</span><span class="gl" data-glyphs></span></div>
-<pre><span class="cl"><span class="tk">const</span> gate = (socket, next) =&gt; {</span><span class="cl">  <span class="tk">if</span> (!verifyJwt(socket.handshake.auth?.token))</span><span class="cl">    <span class="tk">return</span> next(<span class="tk">new</span> Error(<span class="cm">"unauthorized"</span>));<span class="cm"> // same gate as REST</span></span><span class="cl">  next();</span><span class="cl">};</span><span class="cl"></span><span class="cl">io.on(<span class="cm">"connection"</span>, (socket) =&gt; {</span><span class="cl">  socket.on(<span class="cm">"ride:join"</span>, <span class="tk">async</span> ({ rideId }) =&gt; {</span><span class="cl">    <span class="tk">if</span> (!(<span class="tk">await</span> canAccess(socket.userId, rideId))) <span class="tk">return</span>;<sup class="mk">1</sup></span><span class="cl">    socket.join(room(rideId));<span class="cm">     // one room per ride</span><sup class="mk">2</sup></span><span class="cl">    socket.to(room(rideId)).emit(<span class="cm">"rider:joined"</span>, {</span><span class="cl">      user: socket.userId,</span><span class="cl">    });</span><span class="cl">  });</span><span class="cl">});</span></pre>
-        <ul class="ans">
-          <li><sup>1</sup>The room is scoped twice: JWT at the connection gate, per-ride access here.</li>
-          <li><sup>2</sup>Emit to the room, never to io. Scope is the security model.</li>
-        </ul>
-        <div class="spec-foot"><button class="pull" data-pdf="b">Pull PDF proof ↓</button><span class="lc" data-lines></span></div>
-      </article>
-
-      <!-- SPECIMEN C -->
-      <article class="spec" data-title="SPECIMEN C — YAML" data-sub="TRAIL LAB · CI/CD · DEPLOY PIPELINE" tabindex="0" aria-label="Specimen C, YAML pipeline plate, draggable">
-        <div class="spec-head"><span class="pl">C</span><span>YAML — Trail Lab · .github/workflows/deploy.yml</span><span class="gl" data-glyphs></span></div>
-<pre><span class="cl"><span class="tk">name</span>: deploy</span><span class="cl"><span class="tk">on</span>:</span><span class="cl">  <span class="tk">push</span>: { branches: [main] }</span><span class="cl"><span class="tk">jobs</span>:</span><span class="cl">  <span class="tk">test</span>:</span><span class="cl">    <span class="tk">steps</span>:</span><span class="cl">      - run: npm ci &amp;&amp; npm test<span class="cm">   # gate, not suggestion</span><sup class="mk">1</sup></span><span class="cl">  <span class="tk">build</span>:</span><span class="cl">    <span class="tk">needs</span>: test</span><span class="cl">    <span class="tk">steps</span>:</span><span class="cl">      - run: gcloud builds submit<span class="cm"> # GCP Cloud Build</span></span><span class="cl">  <span class="tk">deploy</span>:</span><span class="cl">    <span class="tk">needs</span>: build</span><span class="cl">    <span class="tk">steps</span>:</span><span class="cl">      - run: ./deploy.sh<span class="cm">        # 15 min to 2 min, end to end</span><sup class="mk">2</sup></span></pre>
-        <ul class="ans">
-          <li><sup>1</sup>Tests gate the build. Fast CI only helps if it can still say no.</li>
-          <li><sup>2</sup>Fifteen minutes to two: the pipeline got shorter the same week it got stricter.</li>
-        </ul>
-        <div class="spec-foot"><button class="pull" data-pdf="c">Pull PDF proof ↓</button><span class="lc" data-lines></span></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= III — RESEARCH & HONORS ================= -->
+<!-- ================= II — RESEARCH & HONORS ================= -->
 <section id="research">
   <header class="chap">
-    <span class="chap-n" aria-hidden="true">III</span>
+    <span class="chap-n" aria-hidden="true">II</span>
     <h2>Research &amp; Honors</h2>
     <p class="chap-note">The lab work, the honors list, and the syllabus. No conference talks yet — the press is
     warmed up for the first one.</p>
@@ -1116,10 +1021,10 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
   </div>
 </section>
 
-<!-- ================= IV — CONTACT ================= -->
+<!-- ================= III — CONTACT ================= -->
 <section id="contact">
   <header class="chap">
-    <span class="chap-n" aria-hidden="true">IV</span>
+    <span class="chap-n" aria-hidden="true">III</span>
     <h2>Contact &amp; Colophon</h2>
     <p class="chap-note">Correspondence answered within one business day, usually faster.</p>
   </header>
@@ -1265,14 +1170,14 @@ const rhPage = $('#rhPage'), prog = $('#prog'), rhSec = $('#rhSec');
 function folio(){
   const max = document.documentElement.scrollHeight - innerHeight;
   const p = max > 0 ? clamp(scrollY/max, 0, 1) : 0;
-  rhPage.textContent = 'P. ' + String(1+Math.round(p*95)).padStart(3,'0') + ' / 096';
+  rhPage.textContent = 'P. ' + String(1+Math.round(p*83)).padStart(3,'0') + ' / 084';
   prog.style.width = (p*100).toFixed(2)+'%';
 }
-const SEC_NAMES = [['cover','Cover'],['works','I — Works'],['specimens','II — Specimens'],['research','III — Research & Honors'],['contact','IV — Contact']];
+const SEC_NAMES = [['cover','Cover'],['works','I — Works'],['research','II — Research & Honors'],['contact','III — Contact']];
 const secIO = new IntersectionObserver(es=>es.forEach(e=>{
   if (e.isIntersecting){
     const n = SEC_NAMES.find(s=>s[0]===e.target.id);
-    if (n) rhSec.textContent = n[1];
+    if (n && rhSec) rhSec.textContent = n[1];
   }
 }), {rootMargin:'-42% 0px -52% 0px'});
 SEC_NAMES.forEach(([id])=>{ const el = document.getElementById(id); if (el) secIO.observe(el); });
@@ -1298,7 +1203,7 @@ function fire(el){
   $$('[data-c]', el).forEach(countUp);
 }
 const rvIO = new IntersectionObserver(es=>es.forEach(e=>{
-  const inStickyWorks = e.target.closest('#worksStage') && Works.isSticky();
+  const inStickyWorks = e.target.closest('#worksStage') && Works.api.isSticky();
   if (!e.isIntersecting || inStickyWorks) return;
   fire(e.target); rvIO.unobserve(e.target);
 }), {threshold:.2, rootMargin:'0px 0px -6% 0px'});
@@ -1410,110 +1315,7 @@ const strips = [];
 });
 
 /* ============================================================
-   7 · SPECIMEN PLATES — drag, pinch, nudge
-   ============================================================ */
-const Board = (()=>{
-  const board = $('#board'), cards = $$('.spec', board);
-  const mode = ()=> matchMedia('(min-width: 980px)').matches;
-  let zTop = 5;
-  const state = cards.map(()=>({ x:0, y:0, s:1 }));
-  const spots = [ {f:.03, y:30}, {f:.37, y:330}, {f:.64, y:60} ];
-
-  function apply(i){
-    const st = state[i];
-    cards[i].style.transform = 'translate('+st.x+'px,'+st.y+'px) scale('+st.s+')';
-  }
-  function clampPos(i){
-    const st = state[i], card = cards[i];
-    st.x = clamp(st.x, -30, board.clientWidth  - card.offsetWidth *st.s + 30);
-    st.y = clamp(st.y, -20, board.clientHeight - card.offsetHeight*st.s + 20);
-  }
-  function layout(){
-    if (!mode()){ cards.forEach(c=>c.style.transform=''); return; }
-    cards.forEach((card, i)=>{
-      const st = state[i];
-      st.x = spots[i].f * board.clientWidth;
-      st.y = spots[i].y;
-      clampPos(i); apply(i);
-    });
-  }
-  cards.forEach((card, i)=>{
-    const st = state[i];
-    const ptrs = new Map();
-    let dragBase = null, pinchBase = null;
-    card.addEventListener('pointerdown', e=>{
-      if (!mode() || e.button !== 0) return;
-      if (e.target.closest('a,button')) return;
-      card.setPointerCapture(e.pointerId);
-      ptrs.set(e.pointerId, {x:e.clientX, y:e.clientY});
-      card.style.zIndex = ++zTop;
-      card.classList.add('lift');
-      if (ptrs.size === 1) dragBase = { x: st.x - e.clientX, y: st.y - e.clientY };
-      if (ptrs.size === 2){
-        const [a,b] = [...ptrs.values()];
-        pinchBase = { d: Math.hypot(a.x-b.x, a.y-b.y)||1, s: st.s,
-                      cx:(a.x+b.x)/2, cy:(a.y+b.y)/2, px:st.x, py:st.y };
-        dragBase = null;
-      }
-      e.preventDefault();
-    });
-    card.addEventListener('pointermove', e=>{
-      if (!ptrs.has(e.pointerId)) return;
-      ptrs.set(e.pointerId, {x:e.clientX, y:e.clientY});
-      if (ptrs.size === 2 && pinchBase){
-        const [a,b] = [...ptrs.values()];
-        const d = Math.hypot(a.x-b.x, a.y-b.y)||1;
-        st.s = clamp(pinchBase.s * d/pinchBase.d, .55, 1.8);
-        st.x = pinchBase.px + (a.x+b.x)/2 - pinchBase.cx;
-        st.y = pinchBase.py + (a.y+b.y)/2 - pinchBase.cy;
-      } else if (dragBase){
-        st.x = e.clientX + dragBase.x; st.y = e.clientY + dragBase.y;
-      }
-      clampPos(i); apply(i);
-    });
-    const end = e=>{
-      ptrs.delete(e.pointerId);
-      if (ptrs.size === 1){
-        const [p] = [...ptrs.values()];
-        dragBase = { x: st.x - p.x, y: st.y - p.y }; pinchBase = null;
-      } else if (ptrs.size === 0){
-        dragBase = null; pinchBase = null; card.classList.remove('lift');
-      }
-    };
-    card.addEventListener('pointerup', end);
-    card.addEventListener('pointercancel', end);
-    card.addEventListener('wheel', e=>{
-      if (!mode() || !e.ctrlKey) return;
-      e.preventDefault();
-      st.s = clamp(st.s * Math.pow(1.002, -e.deltaY), .55, 1.8);
-      apply(i);
-    }, {passive:false});
-    card.addEventListener('keydown', e=>{
-      if (!mode()) return;
-      const step = e.shiftKey ? 32 : 12; let used = true;
-      if (e.key === 'ArrowLeft')  st.x -= step;
-      else if (e.key === 'ArrowRight') st.x += step;
-      else if (e.key === 'ArrowUp')    st.y -= step;
-      else if (e.key === 'ArrowDown')  st.y += step;
-      else if (e.key === '+' || e.key === '=') st.s = clamp(st.s+.08,.55,1.8);
-      else if (e.key === '-') st.s = clamp(st.s-.08,.55,1.8);
-      else used = false;
-      if (used){ clampPos(i); apply(i); e.preventDefault(); }
-    });
-  });
-  return { layout, mode };
-})();
-
-/* specimen meta: real line + glyph counts */
- $$('.spec').forEach(card=>{
-  const lines = $$('.cl', card);
-  const glyphs = lines.reduce((n,l)=>n + l.textContent.replace(/\s/g,'').length, 0);
-  $('[data-lines]', card).textContent = lines.length + ' lines · ' + glyphs.toLocaleString('en-US') + ' glyphs';
-  $('[data-glyphs]', card).textContent = glyphs.toLocaleString('en-US') + ' GLYPHS';
-});
-
-/* ============================================================
-   8 · ACCORDIONS
+   7 · ACCORDIONS
    ============================================================ */
  $$('.ix-head, .fold-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
@@ -1524,7 +1326,7 @@ const Board = (()=>{
 });
 
 /* ============================================================
-   9 · TOAST + CLIPBOARD
+   8 · TOAST + CLIPBOARD
    ============================================================ */
  $('#copyMail').addEventListener('click', async ()=>{
   const addr = 'nischalsinghbista@gmail.com';
@@ -1533,7 +1335,7 @@ const Board = (()=>{
 });
 
 /* ============================================================
-   10 · PDF PRESSES — minimal, valid PDF writer
+   9 · PDF PRESSES — minimal, valid PDF writer
    ============================================================ */
 const Press = (()=>{
   const esc = s => s.replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
@@ -1588,29 +1390,6 @@ const Press = (()=>{
   function chrome(ops, label){
     ops.push(R(M, 714, PW-2*M, 2.5, RED));
     ops.push(T('F4', 7.5, M, 40, label+' — SET & PRINTED IN THE BROWSER · NISCHALSINGHBISTA@GMAIL.COM', MUT));
-  }
-  const clean = node => { const c = node.cloneNode(true); c.querySelectorAll('sup').forEach(s=>s.remove()); return c.textContent; };
-  function specimen(card){
-    const ops = [];
-    chrome(ops, 'PLATE PROOF · '+new Date().toISOString().slice(0,10));
-    ops.push(T('F1', 24, M, 676, card.dataset.title));
-    ops.push(T('F4', 9, M, 656, card.dataset.sub, MUT));
-    let y = 620;
-    $$('.cl', card).forEach(l=>{
-      ops.push(T('F4', 8.2, M, y, clean(l).replace(/\s+$/,'')));
-      y -= 12.6;
-    });
-    y -= 14;
-    ops.push(R(M, y+10, 60, 1.4, INK));
-    y -= 8;
-    $$('.ans li', card).forEach(li=>{
-      const num = li.querySelector('sup') ? li.querySelector('sup').textContent : '';
-      wrap(clean(li), 92).forEach((t,i)=>{
-        ops.push(T(i===0 ? 'F3' : 'F2', 9, M + (i===0?0:12), y, (i===0 ? num+'. ' : '')+t));
-        y -= 13;
-      });
-    });
-    return make([{ops}]);
   }
   /* ---- résumé — two pages, real data ---- */
   const RESUME = {
@@ -1689,20 +1468,15 @@ const Press = (()=>{
     wrap(RESUME.honors, 100).forEach(l=>{ p2.push(T('F2', 9.5, M, y, l)); y -= 12.5; });
     return make([{ops:p1},{ops:p2}]);
   }
-  return { specimen, resume, download };
+  return { resume, download };
 })();
- $$('.pull').forEach(b=>b.addEventListener('click', ()=>{
-  const card = b.closest('.spec');
-  Press.download('specimen-'+b.dataset.pdf+'.pdf', Press.specimen(card));
-  toast('Specimen ' + b.dataset.pdf.toUpperCase() + ' — proof pulled, 1 page');
-}));
  $('#resumeBtn').addEventListener('click', ()=>{
   Press.download('nischal-singh-bista-resume.pdf', Press.resume());
   toast('Résumé pulled — 2 pages, typeset just now');
 });
 
 /* ============================================================
-   11 · NAVIGATION
+   10 · NAVIGATION
    ============================================================ */
  $$('.toc-row').forEach(row=>row.addEventListener('click', ()=>{
   const t = $(row.dataset.goto);
@@ -1710,7 +1484,7 @@ const Press = (()=>{
 }));
 
 /* ============================================================
-   12 · MAIN LOOP + SCROLL + RESIZE
+   11 · MAIN LOOP + SCROLL + RESIZE
    ============================================================ */
 (function loop(){
   Trail.draw();
@@ -1726,12 +1500,12 @@ let rzT;
 addEventListener('resize', ()=>{
   clearTimeout(rzT);
   rzT = setTimeout(()=>{
-    Trail.resize(); Works.measure(); Board.layout();
+    Trail.resize(); Works.measure();
     strips.forEach(s=>s.refill()); Works.frame(); folio();
   }, 140);
 });
-addEventListener('load', ()=>{ Works.measure(); Board.layout(); Works.frame(); folio(); });
-document.fonts.ready.then(()=>{ Works.measure(); Board.layout(); Works.frame(); });
+addEventListener('load', ()=>{ Works.measure(); Works.frame(); folio(); });
+document.fonts.ready.then(()=>{ Works.measure(); Works.frame(); });
 folio();
 </script>
 </body>

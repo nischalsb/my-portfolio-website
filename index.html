@@ -666,7 +666,7 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
           </div>
           <div class="sp-links rv" style="--d:.3s">
             <!-- TODO: point at the real Badger Code repository URL -->
-            <a href="https://github.com/n1-sb" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://github.com/nischalsb" target="_blank" rel="noopener">GitHub ↗</a>
             <span><button class="fold-btn" aria-expanded="false">Design note +</button>
             <span class="fold-body"><p>A container per attempt is the whole trick: slow to provision, impossible
             to cheat, and every run replays the same way. Reproducibility is a feature you pay for in seconds.</p></span></span>
@@ -822,7 +822,7 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
           </div>
           <div class="sp-links rv" style="--d:.3s">
             <!-- TODO: swap in the real repository / live-site URL for Educate Nepal -->
-            <a href="https://github.com/n1-sb" target="_blank" rel="noopener">Repository ↗</a>
+            <a href="https://github.com/nischalsb" target="_blank" rel="noopener">Repository ↗</a>
             <span><button class="fold-btn" aria-expanded="false">Design note +</button>
             <span class="fold-body"><p>Every layer chosen to be boring on purpose: relational data, stateless APIs,
             one cloud. The interesting decisions were the schema and the auth flow — everything else is plumbing
@@ -899,7 +899,7 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
           </div>
           <div class="sp-links rv" style="--d:.3s">
             <!-- TODO: point at the real BadgerRides repository URL -->
-            <a href="https://github.com/n1-sb" target="_blank" rel="noopener">Repository ↗</a>
+            <a href="https://github.com/nischalsb" target="_blank" rel="noopener">Repository ↗</a>
             <span><button class="fold-btn" aria-expanded="false">Design note +</button>
             <span class="fold-body"><p>Rooms per ride keep the chat scoped: you only hear the carpool you joined.
             JWT keeps the server stateless; Postgres keeps the truth. Everything else is an optimization.</p></span></span>
@@ -1095,11 +1095,10 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
     <p class="avail rv" style="--d:.15s">Open to software engineering internships — Summer 2027 — and new-grad roles
     from May 2027. If your problem involves pipelines, PDFs, or a stubborn model, I already have opinions.</p>
     <div class="mailrow rv" style="--d:.2s">
-      <!-- TODO: verify these two URLs — the resume linked them without addresses -->
-      <a class="chip" href="https://github.com/n1-sb" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="chip" href="https://www.linkedin.com/in/nischalsinghbista" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="chip" href="https://github.com/nischalsb" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="chip" href="https://www.linkedin.com/in/nischalsb/" target="_blank" rel="noopener">LinkedIn ↗</a>
       <a class="chip" href="https://www.n1-sb.com" target="_blank" rel="noopener">www.n1-sb.com ↗</a>
-      <button class="chip" id="resumeBtn">Résumé — pull PDF ↓</button>
+      <a class="chip" href="https://docs.google.com/document/d/1DyCck9B3-R5QmZcJAvYSMImtEKMYYrNf/edit" target="_blank" rel="noopener">Résumé ↗</a>
     </div>
 
     <div class="colophon rv">
@@ -1112,8 +1111,7 @@ figure.dgf figcaption{display:flex;justify-content:space-between;align-items:cen
         GPA 3.6. King Morgridge Scholar (full ride), Dean’s List, L&amp;S STEM Scholar, Undergraduate Research
         Scholar.</p></div>
       <div><h5>Edition</h5>
-        <p>First edition. A single HTML file: no framework, no build step, no analytics, no cookies. The résumé
-        PDF is typeset by the page itself, on demand. Reduced-motion readers get a still press.</p></div>
+        <p>First edition. A single HTML file: no framework, no build step, no analytics, no cookies. Reduced-motion readers get a still press.</p></div>
     </div>
 
     <div class="foot">
@@ -1391,148 +1389,7 @@ const strips = [];
 });
 
 /* ============================================================
-   9 · PDF PRESSES — minimal, valid PDF writer
-   ============================================================ */
-const Press = (()=>{
-  const esc = s => s.replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
-  const MAP = {'\u2019':"'",'\u2018':"'",'\u201C':'"','\u201D':'"','\u2014':'--','\u2013':'-',
-               '\u2192':'->','\u2197':'->','\u00d7':'x','\u00b7':'*','\u2264':'<=','\u2265':'>=',
-               '\u00e9':'e','\u00a0':' ','\u2026':'...','\u2022':'-','\u2212':'-'};
-  const ascii = s => s.replace(/[^\x20-\x7E\n]/g, ch => MAP[ch] !== undefined ? MAP[ch] : '');
-  const INK=[.09,.075,.06], RED=[.874,.239,.063], MUT=[.45,.42,.37];
-  const T = (f,size,xx,yy,text,col=INK)=> 'BT /'+f+' '+size+' Tf '+col.join(' ')+' rg 1 0 0 1 '+
-          xx.toFixed(1)+' '+yy.toFixed(1)+' Tm ('+esc(ascii(text))+') Tj ET';
-  const R = (xx,yy,w,h,col)=> col.join(' ')+' rg '+xx+' '+yy+' '+w+' '+h+' re f';
-  function wrap(s, max){
-    const out = []; let line = '';
-    s.split(/\s+/).forEach(w=>{
-      if ((line+' '+w).trim().length > max){ out.push(line.trim()); line = w; }
-      else line += ' '+w;
-    });
-    if (line.trim()) out.push(line.trim());
-    return out;
-  }
-  function make(pages){
-    let out = '%PDF-1.4\n';
-    const offs = [];
-    const obj = b => { offs.push(out.length); out += b; };
-    obj('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
-    obj('2 0 obj\n<< /Type /Pages /Kids [ '+pages.map((_,i)=>(3+i*2)+' 0 R').join(' ')+' ] /Count '+pages.length+' >>\nendobj\n');
-    pages.forEach((p,i)=>{
-      const pg = 3+i*2;
-      obj(pg+' 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 '+(5+pages.length*2)+' 0 R /F2 '+(6+pages.length*2)+' 0 R /F3 '+(7+pages.length*2)+' 0 R /F4 '+(8+pages.length*2)+' 0 R >> >> /Contents '+(pg+1)+' 0 R >>\nendobj\n');
-      const stream = p.ops.join('\n');
-      obj((pg+1)+' 0 obj\n<< /Length '+stream.length+' >>\nstream\n'+stream+'\nendstream\nendobj\n');
-    });
-    const fb = 5+pages.length*2;
-    obj(fb+' 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>\nendobj\n');
-    obj((fb+1)+' 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n');
-    obj((fb+2)+' 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>\nendobj\n');
-    obj((fb+3)+' 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>\nendobj\n');
-    const xr = out.length;
-    out += 'xref\n0 '+(offs.length+1)+'\n0000000000 65535 f\r\n';
-    offs.forEach(o=> out += String(o).padStart(10,'0')+' 00000 n\r\n');
-    out += 'trailer\n<< /Size '+(offs.length+1)+' /Root 1 0 R >>\nstartxref\n'+xr+'\n%%EOF';
-    return out;
-  }
-  function download(name, pdf){
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([pdf], {type:'application/pdf'}));
-    a.download = name;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
-  }
-  const M = 66, PW = 612;
-  function chrome(ops, label){
-    ops.push(R(M, 714, PW-2*M, 2.5, RED));
-    ops.push(T('F4', 7.5, M, 40, label+' — SET & PRINTED IN THE BROWSER · NISCHALSINGHBISTA@GMAIL.COM', MUT));
-  }
-  /* ---- résumé — two pages, real data ---- */
-  const RESUME = {
-    contact: 'nischalsinghbista@gmail.com - +1 (608) 722-0825 - www.n1-sb.com - Madison, WI',
-    education: [
-      'B.S. Computer Science, Minor: Data Science - Expected May 2027 - GPA 3.6',
-      'Honors: King Morgridge Scholar (Full-Ride) - Dean\'s List - L&S STEM Scholar - Undergraduate Research Scholar',
-      'Coursework: Distributed Systems (Docker) - Deep Learning & Generative Models (PyTorch) - Operating Systems - DBMS - Probability - OOP'
-    ],
-    exp: [
-      { role:'SOFTWARE DEVELOPER - CAPSTONE', org:'Amazon Shopbop - Madison, WI', dates:'SEP 2026 - PRESENT', pts:[
-        'Daily Wordle-style fashion guessing game scored by semantic similarity via Shopbop\'s vector search API.',
-        'Serverless AWS backend (Lambda, API Gateway, DynamoDB) persisting puzzles, guesses, and user streaks.' ]},
-      { role:'SOFTWARE DEVELOPMENT INTERN', org:'Trail Lab - Madison, WI', dates:'SEP 2025 - PRESENT', pts:[
-        'PDF Q&A pipeline with FastAPI, Next.js, Groq APIs and embeddings; context retrieved in under 0.2 seconds.',
-        'FastAPI audio pipeline over Groq APIs: transcription, summarization, and translation in 10+ languages.',
-        'CI/CD with GitHub Actions and GCP Cloud Build, gated by test suites; deploy time cut from 15 to 2 minutes.' ]},
-      { role:'AI/ML RESEARCHER', org:'Dept. of Atmospheric & Oceanic Sciences, UW-Madison', dates:'MAY 2025 - AUG 2025', pts:[
-        'Optimized ensemble models and engineered features on 500GB+ of NASA MERRA-2 data, improving accuracy 15%.',
-        'Automated data processing and visualization pipelines, cutting manual analysis time by 50%.',
-        'Formalized reproducible pipelines with cross-validation, standardizing experiment workflows across the lab.' ]}
-    ],
-    skills: [
-      'Languages: Python, JavaScript, TypeScript, Java, C, SQL, Bash',
-      'Backend & APIs: FastAPI, Node.js, Express, REST APIs, PostgreSQL',
-      'Frontend: React, Next.js, React Native',
-      'Cloud & DevOps: AWS (Lambda, API Gateway, DynamoDB), GCP (Cloud Run, Cloud Functions, Cloud Build), Docker, GitHub Actions, CI/CD',
-      'AI & ML: PyTorch, scikit-learn, Pandas, NumPy, LLMs, RAG, Embeddings, LangChain'
-    ],
-    projects: [
-      { name:'BADGER CODE', stack:'Python - Docker - Harbor - Terminal-Bench - Qwen', pts:[
-        'Qwen-powered coding agent with Harbor running autonomous shell workflows in isolated Docker environments.',
-        'Reproducible Terminal-Bench evaluation pipeline across 89 tasks; successful completion on 40+ tasks.' ]},
-      { name:'BADGERRIDES - CARPOOL PLATFORM', stack:'React - TypeScript - Node.js - Express - PostgreSQL - Socket.IO', pts:[
-        'Full-stack carpool platform for UW-Madison students: JWT authentication, REST APIs, ride matching, and real-time messaging.' ]},
-      { name:'EDUCATE NEPAL INITIATIVE (NON-PROFIT)', stack:'React - TypeScript - Node.js - PostgreSQL - AWS', pts:[
-        'Full-stack platform on AWS serving 10K+ monthly users; owned PostgreSQL design, authentication, backend APIs, and cloud deployment.' ]}
-    ],
-    honors: 'King Morgridge Scholar (Full-Ride) - Dean\'s List - L&S STEM Scholar - Undergraduate Research Scholar.'
-  };
-  function resume(){
-    const p1 = [], p2 = [];
-    chrome(p1, 'RÉSUMÉ · PAGE 1 / 2'); chrome(p2, 'RÉSUMÉ · PAGE 2 / 2');
-    p1.push(T('F1', 28, M, 676, 'NISCHAL SINGH BISTA'));
-    p1.push(T('F2', 11, M, 654, 'Software Engineer — Full-Stack, Backend & Applied ML'));
-    p1.push(T('F4', 8.5, M, 634, RESUME.contact, MUT));
-    p1.push(R(M, 620, PW-2*M, 1, INK));
-    let y = 594;
-    p1.push(T('F1', 10, M, y, 'EDUCATION')); y -= 17;
-    p1.push(T('F1', 10.5, M, y, 'UNIVERSITY OF WISCONSIN–MADISON'));
-    p1.push(T('F2', 9, PW-M-140, y, 'EXPECTED MAY 2027', MUT)); y -= 13;
-    RESUME.education.forEach(t=>wrap(t, 100).forEach(l=>{ p1.push(T('F2', 9.5, M, y, l)); y -= 12.5; }));
-    y -= 12; p1.push(T('F1', 10, M, y, 'EXPERIENCE')); y -= 17;
-    RESUME.exp.forEach(e=>{
-      p1.push(T('F1', 10.5, M, y, e.role));
-      p1.push(T('F2', 9, PW-M-150, y, e.dates, MUT)); y -= 13;
-      p1.push(T('F3', 9, M, y, e.org)); y -= 13;
-      e.pts.forEach(pt=>wrap(pt, 94).forEach((t,i)=>{
-        p1.push(T('F2', 9, M+10, y, (i===0?'- ':'  ')+t)); y -= 12.5;
-      }));
-      y -= 9;
-    });
-    y = 700;
-    p2.push(T('F1', 10, M, y, 'TECHNICAL SKILLS')); y -= 17;
-    RESUME.skills.forEach(t=>wrap(t, 100).forEach(l=>{ p2.push(T('F2', 9.5, M, y, l)); y -= 12.5; }));
-    y -= 12; p2.push(T('F1', 10, M, y, 'PROJECTS')); y -= 17;
-    RESUME.projects.forEach(p=>{
-      p2.push(T('F1', 10.5, M, y, p.name)); y -= 13;
-      p2.push(T('F3', 8.5, M, y, p.stack)); y -= 13;
-      p.pts.forEach(pt=>wrap(pt, 94).forEach((t,i)=>{
-        p2.push(T('F2', 9, M+10, y, (i===0?'- ':'  ')+t)); y -= 12.5;
-      }));
-      y -= 9;
-    });
-    y -= 4; p2.push(T('F1', 10, M, y, 'HONORS')); y -= 17;
-    wrap(RESUME.honors, 100).forEach(l=>{ p2.push(T('F2', 9.5, M, y, l)); y -= 12.5; });
-    return make([{ops:p1},{ops:p2}]);
-  }
-  return { resume, download };
-})();
- $('#resumeBtn').addEventListener('click', ()=>{
-  Press.download('nischal-singh-bista-resume.pdf', Press.resume());
-  toast('Résumé pulled — 2 pages, typeset just now');
-});
-
-/* ============================================================
-   10 · NAVIGATION
+   9 · NAVIGATION
    ============================================================ */
  $$('.toc-row').forEach(row=>row.addEventListener('click', ()=>{
   const t = $(row.dataset.goto);
@@ -1540,7 +1397,7 @@ const Press = (()=>{
 }));
 
 /* ============================================================
-   11 · MAIN LOOP + SCROLL + RESIZE
+   10 · MAIN LOOP + SCROLL + RESIZE
    ============================================================ */
 (function loop(){
   Trail.draw();
